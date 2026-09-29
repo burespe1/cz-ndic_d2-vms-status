@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Dynamic Composite VMS example, road further down closed use first exit -->
+<!-- 
+ x=======x====================x     
+ x       x   PIT, line 1      x      
+ x  PDZ  x   PIT, line 2      x====x 
+ x       x   PIT, line 3      x    x 
+ x=======x====================x    x 
+ -->
+<d2:payload xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" modelBaseVersion="3" xsi:type="vms:VmsPublication" xsi:schemaLocation="http://datex2.eu/schema/3/d2Payload ../schema/DATEXII_3_D2Payload.xsd" lang="cs" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
+  <com:feedType>x-source:cz-ndic_d2-vms-status-fixed-pull-v3</com:feedType>
+  <com:publicationTime>2021-12-28T18:45:00+01:00</com:publicationTime>
+  <com:publicationCreator>
+    <com:country>cz</com:country>
+    <com:nationalIdentifier>NDIC</com:nationalIdentifier>
+  </com:publicationCreator>
+  <vms:headerInformation>
+    <com:confidentiality>noRestriction</com:confidentiality>
+    <com:informationStatus>real</com:informationStatus>
+  </vms:headerInformation>
+  <!-- vmsControllerStatus per one dynamic sign -->
+  <vms:vmsControllerStatus>
+    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="1"/>
+    <vms:vmsControllerReference id="849619d2a1" targetClass="vms:VmsController" version="1"/>
+    <vms:statusUpdateTime>2021-12-28T18:45:00+01:00</vms:statusUpdateTime>
+    <!-- dynamic setting of PDZ -->
+    <vms:vmsStatus vmsIndex="1">
+      <vms:vmsStatus>
+        <vms:flashingLightsOn>true</vms:flashingLightsOn>
+        <vms:workingStatus>working</vms:workingStatus>
+        <vms:vmsMessage messageIndex="1">
+          <vms:vmsMessage>
+            <vms:messageInformationType>trafficManagement</vms:messageInformationType>
+            <vms:timeLastSet>2021-12-23T16:05:00+01:00</vms:timeLastSet>
+            <vms:displayAreaSettings displayAreaIndex="1">
+              <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
+                <vms:isBlank>false</vms:isBlank>
+                <vms:legallyBinding>true</vms:legallyBinding>
+                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/849619d2a1/01/01</vms:pictogramDisplayUrl>
+                <vms:pictogram xsi:type="vms:CompositePictogram">
+                  <vms:customPictogramCode>B1</vms:customPictogramCode>
+                  <vms:pictogramInformationType>prohibition</vms:pictogramInformationType>
+                  <vms:pictogramDescription>restrictionOnCurrentSectionAfterNextExit</vms:pictogramDescription>
+                  <vms:regularPictogram>
+                  <vms:customPictogramCode>B1</vms:customPictogramCode>
+                  <vms:pictogramInInverseColour>true</vms:pictogramInInverseColour>
+                  <vms:pictogramInformationType>prohibition</vms:pictogramInformationType>
+                  <vms:gddStructure>
+                    <vms:gddPictogramIdentification>
+                      <vms:country>cz</vms:country>
+                      <vms:serviceCategory>regulatory</vms:serviceCategory>
+                      <vms:pictogramCategoryCode>415</vms:pictogramCategoryCode>
+                    </vms:gddPictogramIdentification>
+                  </vms:gddStructure>
+                  <vms:presenceOfRedTriangle>false</vms:presenceOfRedTriangle>
+                  </vms:regularPictogram>
+                </vms:pictogram>
+              </vms:displayAreaSettings>
+            </vms:displayAreaSettings>
+            <vms:displayAreaSettings displayAreaIndex="2">
+              <vms:displayAreaSettings xsi:type="vms:TextDisplay">
+                <vms:isBlank>false</vms:isBlank>
+                <vms:legallyBinding>false</vms:legallyBinding>
+                <vms:textImageUrl>https://rsd.cz/cache/vms/849619d2a1/01/02</vms:textImageUrl>
+                <vms:textLine lineIndex="1">
+                  <vms:textLine lineLanguage="cs">
+                    <vms:textLine>[56] km 65 -&gt; 90</vms:textLine>
+                    <vms:lineColour>white</vms:lineColour>
+                    <vms:isExactTextOnSign>true</vms:isExactTextOnSign>
+                    <vms:textInformationType>location</vms:textInformationType>
+                  </vms:textLine>
+                </vms:textLine>
+                <vms:textLine lineIndex="2">
+                  <vms:textLine lineLanguage="cs">
+                    <vms:textLine>UZAVŘENA/CLOSED</vms:textLine>
+                    <vms:lineColour>white</vms:lineColour>
+                    <vms:isExactTextOnSign>true</vms:isExactTextOnSign>
+                    <vms:textInformationType>prohibition</vms:textInformationType>
+                  </vms:textLine>
+                </vms:textLine>
+                <vms:textLine lineIndex="3">
+                  <vms:textLine lineLanguage="cs">
+                    <vms:textLine>POUŽIJ/USE [58]</vms:textLine>
+                    <vms:lineColour>white</vms:lineColour>
+                    <vms:isExactTextOnSign>true</vms:isExactTextOnSign>
+                    <vms:textInformationType>generalInformation</vms:textInformationType>
+                  </vms:textLine>
+                </vms:textLine>
+              </vms:displayAreaSettings>
+            </vms:displayAreaSettings>
+          </vms:vmsMessage>
+        </vms:vmsMessage>
+      </vms:vmsStatus>
+    </vms:vmsStatus>
+  </vms:vmsControllerStatus>
+</d2:payload>

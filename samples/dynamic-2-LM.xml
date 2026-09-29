@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Dynamic Lane management example, VMS on the gantry and support structure -->
+<!-- 
+         x=====x   x=====x   x=====x      
+    x====x PDZ x===x PDZ x===x PDZ x====x
+    x    x=====x   x=====x   x=====x    x
+ x=====x                           x=====x
+ x PDZ x                             x PDZ x
+ x=====x                             x=====x
+    x                                   x
+ -->
+<d2:payload xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" modelBaseVersion="3" xsi:type="vms:VmsPublication" xsi:schemaLocation="http://datex2.eu/schema/3/d2Payload ../schema/DATEXII_3_D2Payload.xsd" lang="cs" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
+  <com:feedType>x-source:cz-ndic_d2-vms-status-fixed-pull-v3</com:feedType>
+  <com:publicationTime>2021-12-28T18:45:00+01:00</com:publicationTime>
+  <com:publicationCreator>
+    <com:country>cz</com:country>
+    <com:nationalIdentifier>NDIC</com:nationalIdentifier>
+  </com:publicationCreator>
+  <vms:headerInformation>
+    <com:confidentiality>noRestriction</com:confidentiality>
+    <com:informationStatus>real</com:informationStatus>
+  </vms:headerInformation>
+  <vms:vmsControllerStatus>
+    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="1"/>
+    <vms:vmsControllerReference id="hadr24lfd3" targetClass="vms:VmsController" version="1"/>
+    <vms:statusUpdateTime>2021-12-28T18:45:00+01:00</vms:statusUpdateTime>
+    
+    <!-- obligatory sign with speed limit 100 km/h -->
+    <vms:vmsStatus vmsIndex="1">
+      <vms:vmsStatus>
+        <vms:flashingLightsOn>false</vms:flashingLightsOn>
+        <vms:workingStatus>working</vms:workingStatus>
+        <!-- if needed for override of display settings
+        <vms:vmsDynamicConfiguration></vms:vmsDynamicConfiguration>
+        -->
+        <vms:vmsMessage messageIndex="1">
+          <vms:vmsMessage>
+            <vms:messageInformationType>trafficManagement</vms:messageInformationType>
+            <vms:timeLastSet>2021-12-23T16:05:00+01:00</vms:timeLastSet>
+            <vms:displayAreaSettings displayAreaIndex="1">
+              <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
+                <vms:isBlank>false</vms:isBlank>
+                <vms:legallyBinding>true</vms:legallyBinding>
+                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/hadr24lfd3/01/01</vms:pictogramDisplayUrl>
+                <vms:pictogram xsi:type="vms:RegularPictogram">
+                  <vms:customPictogramCode>B20a</vms:customPictogramCode>
+                  <vms:pictogramInInverseColour>true</vms:pictogramInInverseColour>
+                  <vms:pictogramInformationType>prohibition</vms:pictogramInformationType>
+                  <vms:gddStructure>
+                    <vms:gddPictogramIdentification>
+                      <vms:country>cz</vms:country>
+                      <vms:serviceCategory>regulatory</vms:serviceCategory>
+                      <vms:pictogramCategoryCode>557</vms:pictogramCategoryCode>
+                    </vms:gddPictogramIdentification>
+                  </vms:gddStructure>
+                  <vms:presenceOfRedTriangle>false</vms:presenceOfRedTriangle>
+                  <vms:displayedNumericalInformation>
+                    <vms:numericalInformationType>speed</vms:numericalInformationType>
+                    <vms:numericValue>100</vms:numericValue>
+                    <vms:unitOfMeasure>kilometresPerHour</vms:unitOfMeasure>
+                  </vms:displayedNumericalInformation>
+                </vms:pictogram>
+              </vms:displayAreaSettings>
+            </vms:displayAreaSettings>
+          </vms:vmsMessage>
+        </vms:vmsMessage>
+      </vms:vmsStatus>
+    </vms:vmsStatus>
+    
+    <!-- merge lane sign above 2. lane -->
+    <vms:vmsStatus vmsIndex="2">
+      <vms:vmsStatus>
+        <vms:flashingLightsOn>false</vms:flashingLightsOn>
+        <vms:workingStatus>working</vms:workingStatus>
+        <vms:vmsMessage messageIndex="1">
+          <vms:vmsMessage>
+            <vms:messageInformationType>trafficManagement</vms:messageInformationType>
+            <vms:timeLastSet>2021-12-23T16:05:00+01:00</vms:timeLastSet>
+            <vms:displayAreaSettings displayAreaIndex="1">
+              <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
+                <vms:isBlank>false</vms:isBlank>
+                <vms:legallyBinding>true</vms:legallyBinding>
+                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/hadr24lfd3/02/01</vms:pictogramDisplayUrl>
+                <vms:pictogram xsi:type="vms:RegularPictogram">
+                  <vms:customPictogramCode>S8d</vms:customPictogramCode>
+                  <vms:pictogramInInverseColour>true</vms:pictogramInInverseColour>
+                  <vms:pictogramInformationType>obligation</vms:pictogramInformationType>
+                  <vms:gddStructure>
+                    <vms:gddPictogramIdentification>
+                      <vms:country>cz</vms:country>
+                      <vms:serviceCategory>informative</vms:serviceCategory>
+                      <vms:pictogramCategoryCode>662</vms:pictogramCategoryCode>
+                    </vms:gddPictogramIdentification>
+                  </vms:gddStructure>
+                  <vms:presenceOfRedTriangle>false</vms:presenceOfRedTriangle>
+                </vms:pictogram>
+              </vms:displayAreaSettings>
+            </vms:displayAreaSettings>
+          </vms:vmsMessage>
+        </vms:vmsMessage>
+      </vms:vmsStatus>
+    </vms:vmsStatus>
+    
+    <!-- warning sign in between lanes -->
+    <vms:vmsStatus vmsIndex="3">
+      <vms:vmsStatus>
+        <vms:flashingLightsOn>false</vms:flashingLightsOn>
+        <vms:workingStatus>working</vms:workingStatus>
+        <vms:vmsMessage messageIndex="1">
+          <vms:vmsMessage>
+            <vms:messageInformationType>situationWarning</vms:messageInformationType>
+            <vms:timeLastSet>2021-12-23T16:05:00+01:00</vms:timeLastSet>
+            <vms:displayAreaSettings displayAreaIndex="1">
+              <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
+                <vms:isBlank>false</vms:isBlank>
+                <vms:legallyBinding>false</vms:legallyBinding>
+                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/hadr24lfd3/03/01</vms:pictogramDisplayUrl>
+                <vms:pictogram xsi:type="vms:RegularPictogram">
+                  <vms:customPictogramCode>A22</vms:customPictogramCode>
+                  <vms:pictogramInInverseColour>true</vms:pictogramInInverseColour>
+                  <vms:pictogramInformationType>warning</vms:pictogramInformationType>
+                  <vms:gddStructure>
+                    <vms:gddPictogramIdentification>
+                      <vms:country>cz</vms:country>
+                      <vms:serviceCategory>dangerWarning</vms:serviceCategory>
+                      <vms:pictogramCategoryCode>999</vms:pictogramCategoryCode>
+                    </vms:gddPictogramIdentification>
+                  </vms:gddStructure>
+                  <vms:presenceOfRedTriangle>true</vms:presenceOfRedTriangle>
+                </vms:pictogram>
+              </vms:displayAreaSettings>
+            </vms:displayAreaSettings>
+          </vms:vmsMessage>
+        </vms:vmsMessage>
+      </vms:vmsStatus>
+    </vms:vmsStatus>
+    
+    <!-- blank pictogram -->
+    <vms:vmsStatus vmsIndex="4">
+      <vms:vmsStatus>
+        <vms:flashingLightsOn>false</vms:flashingLightsOn>
+        <vms:workingStatus>working</vms:workingStatus>
+        <vms:vmsMessage messageIndex="1">
+          <vms:vmsMessage>
+            <!-- no messageInformationType for blank -->
+            <vms:timeLastSet>2021-12-23T16:05:00+01:00</vms:timeLastSet>
+            <vms:displayAreaSettings displayAreaIndex="1">
+              <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
+                <vms:isBlank>true</vms:isBlank>
+                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/hadr24lfd3/04/01</vms:pictogramDisplayUrl>
+                <vms:pictogram xsi:type="vms:RegularPictogram">
+                  <vms:customPictogramCode>blank</vms:customPictogramCode>
+                  <vms:pictogramInformationType>blank</vms:pictogramInformationType>
+                  <vms:gddStructure>
+                    <vms:gddPictogramIdentification>
+                      <vms:country>cz</vms:country>
+                      <vms:serviceCategory>informative</vms:serviceCategory>
+                      <vms:pictogramCategoryCode>991</vms:pictogramCategoryCode>
+                    </vms:gddPictogramIdentification>
+                  </vms:gddStructure>
+                  <vms:pictogramDescription>blankVoid</vms:pictogramDescription>
+                </vms:pictogram>
+              </vms:displayAreaSettings>
+            </vms:displayAreaSettings>
+          </vms:vmsMessage>
+        </vms:vmsMessage>
+      </vms:vmsStatus>
+    </vms:vmsStatus>
+    
+    <!-- obligatory sign with speed limit 100 km/h -->
+    <vms:vmsStatus vmsIndex="5">
+      <vms:vmsStatus>
+        <vms:flashingLightsOn>false</vms:flashingLightsOn>
+        <vms:workingStatus>working</vms:workingStatus>
+        <vms:vmsMessage messageIndex="1">
+          <vms:vmsMessage>
+            <vms:messageInformationType>trafficManagement</vms:messageInformationType>
+            <vms:timeLastSet>2021-12-23T16:05:00+01:00</vms:timeLastSet>
+            <vms:displayAreaSettings displayAreaIndex="1">
+              <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
+                <vms:isBlank>false</vms:isBlank>
+                <vms:legallyBinding>true</vms:legallyBinding>
+                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/hadr24lfd3/05/01</vms:pictogramDisplayUrl>
+                <vms:pictogram xsi:type="vms:RegularPictogram">
+                  <vms:customPictogramCode>B20a</vms:customPictogramCode>
+                  <vms:pictogramInInverseColour>true</vms:pictogramInInverseColour>
+                  <vms:pictogramInformationType>prohibition</vms:pictogramInformationType>
+                  <vms:gddStructure>
+                    <vms:gddPictogramIdentification>
+                      <vms:country>cz</vms:country>
+                      <vms:serviceCategory>regulatory</vms:serviceCategory>
+                      <vms:pictogramCategoryCode>557</vms:pictogramCategoryCode>
+                    </vms:gddPictogramIdentification>
+                  </vms:gddStructure>
+                  <vms:presenceOfRedTriangle>false</vms:presenceOfRedTriangle>
+                  <vms:displayedNumericalInformation>
+                    <vms:numericalInformationType>speed</vms:numericalInformationType>
+                    <vms:numericValue>100</vms:numericValue>
+                    <vms:unitOfMeasure>kilometresPerHour</vms:unitOfMeasure>
+                  </vms:displayedNumericalInformation>
+                </vms:pictogram>
+              </vms:displayAreaSettings>
+            </vms:displayAreaSettings>
+          </vms:vmsMessage>
+        </vms:vmsMessage>
+      </vms:vmsStatus>
+    </vms:vmsStatus>
+  </vms:vmsControllerStatus>
+</d2:payload>

@@ -1,0 +1,218 @@
+== Příklady konfigurace značek
+
+Tato příloha popisuje příklady proměnného dopravního značení (VMS) popsaného dynamickou a statickou
+publikací. Každý příklad obsahuje:
+
+* statickou publikaci popisující konfiguraci VMS (formát `cz-ndic_d2-vms-table`, vzorek `static-…`):
+  obrázek s vyznačením popisovaných částí a jejich indexů a popis základního konceptu,
+* jednu či více dynamických publikací (tento formát, vzorky `dynamic-…`) popisujících, co je na VMS
+  aktuálně zobrazeno.
+
+Vzorky dynamické publikace jsou součástí balíčku specifikace `{schema-uri}.zip` (adresář `samples`), vzorky
+statické publikace balíčku formátu `cz-ndic_d2-vms-table`. Všechny jsou validní vůči schématu DATEX II 3.7 a odpovídají výběru profilu (`.sel`).
+
+=== Informační (polo)portál se ZPI
+
+Poloportál s jedním zařízením pro provozní informace (PDZ a PIT).
+
+==== Statická publikace
+
+image::ex-02.png[Poloportál se ZPI,width=600]
+
+* vzorek: `static-1-ZPI.xml`
+* koncept:
+** `VmsController` (identifikace): 1×
+** `Vms` (`roadsideCantileverMounted`): 1× dynamická značka na poloportálu pro celý jízdní pás [vms:1]
+** `DisplayArea`: [vms:1] 1× typu piktogram (s implicitní doplňkovou tabulkou) a 1× typu text
+
+==== Dynamická publikace „kolona“
+
+Obsah: piktogram „kolona“; text: ulice Wilsonova ve směru I. P. Pavlova, st. dopravy 4.
+
+.dynamic-1-ZPI.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI.xml[tags=**]
+----
+====
+
+==== Dynamická publikace „nic k hlášení“
+
+Obsah: prázdný piktogram; text „jeďte opatrně“ (informační kampaň).
+
+.dynamic-1-ZPI-campain.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI-campain.xml[tags=**]
+----
+====
+
+==== Dynamická publikace „vpředu uzavřeno, objížďka“
+
+Obsah: vpředu uzavřeno, použijte 1. výjezd; silnice I/56 v km 65–90 uzavřena, použijte silnici I/58.
+
+image::ex-03.png[Složený piktogram s objížďkou,width=600]
+
+.dynamic-1-ZPI-composite.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI-composite.xml[tags=**]
+----
+====
+
+==== Dynamická publikace „nefunkční ZPI“
+
+Obsah: oznámení o nefunkční části VMS.
+
+.dynamic-1-ZPI-not_working.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI-not_working.xml[tags=**]
+----
+====
+
+=== Portál liniového řízení
+
+Portál liniového řízení se dvěma PDZ na sloupech podél pozemní komunikace a třemi PDZ pro liniové řízení
+nad komunikací.
+
+==== Statická publikace
+
+image::ex-04.png[Portál liniového řízení,width=600]
+
+* vzorek: `static-2-LM.xml`
+* koncept:
+** `VmsController` (identifikace): 1×
+** `Vms` (`gantryMounted`):
+*** 2× proměnná značka vlevo a vpravo na sloupku pro celý jízdní pás [vms:1,5]
+*** 2× dynamická značka na portálu pro řízení v jízdních pruzích [vms:2,4]
+*** 1× dynamická značka na portálu pro celý jízdní pás [vms:3]
+** `DisplayArea`:
+*** [vms:1,5] 1× typu piktogram
+*** [vms:2,3,4] 1× typu piktogram (s implicitní doplňkovou tabulkou)
+
+==== Dynamická publikace „omezení rychlosti, výstraha, řaď se vpravo“
+
+Obsah: „100 km/h“; „řaď se vpravo“; „pozor“; „prázdné“; „100 km/h“.
+
+.dynamic-2-LM.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-2-LM.xml[tags=**]
+----
+====
+
+=== ZPI teploměr
+
+Proměnná značka podél pozemní komunikace zobrazující teplotu vzduchu a vozovky.
+
+==== Statická publikace
+
+image::ex-05.png[ZPI teploměr,width=600]
+
+* vzorek: `static-3-meteo.xml`
+* koncept:
+** `VmsController` (identifikace): 1×
+** `Vms` (`roadsideMounted`): 1× dynamická značka vpravo pro zobrazení teploty [vms:1]
+** `DisplayArea`: [vms:1] 1× typu text se 2 řádky (1. řádek teplota okolí, 2. řádek teplota vozovky)
+
+==== Dynamická publikace „normální teploty“
+
+Obsah: okolí „27“ °C, vozovka „34“ °C.
+
+.dynamic-3-meteo.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-3-meteo.xml[tags=**]
+----
+====
+
+=== Značka s obsazeností parkoviště
+
+Proměnná značka podél pozemní komunikace zobrazující počet volných míst na parkovišti.
+
+==== Statická publikace
+
+image:ex-06.png[Značka s obsazeností parkoviště,width=400]
+image:ex-07.png[Detail značky,width=140]
+
+* vzorky: `static-4-parking.xml`, `static-4-parking_full.xml`
+* koncept:
+** `VmsController` (identifikace): 1×
+** `Vms` (`roadsideMounted`): 1× dynamická značka pro zobrazení obsazenosti parkovišť [vms:1]
+** `DisplayArea`: [vms:1] 1× typu text s 1–2 řádky (1. řádek bližší, 2. řádek vzdálenější parkoviště)
+
+==== Dynamická publikace „volná místa“
+
+Obsah: volných „144“ míst na odpočívce Pávov ve vzdálenosti 800 m.
+
+.dynamic-4-parking.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-4-parking.xml[tags=**]
+----
+====
+
+.dynamic-4-parking_full.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-4-parking_full.xml[tags=**]
+----
+====
+
+=== Mobilní vozík
+
+Mobilní VMS na vozíku umístěném na krajnici.
+
+==== Statická publikace
+
+image:ex-08.png[Mobilní vozík,width=180]
+image:ex-09.png[Konfigurace vozíku,width=360]
+
+* vzorek: `static-5-trailer.xml`
+* koncept (bez polohy – poloha je v dynamické publikaci):
+** `VmsController` (identifikace): 1×
+** `Vms` (`trailerMounted`): 1× dynamická značka na vozíku [vms:1]
+** `DisplayArea`: [vms:1] 2× typu piktogram (s implicitní doplňkovou tabulkou)
+
+==== Dynamická publikace „pozor kolona, zpomal“
+
+Obsah: omezení „80 km/h“, „kolona v délce 2,2 km“; aktuální poloha vozíku je v `vmsLocationOverride`.
+
+.dynamic-5-trailer.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-5-trailer.xml[tags=**]
+----
+====
+
+==== Dynamická publikace „vozík přesunut na jiné místo“
+
+Obsah: vozík deaktivovaný pomocí `vmsControllerFault`.
+
+.dynamic-5-trailer_deactivated.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tags=**]
+----
+====

@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Mobile trailer at the Road Works (stationary per roadworks duration) 
+  with 1, 2 pictograms or fully programmable matrix display 
+  Example 1: 
+     - upper pictogram: limit 80 Km/h, 
+   - lower pictogram: congestion + 2.2 km in length
+   - flashing lights
+-->
+<!-- 
+ x=======x
+ x  PDZ  x
+ x+++++++x
+ x  PDZ  x
+ xx=====xx
+  x     x
+ -->
+<d2:payload xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" modelBaseVersion="3" xsi:type="vms:VmsPublication" xsi:schemaLocation="http://datex2.eu/schema/3/d2Payload ../schema/DATEXII_3_D2Payload.xsd" lang="cs" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
+  <com:feedType>x-source:cz-ndic_d2-vms-status-mobile-pull-v3</com:feedType>
+  <com:publicationTime>2021-12-28T18:45:00+01:00</com:publicationTime>
+  <com:publicationCreator>
+    <com:country>cz</com:country>
+    <com:nationalIdentifier>NDIC</com:nationalIdentifier>
+  </com:publicationCreator>
+  <vms:headerInformation>
+    <com:confidentiality>noRestriction</com:confidentiality>
+    <com:informationStatus>real</com:informationStatus>
+  </vms:headerInformation>
+  <!-- vmsControllerStatus per one dynamic sign -->
+  <vms:vmsControllerStatus>
+    <vms:vmsControllerTableReference id="CzechVmsTable-mobileVms" targetClass="vms:VmsControllerTable" version="1"/>
+    <vms:vmsControllerReference id="an6qirhubg" targetClass="vms:VmsController" version="1"/>
+    <vms:statusUpdateTime>2021-12-28T18:45:00+01:00</vms:statusUpdateTime>
+    <!-- dynamic setting of VMS = i static publication set to have 2 displays one above the other -->
+    <vms:vmsStatus vmsIndex="1">
+      <vms:vmsStatus>
+        <vms:flashingLightsOn>true</vms:flashingLightsOn>
+        <vms:workingStatus>working</vms:workingStatus>
+        <!-- <vms:vmsDynamicConfiguration></vms:vmsDynamicConfiguration> -->
+        <vms:vmsMessage messageIndex="1">
+          <vms:vmsMessage>
+            <vms:messageInformationType>trafficManagement</vms:messageInformationType>
+            <vms:timeLastSet>2021-12-23T16:05:00+01:00</vms:timeLastSet>
+            <vms:displayAreaSettings displayAreaIndex="1">
+              <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
+                <vms:isBlank>false</vms:isBlank>
+                <vms:legallyBinding>true</vms:legallyBinding>
+                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/an6qirhubg/01/01</vms:pictogramDisplayUrl>
+                <vms:pictogram xsi:type="vms:RegularPictogram">
+                  <vms:customPictogramCode>A20a_80</vms:customPictogramCode>
+                  <vms:pictogramInInverseColour>true</vms:pictogramInInverseColour>
+                  <vms:pictogramInformationType>prohibition</vms:pictogramInformationType>
+                  <vms:gddStructure>
+                    <vms:gddPictogramIdentification>
+                      <vms:country>cz</vms:country>
+                      <vms:serviceCategory>regulatory</vms:serviceCategory>
+                      <vms:pictogramCategoryCode>557</vms:pictogramCategoryCode>
+                    </vms:gddPictogramIdentification>
+                  </vms:gddStructure>
+                  <vms:presenceOfRedTriangle>false</vms:presenceOfRedTriangle>
+                  <vms:displayedNumericalInformation>
+                    <vms:numericalInformationType>speed</vms:numericalInformationType>
+                    <vms:numericValue>80</vms:numericValue>
+                    <vms:unitOfMeasure>kilometresPerHour</vms:unitOfMeasure>
+                  </vms:displayedNumericalInformation>
+                </vms:pictogram>
+              </vms:displayAreaSettings>
+            </vms:displayAreaSettings>
+            <vms:displayAreaSettings displayAreaIndex="2">
+              <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
+                <vms:isBlank>false</vms:isBlank>
+                <vms:legallyBinding>false</vms:legallyBinding>
+                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/an6qirhubg/01/02</vms:pictogramDisplayUrl>
+                <vms:pictogram xsi:type="vms:RegularPictogram">
+                  <vms:customPictogramCode>A23</vms:customPictogramCode>
+                  <vms:pictogramInInverseColour>true</vms:pictogramInInverseColour>
+                  <vms:pictogramInformationType>warning</vms:pictogramInformationType>
+                  <vms:gddStructure>
+                    <vms:gddPictogramIdentification>
+                      <vms:country>cz</vms:country>
+                      <vms:serviceCategory>dangerWarning</vms:serviceCategory>
+                      <vms:pictogramCategoryCode>421</vms:pictogramCategoryCode>
+                    </vms:gddPictogramIdentification>
+                  </vms:gddStructure>
+                  <vms:presenceOfRedTriangle>true</vms:presenceOfRedTriangle>
+                  <vms:displayedNumericalInformation>
+                    <vms:numericalInformationType>sectionLength</vms:numericalInformationType>
+                    <vms:numericValue>2200</vms:numericValue>
+                    <vms:unitOfMeasure>metres</vms:unitOfMeasure>
+                  </vms:displayedNumericalInformation>
+                </vms:pictogram>
+                <vms:supplementaryInformationDisplay xsi:type="vms:SupplementaryPictogram">
+                  <vms:isBlank>false</vms:isBlank>
+                  <vms:pictogramDescription>lengthOfTheApplicationZone</vms:pictogramDescription>
+                  <vms:pictogramCode>E4_2200</vms:pictogramCode>
+                </vms:supplementaryInformationDisplay>
+              </vms:displayAreaSettings>
+            </vms:displayAreaSettings>
+          </vms:vmsMessage>
+        </vms:vmsMessage>
+        <!-- tag::location-override[] -->
+        <vms:vmsLocationOverride xsi:type="loc:PointLocation">
+          <!-- ACTUAL LOCATION OF THE UNIT -->
+          <!-- mobile VMS located on on right side of road, valid for whole road belt -->
+<loc:supplementaryPositionalDescription>
+            <loc:positionOnCarriageway>onTheRight</loc:positionOnCarriageway>
+            <!-- validity for -->
+            <loc:carriageway>
+              <loc:carriageway>mainCarriageway</loc:carriageway>
+              <loc:lane>
+                <loc:laneUsage>allLanesCompleteCarriageway</loc:laneUsage>
+              </loc:lane>
+            </loc:carriageway>
+            <!-- name of the road and direction here -->
+            <loc:roadInformation>
+              <loc:roadDestination>Praha</loc:roadDestination>
+              <loc:roadNumber>D8</loc:roadNumber>
+            </loc:roadInformation>
+          </loc:supplementaryPositionalDescription>
+          <!-- WGS84 coordinates (lat, lon) cente of the road belt, perpendicular to sign post -->
+          <loc:pointByCoordinates>
+            <loc:pointCoordinates>
+              <loc:latitude>50.3211183</loc:latitude>
+              <loc:longitude>14.3069131</loc:longitude>
+            </loc:pointCoordinates>
+          </loc:pointByCoordinates>
+            
+          <!-- location by mileage posts from road start MANDATORY -->
+          <loc:pointAlongLinearElement>
+            <loc:directionRelativeAtPoint>opposite</loc:directionRelativeAtPoint>
+            <loc:linearElement>
+              <loc:roadNumber>D8</loc:roadNumber>
+            </loc:linearElement>
+            <loc:distanceAlongLinearElement xsi:type="loc:DistanceFromLinearElementStart">
+              <loc:distanceAlong>18915</loc:distanceAlong>
+            </loc:distanceAlongLinearElement>
+          </loc:pointAlongLinearElement>
+          
+          <!-- location by Global Network element percentage of the element OPTIONAL -->
+          <loc:pointAlongLinearElement>
+            <!-- always aligned on direction separated roads -->
+            <loc:directionRelativeAtPoint>aligned</loc:directionRelativeAtPoint>
+            <loc:linearElement xsi:type="loc:LinearElementByCode">
+              <!-- identification of the base data set GN -->
+              <loc:linearElementReferenceModel>CZ-RSD-GlobalNetwork</loc:linearElementReferenceModel>
+              <loc:linearElementReferenceModelVersion>21.06</loc:linearElementReferenceModelVersion>
+              <!-- GN element containing the location -->
+              <loc:linearElementIdentifier>1457896321</loc:linearElementIdentifier>
+            </loc:linearElement>
+            <!-- distance in meters from start of the GN element (not start of the road) -->
+            <loc:distanceAlongLinearElement xsi:type="loc:PercentageDistanceAlongLinearElement">
+              <loc:percentageDistanceAlong>28.5</loc:percentageDistanceAlong>
+            </loc:distanceAlongLinearElement>
+          </loc:pointAlongLinearElement>
+        </vms:vmsLocationOverride>
+        <!-- end::location-override[] -->
+      </vms:vmsStatus>
+    </vms:vmsStatus>
+  </vms:vmsControllerStatus>
+</d2:payload>

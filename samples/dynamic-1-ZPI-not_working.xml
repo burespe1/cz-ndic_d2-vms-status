@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Dynamic VMS example in Prague, Wilsonova street with one pictogram (PDZ) and one text area (PIT) -->
+<!-- 
+ x=======x====================x     
+ x       x   PIT, line 1      x      
+ x  PDZ  x   PIT, line 2      x====x 
+ x       x   PIT, line 3      x    x 
+ x=======x====================x    x 
+ -->
+<d2:payload xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" modelBaseVersion="3" xsi:type="vms:VmsPublication" xsi:schemaLocation="http://datex2.eu/schema/3/d2Payload ../schema/DATEXII_3_D2Payload.xsd" lang="cs" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
+  <com:feedType>x-source:cz-ndic_d2-vms-status-fixed-pull-v3</com:feedType>
+  <com:publicationTime>2021-12-28T18:45:00+01:00</com:publicationTime>
+  <com:publicationCreator>
+    <com:country>cz</com:country>
+    <com:nationalIdentifier>NDIC</com:nationalIdentifier>
+  </com:publicationCreator>
+  <vms:headerInformation>
+    <com:confidentiality>noRestriction</com:confidentiality>
+    <com:informationStatus>real</com:informationStatus>
+  </vms:headerInformation>
+  <!-- vmsControllerStatus per one dynamic sign -->
+  <vms:vmsControllerStatus>
+    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="1"/>
+    <vms:vmsControllerReference id="849619d2a1" targetClass="vms:VmsController" version="1"/>
+    <vms:statusUpdateTime>2021-12-28T18:45:00+01:00</vms:statusUpdateTime>
+    <!-- dynamic setting of PDZ -->
+    <vms:vmsStatus vmsIndex="1">
+      <vms:vmsStatus>
+        <vms:flashingLightsOn>false</vms:flashingLightsOn>
+        <vms:workingStatus>notWorking</vms:workingStatus>
+      </vms:vmsStatus>
+    </vms:vmsStatus>
+  </vms:vmsControllerStatus>
+</d2:payload>

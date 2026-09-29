@@ -1,0 +1,13 @@
+# Metadata dokumentace. Verze dokumentace = <format_version>.<revision>
+format_version: '1.2'
+revision: 0
+date: '2026-09-28'
+languages:
+- cs
+- en
+cs:
+  perex: Aktuální obsah a stav proměnných dopravních značek (pevné i mobilní).
+  keywords: DATEX II, NDIC, VmsPublication
+en:
+  perex: Current content and status of variable message signs (fixed and mobile).
+  keywords: DATEX II, NDIC, VmsPublication

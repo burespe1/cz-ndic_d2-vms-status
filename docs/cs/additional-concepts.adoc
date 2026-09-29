@@ -1,0 +1,137 @@
+== Další důležité aspekty
+
+=== Distribuce pull a push
+
+* Dynamická publikace se poskytuje dvěma způsoby:
+** *push* (v okamžiku změny): poskytují se jen řadiče, které se změnily. Publikuje se vždy celá
+   struktura řadiče, i když se změnil jediný element; ostatní části nesou původní časy.
+** *pull* (na vyžádání): poskytují se všechny relevantní řadiče v plné podobě.
+* `publicationTime` odpovídá poslední změně obsahu. Nezměnil-li se obsah od předchozí publikace (např. při
+  opakovaném vyžádání), zůstává čas původní.
+* Aktuálnost stavu řadiče (`statusUpdateTime`) je dána nejvyšší hodnotou času nastavení (`timeLastSet`)
+  jednotlivých VMS daného řadiče.
+
+=== Konfigurace VMS
+
+* Logické elementy (pravda/nepravda) se uvádějí pro obě hodnoty. Nepřítomnost elementu neznamená hodnotu
+  „nepravda“, pouze to, že stav není znám.
+* Elementy s výčty se uvádějí jen tehdy, přinášejí-li informační hodnotu.
+* Typ informace zobrazené na aktivních plochách VMS obecně popisuje typ zprávy `messageInformationType`.
+
+=== Identifikace VMS
+
+* Dynamická publikace popisuje stavy prvků definovaných ve statické publikaci.
+* Stav řadiče popisuje struktura `vmsControllerStatus`, jednoznačně určená:
+** identifikátorem a verzí tabulky (`vmsControllerTableReference`) ve statické publikaci,
+** identifikátorem a verzí řadiče (`vmsControllerReference`) ve statické publikaci.
+* Stav VMS popisuje struktura `vmsStatus`, identifikovaná v rámci řadiče indexem `vmsIndex` (1..n). Stav
+  zobrazený na VMS se může periodicky měnit; jednotlivé stavy definuje podstruktura `vmsMessage`.
+* V tomto profilu se *nepoužívá* cyklování zobrazených zpráv: v rámci `vmsStatus` existuje vždy jen
+  jedna podstruktura `vmsMessage` s indexem 1.
+* Stav zobrazovací plochy popisuje struktura `displayAreaSettings`, identifikovaná v rámci VMS indexem
+  `displayAreaIndex` (1..n).
+
+[#fig-id-structure]
+.Struktura identifikátorů (zdroj: vlastní)
+image::vms-id-structure.png[Struktura identifikátorů,width=600,align="center"]
+
+=== Dynamická konfigurace VMS
+
+* U každé VMS lze na úrovni `vmsStatus` dynamicky přetížit konfiguraci zobrazovacích ploch popsanou ve
+  statické publikaci v elementu `vmsConfiguration`. Krátkodobou změnu rozložení aktivních zobrazovacích
+  ploch, například pro informování v různých časech, popisuje element `vmsDynamicConfiguration`
+  (typ `VmsConfiguration`, stejný jako ve statické publikaci).
+* Použije-li se přetěžující element, nahradí se statický obsah celý (nepřepisuje se jen část zmíněná
+  v dynamické publikaci).
+
+[[life-cycle]]
+=== Životní cyklus informací v dynamické publikaci
+
+==== Životní cyklus struktury VmsController
+
+* V dynamické publikaci je aktivní vždy jen jedna verze každého řadiče (`VmsController`).
+* Původní verze řadiče se nejprve deaktivuje a poté se zveřejní stav nové verze; deaktivace může sloužit
+  i k úplnému odstavení značky.
+
+==== Deaktivace a reaktivace řadiče
+
+* Verze řadiče se deaktivuje v *dynamické publikaci* elementem `vmsControllerFault`:
+** `faultIdentifier` s jednou z předdefinovaných hodnot podle <<tab-faultIdentifier>>,
+** `faultLastUpdateTime` s časem deaktivace,
+** `vmsControllerFault` s hodnotou `other`.
+
+[#tab-faultIdentifier]
+.Hodnoty elementu `faultIdentifier`
+[cols="1,1",options="header"]
+|===
+|Hodnota |Význam
+|`vmsControllerDeactivated` |portál deaktivován, důvod neuveden
+|`vmsControllerMovedToAnotherLocation` |portál, vozík byl přesunut
+|`vmsControllerLayoutChanged` |předělávka zobrazovacích ploch
+|`vmsControllerMovedAndLayoutChanged` |viz dvě předchozí
+|===
+
+.Deaktivace řadiče – vozík přesunut (vzorek `dynamic-5-trailer_deactivated.xml`)
+[source,xml]
+----
+include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
+----
+
+* Statická publikace se při deaktivaci ani reaktivaci nemění.
+* Neaktivní verzi řadiče lze opět aktivovat zveřejněním jejího stavu bez `vmsControllerFault` – například
+  je-li značka přesouvána mezi dvěma místy, lze verzi 1 deaktivovat a následně opět aktivovat, či přepínat
+  mezi dvěma verzemi statického popisu.
+
+=== Odkazy do dalších tabulek
+
+* Všechny piktogramy (`PictogramDisplay`) a některé textové plochy (`TextDisplay`) odkazují do
+  předdefinovaných tabulek: `customPictogramCode` do tabulky piktogramů a `textCode` do tabulky
+  textových frází.
+* Tabulku piktogramů určuje statická publikace v elementu `pictogramCodeListIdentifier`.
+* Tabulky slouží *pouze k vysvětlení* (jak byl určitý symbol zakódován); tabulka frází může obsahovat
+  překlad opakujících se textů na PIT do jiného jazyka. Vhodnost jejich použití posoudí odběratel.
+* Tabulky související s tímto profilem:
+** tabulka piktogramů: `cz-pictogram-code-list.xlsx` (součást balíčku specifikace `{schema-uri}.zip`, adresář `res`),
+** tabulka textových frází: není.
+
+=== Odkazy na grafické zobrazení
+
+* Dynamická publikace odkazuje na obrázky jednotlivých *aktivních zobrazovacích ploch* typu
+  `PictogramDisplay` a `TextDisplay` elementy `pictogramDisplayUrl` a `textImageUrl`.
+* Odkazy na grafické zobrazení celého řadiče (statické) či celé VMS (dynamické) jsou ve statické
+  publikaci.
+* Odkazy mají strukturu `baseUrl/customUrl/vms/vmsControllerId/vmsId/displayAreaId`, např. obsah
+  1. zobrazovací plochy 1. VMS na řadiči: `https://rsd.cz/cache/vms/849619d2a1/01/01`.
+
+=== Popis polohy VMS
+
+* Poloha se, vyjma vozíků a přenosných značek, popisuje vždy ve *statické publikaci*; při trvalé změně
+  polohy se vydá nová verze řadiče s aktualizovaným popisem polohy.
+* Pro vozíky a přenosné značky se na úrovni `vmsStatus` používá `vmsLocationOverride` s aktuální polohou
+  (geografickou i vůči jízdnímu pruhu a pásu); struktura je shodná s `vmsLocation` ve statické publikaci.
+* Použije-li se přetěžující element, nahradí se statický popis polohy celý.
+
+==== Změna polohy
+
+* Změna polohy se může týkat:
+** dočasné změny uspořádání jízdních pruhů, například po dobu uzavírky,
+** trvalé změny polohy mobilní VMS (na vozíku),
+** pohybující se mobilní VMS (na vozíku).
+* Tyto změny se řeší zcela v dynamické publikaci pomocí `vmsLocationOverride`; nevzniká nová verze řadiče.
+* Při trvalejším umístění mobilní VMS (déle než 6 měsíců) lze kvůli optimalizaci přenášených dat vytvořit
+  novou statickou verzi s aktualizovaným popisem polohy; nakládání s původními verzemi popisuje
+  <<life-cycle>>.
+* Při odstranění mobilní VMS (vozíku) z původního místa se v dynamické publikaci deaktivuje; statická
+  publikace se nemění. Při přistavení na nové místo se v dynamické publikaci reaktivuje.
+* Pohybující se *aktivní* mobilní VMS se nedeaktivuje; změna aktuální polohy se hlásí periodicky (např.
+  jednou za minutu).
+
+.Aktuální poloha vozíku (vzorek `dynamic-5-trailer.xml`)
+[source,xml]
+----
+include::{samplesdir}/dynamic-5-trailer.xml[tag=location-override,indent=0]
+----
+
+Popis umístění na řadiči, platnosti vůči jízdnímu pruhu, geografický popis polohy VMS a umístění
+zobrazovacích ploch v rámci VMS stanoví dokumentace statické publikace (`cz-ndic_d2-vms-table`).
+

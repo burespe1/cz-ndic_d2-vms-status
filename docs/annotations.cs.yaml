@@ -1,0 +1,153 @@
+# Ruční texty k tabulkám elementů – JEDINÝ ručně psaný vstup tabulek.
+# Třída:
+#   _: úvodní věta tabulky
+#   element:
+#     note: popis
+#     card: '1..1'   # pravidlo NDIC nad rámec schématu (tmavě modře)
+#     required: true # NDIC vždy vyplňuje
+#     values: {literal: překlad}
+# _enum: {Enum.literal: překlad} – přepisuje sdílený slovník kitu
+# Převzato z dokumentace cz-ndic_d2-vms-v1.1 (tabulky elementů), upraveno pro DATEX II 3.7.
+
+VmsPublication:
+  feedType:
+    note: Odkaz na zdroj dat v registru národního přístupového bodu (https://registr.dopravniinfo.cz/),
+      např. `x-source:cz-ndic_d2-vms-status-fixed-pull-v3`. Formát určují atributy `profileName` a `profileVersion`.
+  publicationTime:
+    note: Čas vytvoření obsahu publikace; nezměnil-li se obsah, zůstává původní.
+  publicationCreator:
+    note: 'Poskytovatel publikace: `country` = `cz`, `nationalIdentifier` = zkratka poskytovatele (NDIC).'
+  headerInformation:
+    note: Vždy `confidentiality` = `noRestriction` a `informationStatus` = `real`.
+  vmsControllerStatus:
+    note: Stav celého řadiče; obsahuje vždy stav všech VMS daného řadiče.
+VmsControllerStatus:
+  vmsControllerTableReference:
+    note: Identifikátor a verze tabulky ve statické publikaci (verze se mění jen ve výjimečných případech).
+  vmsControllerReference:
+    note: Identifikátor a verze řadiče ve statické publikaci (verze se mění při změně konfigurace či polohy).
+  statusUpdateTime:
+    note: Čas aktualizace řadiče = nejvyšší `timeLastSet` jeho VMS. Neuvádí se jen při deaktivaci řadiče,
+      kdy je čas v `vmsControllerFault`.
+  vmsStatus:
+    note: Vynechává se jen při deaktivaci řadiče.
+  vmsControllerFault:
+    card: 0..1
+    note: Jen pro deaktivaci verze řadiče (přesun, zneplatnění). Verze se znovu aktivuje zveřejněním jejího
+      stavu bez `vmsControllerFault`. Platná je vždy jen jedna verze řadiče.
+VmsControllerFault:
+  faultIdentifier:
+    card: 1..1
+    note: Kód deaktivace konkrétní verze řadiče.
+    values:
+      vmsControllerDeactivated: řadič deaktivován, důvod neuveden
+      vmsControllerMovedToAnotherLocation: řadič, vozík byl přesunut
+      vmsControllerLayoutChanged: předělávka zobrazovacích ploch či jízdních pruhů
+      vmsControllerMovedAndLayoutChanged: přesun i předělávka
+  faultLastUpdateTime:
+    note: Čas deaktivace.
+  vmsControllerFault:
+    note: Vždy `other` – struktura slouží jen k deaktivaci.
+VmsStatus:
+  flashingLightsOn:
+    note: '`true`, jsou-li blikače na VMS v provozu.'
+  workingStatus:
+    note: Provozní stav VMS; povoleny všechny hodnoty.
+  vmsDynamicConfiguration:
+    note: Jen při dočasné změně rozložení aktivních zobrazovacích ploch bez změny statické publikace. Po dobu
+      změny musí být přítomna a nahrazuje celý popis konfigurace ve statické publikaci; struktura je shodná
+      s `vmsConfiguration`.
+  vmsMessage:
+    card: 1..1
+    note: Cyklování zpráv se nepoužívá – vždy jen `vmsMessage` s indexem 1.
+  vmsLocationOverride:
+    note: Při změně polohy značky (vozíku) bez změny statické publikace, typ `loc:PointLocation`. Po dobu
+      změny musí být přítomna a nahrazuje celý popis polohy ve statické publikaci; struktura je shodná
+      s `vmsLocation`.
+VmsMessage:
+  messageInformationType:
+    card: 0..1
+    note: Typ zobrazené zprávy; u prázdného displeje se neuvádí.
+  timeLastSet:
+    note: Čas nastavení VMS.
+  displayAreaSettings:
+    card: 1..n
+    note: Informace zobrazené na zobrazovací ploše, typ `vms:PictogramDisplay` nebo `vms:TextDisplay`.
+PictogramDisplay:
+  isBlank:
+    note: '`true`, nezobrazuje-li plocha nic (zpravidla spolu s `workingStatus` = `blank`, GDD kódem 11.991
+      a `pictogramDescription` = `blankVoid`), jinak `false`.'
+  legallyBinding:
+    note: '`true` pro zákazovou či příkazovou značku, jinak `false`. Při `isBlank` = `true` se vynechává.'
+  pictogramDisplayUrl:
+    note: URL obrázku zobrazovací plochy (`baseUrl/…/vms/řadič/VMS/plocha`).
+  pictogram:
+    note: Zobrazený piktogram, typ `vms:RegularPictogram` nebo `vms:CompositePictogram`.
+  supplementaryInformationDisplay:
+    note: Doplňková tabulka, typ `vms:SupplementaryPictogram` nebo `vms:SupplementaryText`. Popisuje význam
+      a kód doplňkové tabulky; číselné hodnoty jsou v nadřazeném piktogramu.
+RegularPictogram:
+  customPictogramCode:
+    note: Povinný kód piktogramu v tabulce piktogramů (`pictogramCodeListIdentifier` ve statické
+      publikaci), např. `A23`.
+  pictogramInInverseColour:
+    note: '`true` = inverzní barvy (nespojitá značka), platí pro všechny maticové zobrazovače; `false` jen
+      u hranolových či plechových značek. Při `isBlank` = `true` se vynechává.'
+  pictogramInformationType:
+    note: Typ informace piktogramu.
+  gddStructure:
+    note: Kód piktogramu podle ISO 14823:2017; jen existuje-li v normě popis.
+  displayedNumericalInformation:
+    note: Číselná hodnota a její význam, zobrazená na piktogramu či na doplňkové tabulce.
+  pictogramDescription:
+    card: 0..1
+    note: Popis piktogramu, jen jako doplněk toho, co nepopisuje GDD; lze uvést i spolu s kódem GDD.
+  presenceOfRedTriangle:
+    note: '`true` u výstražných značek, `false` pro zobrazení vnitřní části výstražné značky na VMS;
+      uvádí se jen při `pictogramInformationType` = `warning`.'
+CompositePictogram:
+  pictogramDescription:
+    note: Popis složeného piktogramu.
+  regularPictogram:
+    note: Standardní piktogram použitý ve složeném zobrazení (struktura `RegularPictogram`).
+GddStructure:
+  gddPictogramIdentification:
+    note: Trojčíselný kód piktogramu podle ISO 14823 (verze 14823:2022 má nové piktogramy a změny kódů).
+DisplayedNumericalInformation:
+  numericalInformationType:
+    note: Význam číselné hodnoty zobrazené na piktogramu či doplňkové tabulce.
+  numericValue:
+    note: Hodnota k uvedenému významu.
+  unitOfMeasure:
+    note: Jednotka hodnoty.
+SupplementaryPictogram:
+  pictogramCode:
+    note: Povinný kód doplňkové tabulky (piktogramu) v tabulce piktogramů.
+  pictogramDescription:
+    note: Popis doplňkového piktogramu.
+SupplementaryText:
+  textLine:
+    note: Řádek doplňkového textového panelu; u VMS se zpravidla nepoužívá.
+TextDisplay:
+  textCode:
+    note: Odkaz na řádek tabulky frází, který popisuje obsah celého panelu (zatím neimplementováno).
+  textImageUrl:
+    note: Aktuální grafické zobrazení aktivní plochy textového panelu.
+  textLine:
+    note: Řádky textového panelu shora dolů, horní řádek má `@lineIndex` = 1.
+TextLine:
+  textLine:
+    note: Text řádku v UTF-8.
+  lineLanguage:
+    card: '1'
+    note: Jazyk řádku, právě jeden.
+  lineColour:
+    note: Barva textu řádku (výchozí bílá).
+  lineHtml:
+    note: Popis řádku v HTML, obsahuje-li speciální symboly (např. šipky).
+  isExactTextOnSign:
+    note: '`true`, odpovídá-li text přesně zobrazení na značce.'
+  textInformationType:
+    note: Typ textové informace na řádku, lze-li jej jednoznačně určit, jinak se vynechá.
+
+_enum: {}
