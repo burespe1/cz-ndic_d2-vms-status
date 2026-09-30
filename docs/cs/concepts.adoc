@@ -8,16 +8,12 @@ poskytování informací a řízení provozu. Profil má statickou a dynamickou 
 * dynamická část (tento formát) popisuje právě zobrazované informace na jednotlivých značkách, u mobilních
   vozíků včetně změny konfigurace zobrazovací plochy a polohy vozíku.
 
-Formát vychází z DATEX II publikace `VmsPublication` <<EN16157-4>>. Oproti verzi 1.1 (DATEX II 3.3) se
-struktura nemění – výběr profilu je přenesen do modelu 3.7 beze změny tříd, prvků, kardinalit i hodnot
-výčtů a data zůstávají platná. Mění se identifikace formátu a zdroje v hlavičce (formát nese nový název
-`cz-ndic_d2-vms-status`) a pravidlo pro `publicationTime`.
+Formát vychází z DATEX II publikace `VmsPublication` <<EN16157-4>>. Používá model DATEX II 3.7.
 
 [[obalka]]
 === Obálka a hlavička publikace
 
-Každá zpráva je dokument DATEX II 3 s kořenovým elementem `d2:payload`. Obálky `d2LogicalModel`
-a `exchange` z verze 2 se již nepoužívají. Atribut `xsi:type` kořenového elementu určuje typ
+Každá zpráva je dokument DATEX II 3 s kořenovým elementem `d2:payload`. Atribut `xsi:type` kořenového elementu určuje typ
 publikace (zde `vms:VmsPublication`), atribut `modelBaseVersion="3"` verzi modelu a atribut `lang` výchozí jazyk
 textů.
 

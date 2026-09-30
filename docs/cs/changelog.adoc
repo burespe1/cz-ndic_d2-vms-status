@@ -3,6 +3,11 @@
 // Revize dokumentace (MAJOR.MINOR.REVIZE). Změny formátu viz CHANGELOG.adoc ve specifikaci.
 === 1.2.0
 
-* Nová dokumentace formátu `cz-ndic_d2-vms-status` verze 1.2 (DATEX II 3.7); nahrazuje dokumentaci formátu cz-ndic_d2-vms-v1.1 (DATEX II 3.3).
-* Změny v obsahu oproti verzi 1.1:
-** Síť Global Network má `linearElementReferenceModel` = `CZ-RSD-GlobalNetwork` a staničení se uvádí číslem komunikace (`roadNumber`) místo modelu `mileage` – shodně se situačními formáty.
+* Nová dokumentace formátu `cz-ndic_d2-vms-status` verze 1.2 (DATEX II 3.7); nahrazuje dokumentaci formátu
+  cz-ndic_d2-vms-v1.1 (DATEX II 3.3).
+* Změny oproti verzi 1.1 (DATEX II 3.3):
+** Struktura se nemění – výběr profilu je přenesen do modelu 3.7 beze změny tříd, prvků, kardinalit
+   i hodnot výčtů a data zůstávají platná. Mění se identifikace formátu a zdroje v hlavičce (formát nese
+   nový název `cz-ndic_d2-vms-status`) a pravidlo pro `publicationTime`.
+** Síť Global Network má `linearElementReferenceModel` = `CZ-RSD-GlobalNetwork` a staničení se uvádí číslem
+   komunikace (`roadNumber`) místo modelu `mileage` – shodně se situačními formáty.
