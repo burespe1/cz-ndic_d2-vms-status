@@ -9,7 +9,7 @@ publikací. Každý příklad obsahuje:
   aktuálně zobrazeno.
 
 Vzorky dynamické publikace jsou součástí balíčku specifikace `{schema-uri}.zip` (adresář `samples`), vzorky
-statické publikace balíčku formátu `cz-ndic_d2-vms-table`. Všechny jsou validní vůči schématu DATEX II 3.7 a odpovídají výběru profilu (`.sel`).
+statické publikace balíčku formátu `cz-ndic_d2-vms-table`.
 
 === Informační (polo)portál se ZPI
 

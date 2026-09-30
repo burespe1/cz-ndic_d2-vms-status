@@ -1,13 +1,10 @@
 == Další důležité aspekty
 
-=== Distribuce pull a push
+=== Rozsah publikace
 
-* Dynamická publikace se poskytuje dvěma způsoby:
-** *push* (v okamžiku změny): poskytují se jen řadiče, které se změnily. Publikuje se vždy celá
-   struktura řadiče, i když se změnil jediný element; ostatní části nesou původní časy.
-** *pull* (na vyžádání): poskytují se všechny relevantní řadiče v plné podobě.
-* `publicationTime` odpovídá poslední změně obsahu. Nezměnil-li se obsah od předchozí publikace (např. při
-  opakovaném vyžádání), zůstává čas původní.
+* Publikace obsahuje buď všechny relevantní řadiče, nebo jen řadiče, které se změnily. Řadič se uvádí vždy
+  celou strukturou, i když se změnil jediný element; ostatní části nesou původní časy.
+* `publicationTime` odpovídá poslední změně obsahu. Nezměnil-li se obsah od předchozí publikace, zůstává čas původní.
 * Aktuálnost stavu řadiče (`statusUpdateTime`) je dána nejvyšší hodnotou času nastavení (`timeLastSet`)
   jednotlivých VMS daného řadiče.
 

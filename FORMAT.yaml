@@ -23,12 +23,6 @@ samples: samples
 ndic:
   action: review
   previous: cz-ndic_d2-vms-v1.1 (DATEX II 3.3)
-  source: NDIC / správci VMS
-  distributions:
-  - x-source:cz-ndic_d2-vms-status-fixed-pull-v3 (pull, pevné PDZ)
-  - x-source:cz-ndic_d2-vms-status-mobile-pull-v3 (pull, vozíky)
-  legislation:
-  - RTTI
   profiles: []
   profileName: cz-ndic_d2-vms-status
   profileVersion: '1.2'
