@@ -4,44 +4,48 @@ Formát popisuje informace zobrazené na proměnném dopravním značení (VMS) 
 poskytování informací a řízení provozu. Profil má statickou a dynamickou část:
 
 * statická část (formát `cz-ndic_d2-vms-table`) popisuje základní charakteristiky dopravní značky či
-  portálu včetně konfigurace zobrazovací plochy, polohy a platnosti vůči jízdnímu pruhu,
+  portálu včetně konfigurace činné plochy, polohy a platnosti vůči jízdnímu pruhu,
 * dynamická část (tento formát) popisuje právě zobrazované informace na jednotlivých značkách, u mobilních
-  vozíků včetně změny konfigurace zobrazovací plochy a polohy vozíku.
+  vozíků včetně změny konfigurace činné plochy a polohy vozíku.
 
-Formát vychází z DATEX II publikace `VmsPublication` <<EN16157-4>>. Používá model DATEX II 3.7.
+Formát vychází z DATEX II publikace `vms:VmsPublication` <<EN16157-4>>. Používá model DATEX II 3.7.
+
+include::{kitdir}/shared/cs/vms/pojmy.adoc[]
 
 [[obalka]]
 === Obálka a hlavička publikace
 
 Každá zpráva je dokument DATEX II 3 s kořenovým elementem `d2:payload`. Atribut `xsi:type` kořenového elementu určuje typ
-publikace (zde `vms:VmsPublication`), atribut `modelBaseVersion="3"` verzi modelu a atribut `lang` výchozí jazyk
+publikace (zde `vms:VmsPublication`), atribut `modelBaseVersion="3"` verzi modelu a atribut `@lang` výchozí jazyk
 textů.
 
 Formát, podle kterého je zpráva sestavena, identifikují výhradně atributy kořenového elementu:
 
 [horizontal]
-`profileName`:: identifikátor formátu bez verze (`cz-ndic_d2-vms-status`),
-`profileVersion`:: verze formátu (`1.2`).
+`@profileName`:: identifikátor formátu bez verze (`cz-ndic_d2-vms-status`),
+`@profileVersion`:: verze formátu (`1.2`).
 
 Hlavička publikace obsahuje:
 
-* `feedType` – identifikátor zdroje dat (distribuce) v registru národního přístupového bodu <<nap>>.
-  Zdroj odkazuje na formát, ve kterém data poskytuje; formát zprávy určují atributy `profileName`
-  a `profileVersion`. Element `feedDescription` se nepoužívá.
-* `publicationTime` – čas vytvoření obsahu publikace. Pokud se obsah od předchozí publikace nezměnil,
-  zůstává čas původní; nový čas vzniká jen se
-  změnou obsahu.
-* `publicationCreator` – poskytovatel publikace: kód země malými písmeny (`cz`) a zkratka
-  poskytovatele (`nationalIdentifier`).
-* `headerInformation` – způsob nakládání s informacemi; NDIC uvádí vždy `confidentiality`
-  = `noRestriction` a `informationStatus` = `real`.
+* `feedType` – identifikátor zdroje dat (distribuce) v registru národního přístupového bodu <<nap>>:
+** zdroj odkazuje na formát, ve kterém data poskytuje; formát zprávy určují atributy `@profileName` a
+   `@profileVersion`,
+** element `feedDescription` se nepoužívá.
+* `publicationTime` – čas vytvoření obsahu publikace; pokud se obsah od předchozí publikace nezměnil, zůstává
+  čas původní; nový čas vzniká jen se změnou obsahu.
+* `publicationCreator` – poskytovatel publikace:
+** kód země malými písmeny (`cz`),
+** zkratka poskytovatele (`nationalIdentifier`).
+* `headerInformation` – způsob nakládání s informacemi; NDIC uvádí vždy:
+** `confidentiality` = `noRestriction`,
+** `informationStatus` = `real`.
 
 Všechny časové údaje ve zprávě se uvádějí včetně časové zóny.
 
 .Kořenový element a hlavička publikace (vzorek `dynamic-1-ZPI.xml`)
 [source,xml]
 ----
-include::{samplesdir}/dynamic-1-ZPI.xml[lines=10]
+include::{samplesdir}/dynamic-1-ZPI.xml[lines=2]
 include::{samplesdir}/dynamic-1-ZPI.xml[tag=header,indent=2]
   ...
 ----
@@ -51,11 +55,11 @@ include::{samplesdir}/dynamic-1-ZPI.xml[tag=header,indent=2]
 
 Dynamická publikace má následující strukturu:
 
-* `vmsControllerStatus`: dynamický stav celého řadiče (portálu, značky, vozíku),
-* `vmsStatus`: stav jednotlivé VMS v rámci jednoho řadiče,
-* `vmsMessage`: kontejner pro všechny informace zobrazené na VMS,
-* `displayAreaSettings`: stav zobrazovací plochy typu piktogram (`PictogramDisplay`) či text
-  (`TextDisplay`).
+* stav řadiče VMS (element `vmsControllerStatus`) – dynamický stav celého řadiče (portálu, značky, vozíku),
+* stav VMS (element `vmsStatus`) – stav jednotlivé VMS v rámci řadiče,
+* zpráva VMS (element `vmsMessage`) – kontejner pro všechny informace zobrazené na VMS,
+* nastavení činné plochy (element `displayAreaSettings`) – stav činné plochy typu piktogram
+  (`vms:PictogramDisplay`) či text (`vms:TextDisplay`).
 
 .Stav řadiče (vzorek `dynamic-1-ZPI.xml`)
 [source,xml]
@@ -65,66 +69,83 @@ include::{samplesdir}/dynamic-1-ZPI.xml[tag=controller,indent=0]
 
 === Koncept struktury publikace
 
-* Na úrovni řadiče nelze vyjádřit celkový stav řadiče ani typ zobrazovaných informací; ty se vyjadřují až
-  na úrovni VMS a aktivních zobrazovacích ploch.
-* Dynamické informace se poskytují na úrovni řadiče strukturou `vmsControllerStatus`, která odkazuje na
-  řadič (`VmsController`) ve statické publikaci.
-* Doplňkový text či doplňkový piktogram se vždy vytváří v dynamické publikaci jako součást zobrazovací
-  plochy typu `PictogramDisplay`; není odkazován indexem do statické publikace (tam neexistuje).
+* Dynamické informace se poskytují jako stav řadiče VMS (element `vmsControllerStatus`), který odkazuje
+  na řadič VMS (`vms:VmsController`) ve statické publikaci.
+* Na úrovni řadiče nelze vyjádřit celkový stav řadiče ani typ zobrazovaných informací; ty se vyjadřují až:
+** na úrovni VMS,
+** na úrovni aktivních činných ploch.
+* Dodatková tabulka (textová či v podobě piktogramu):
+** se vždy vytváří v dynamické publikaci jako součást činné plochy typu piktogram (`vms:PictogramDisplay`),
+** není odkazována indexem do statické publikace (tam neexistuje).
 
-==== PictogramDisplay
+==== Činná plocha typu piktogram
 
-* Každý piktogram může mít právě jednu doplňkovou tabulku či doplňkový piktogram.
-* Povinně obsahuje kód piktogramu `customPictogramCode`, který odkazuje do předdefinované tabulky
-  piktogramů určené ve statické publikaci v `pictogramCodeListIdentifier`. Neexistuje-li pro daný
-  piktogram standardní popis, je tato tabulka jedinou možností jeho popisu.
+Činnou plochu typu piktogram popisuje třída `vms:PictogramDisplay`.
+
+* Každý piktogram může mít právě jednu dodatkovou tabulku (textovou či v podobě piktogramu).
+* Povinně obsahuje kód piktogramu `customPictogramCode`:
+** kód odkazuje do předdefinované tabulky piktogramů určené ve statické publikaci v `pictogramCodeListIdentifier`,
+** neexistuje-li pro daný piktogram standardní popis, je tato tabulka jedinou možností jeho popisu.
 * Piktogram (`pictogram`) může být typu:
-** standardní piktogram (`RegularPictogram`) – jednoduchý symbol,
-** složený piktogram (`CompositePictogram`) – symbol složený ze standardního piktogramu a směrového
+** standardní piktogram (`vms:RegularPictogram`) – jednoduchý symbol,
+** složený piktogram (`vms:CompositePictogram`) – symbol složený ze standardního piktogramu a směrového
    uspořádání.
-* Všechny piktogramy, pro které existuje popis v normě GDD (ISO 14823:2017), jsou popsány kódem GDD
-  (`gddStructure`). Vyhovuje-li číselník popisu piktogramu `pictogramDescription`, použije se také, viz
-  <<fig-gdd-mapping>>.
+* Popis piktogramu podle norem:
+** všechny piktogramy, pro které existuje popis v normě GDD (ISO 14823:2017), jsou popsány kódem GDD
+   (`gddStructure`),
+** vyhovuje-li číselník popisu piktogramu `pictogramDescription`, použije se také (viz <<fig-gdd-mapping>>).
 
 [#fig-gdd-mapping]
 .Zobrazení části popisu kódování dopravního značení (zdroj: ISO 14823)
 image::vms-gdd-mapping.png[Kódování dopravního značení podle ISO 14823,width=600,align="center"]
 
-* Piktogram vždy nese informaci, zda je prázdný (`isBlank`), zda je právně závazný (`legallyBinding`),
-  zda používá inverzní zobrazení (`pictogramInInverseColour`, platí pro všechny nespojité značky, viz
-  <<fig-inverse-pic>>), jakého je typu (`pictogramInformationType`) a zda je použit výstražný trojúhelník
-  (`presenceOfRedTriangle`).
+* Piktogram vždy nese informaci:
+** zda je prázdný (`isBlank`),
+** zda je právně závazný (`legallyBinding`),
+** zda používá inverzní zobrazení (`pictogramInInverseColour`; platí pro všechny nespojité značky, viz
+   <<fig-inverse-pic>>),
+** jakého je typu (`pictogramInformationType`),
+** zda je použit výstražný trojúhelník (`presenceOfRedTriangle`).
 
 [#fig-inverse-pic]
 .Spojité a nespojité zobrazení (zdroj: ŘSD R19)
 image::vms-inverse.png[Spojité a nespojité zobrazení,width=600,align="center"]
 
-.Piktogram s doplňkovou tabulkou (vzorek `dynamic-1-ZPI.xml`)
+.Piktogram s dodatkovou tabulkou (vzorek `dynamic-1-ZPI.xml`)
 [source,xml]
 ----
 include::{samplesdir}/dynamic-1-ZPI.xml[tag=pictogram,indent=0]
 ----
 
-==== Doplňková tabulka
+==== Dodatková tabulka
 
-* Doplňková tabulka je modelována jako piktogram třídou `SupplementaryPictogram` (pro typy E3a –
-  vzdálenost k místu, E4 – délka úseku, E5 – největší povolená hmotnost, E7 a další).
-* Povinně obsahuje kód `pictogramCode`, který odkazuje do předdefinované tabulky. Neexistuje-li pro daný
-  piktogram standardní popis, je tato tabulka jedinou možností jeho popisu.
-* Číselné údaje z doplňkové tabulky jsou promítnuty do struktury číselných údajů nadřazeného piktogramu
+* Dodatková tabulka je modelována jako piktogram třídou `vms:SupplementaryPictogram`, např. pro typy:
+** E3a – vzdálenost k místu,
+** E4 – délka úseku,
+** E5 – největší povolená hmotnost,
+** E7 a další.
+* Povinně obsahuje kód `pictogramCode`:
+** kód odkazuje do předdefinované tabulky,
+** neexistuje-li pro danou dodatkovou tabulku standardní popis, je tato tabulka jedinou možností jejího popisu.
+* Číselné údaje z dodatkové tabulky jsou promítnuty do struktury číselných údajů nadřazeného piktogramu
   (`displayedNumericalInformation`); v popisu tabulky zůstává jen určení typu.
 
-==== TextDisplay
+==== Činná plocha typu text
 
-* Celkový obsah aktivní části textového panelu je popsán grafickým zobrazením dostupným na URL
-  v elementu `textImageUrl`, případně frází z tabulky předdefinovaných textů, odkázanou kódem `textCode`
-  (zatím neimplementováno).
-* Jednotlivé řádky textového panelu (`textLine`) vždy obsahují jazyk, text řádku (v UTF-8), barvu řádku
-  (výchozí bílá) a přesnost shody popisu se zobrazením na VMS (`isExactTextOnSign`; liší se u speciálních
-  znaků a symbolů, viz tabulka piktogramů `res/cz-pictogram-code-list.xlsx` v balíčku specifikace).
+Činnou plochu typu text popisuje třída `vms:TextDisplay`.
+
+* Celkový obsah aktivní činné plochy typu text je popsán:
+** grafickým zobrazením dostupným na URL v elementu `textImageUrl`,
+** případně frází z tabulky předdefinovaných textů, odkázanou kódem `textCode` (zatím neimplementováno).
+* Jednotlivé řádky (`textLine`) vždy obsahují:
+** jazyk,
+** text řádku (v UTF-8),
+** barvu řádku (výchozí bílá),
+** přesnost shody popisu se zobrazením na VMS (`isExactTextOnSign`); liší se u speciálních znaků a symbolů,
+   viz tabulka piktogramů `res/cz-pictogram-code-list.xlsx` v balíčku specifikace.
 * Řádek může obsahovat i popis v HTML pro přesnější vyjádření obsahu, obsahuje-li speciální symboly.
 
-.Textový panel (vzorek `dynamic-1-ZPI.xml`)
+.Činná plocha typu text (vzorek `dynamic-1-ZPI.xml`)
 [source,xml]
 ----
 include::{samplesdir}/dynamic-1-ZPI.xml[tag=text,indent=0]

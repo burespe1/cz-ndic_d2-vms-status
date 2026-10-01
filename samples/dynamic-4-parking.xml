@@ -22,8 +22,8 @@
   </vms:headerInformation>
   <!-- vmsControllerStatus per one dynamic sign -->
   <vms:vmsControllerStatus>
-    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="1"/>
-    <vms:vmsControllerReference id="e2p7j5pc25" targetClass="vms:VmsController" version="1"/>
+    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="260601"/>
+    <vms:vmsControllerReference id="e2p7j5pc25" targetClass="vms:VmsController" version="260601"/>
     <vms:statusUpdateTime>2021-12-28T18:45:00+01:00</vms:statusUpdateTime>
     <!-- dynamic setting of information table with parking occupancy info -->
     <vms:vmsStatus vmsIndex="1">
@@ -38,7 +38,7 @@
               <vms:displayAreaSettings xsi:type="vms:TextDisplay">
                 <vms:isBlank>false</vms:isBlank>
                 <vms:legallyBinding>false</vms:legallyBinding>
-                <vms:textImageUrl>https://rsd.cz/cache/vms/e2p7j5pc25/01/01</vms:textImageUrl>
+                <vms:textImageUrl>https://mobilitydata.rsd.cz/VMS/e2p7j5pc25/1/1</vms:textImageUrl>
                 <!-- 1st line for more distant parking (in case of sign with more parking) -->
                 <vms:textLine lineIndex="1">
                   <vms:textLine lineLanguage="cs">

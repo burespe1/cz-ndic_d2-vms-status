@@ -21,13 +21,15 @@ image::ex-02.png[Poloportál se ZPI,width=600]
 
 * vzorek: `static-1-ZPI.xml`
 * koncept:
-** `VmsController` (identifikace): 1×
-** `Vms` (`roadsideCantileverMounted`): 1× dynamická značka na poloportálu pro celý jízdní pás [vms:1]
-** `DisplayArea`: [vms:1] 1× typu piktogram (s implicitní doplňkovou tabulkou) a 1× typu text
+** Řadič VMS (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `roadsideCantileverMounted`): 1× dynamická značka na poloportálu pro celý jízdní pás [vms:1]
+** Činné plochy (`vms:DisplayArea`): [vms:1] 1× typu piktogram (s implicitní dodatkovou tabulkou) a 1× typu text
 
-==== Dynamická publikace „kolona“
+==== Dynamická publikace „práce na silnici“
 
-Obsah: piktogram „kolona“; text: ulice Wilsonova ve směru I. P. Pavlova, st. dopravy 4.
+Skutečný stav z dat NDIC (9. 11. 2025): piktogram A15 (práce na silnici) a text „ulice Wilsonova“,
+„⇒ Muzeum“, „práce na silnici“; blikače zapnuty. Verze odkazu na tabulku je sjednocena se vzorkem
+tabulky (`260601`).
 
 .dynamic-1-ZPI.xml
 [%collapsible]
@@ -90,14 +92,14 @@ image::ex-04.png[Portál liniového řízení,width=600]
 
 * vzorek: `static-2-LM.xml`
 * koncept:
-** `VmsController` (identifikace): 1×
-** `Vms` (`gantryMounted`):
+** Řadič VMS (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `gantryMounted`):
 *** 2× proměnná značka vlevo a vpravo na sloupku pro celý jízdní pás [vms:1,5]
 *** 2× dynamická značka na portálu pro řízení v jízdních pruzích [vms:2,4]
 *** 1× dynamická značka na portálu pro celý jízdní pás [vms:3]
-** `DisplayArea`:
+** Činné plochy (`vms:DisplayArea`):
 *** [vms:1,5] 1× typu piktogram
-*** [vms:2,3,4] 1× typu piktogram (s implicitní doplňkovou tabulkou)
+*** [vms:2,3,4] 1× typu piktogram (s implicitní dodatkovou tabulkou)
 
 ==== Dynamická publikace „omezení rychlosti, výstraha, řaď se vpravo“
 
@@ -122,9 +124,9 @@ image::ex-05.png[ZPI teploměr,width=600]
 
 * vzorek: `static-3-meteo.xml`
 * koncept:
-** `VmsController` (identifikace): 1×
-** `Vms` (`roadsideMounted`): 1× dynamická značka vpravo pro zobrazení teploty [vms:1]
-** `DisplayArea`: [vms:1] 1× typu text se 2 řádky (1. řádek teplota okolí, 2. řádek teplota vozovky)
+** Řadič VMS (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `roadsideMounted`): 1× dynamická značka vpravo pro zobrazení teploty [vms:1]
+** Činné plochy (`vms:DisplayArea`): [vms:1] 1× typu text se 2 řádky (1. řádek teplota okolí, 2. řádek teplota vozovky)
 
 ==== Dynamická publikace „normální teploty“
 
@@ -150,9 +152,9 @@ image:ex-07.png[Detail značky,width=140]
 
 * vzorky: `static-4-parking.xml`, `static-4-parking_full.xml`
 * koncept:
-** `VmsController` (identifikace): 1×
-** `Vms` (`roadsideMounted`): 1× dynamická značka pro zobrazení obsazenosti parkovišť [vms:1]
-** `DisplayArea`: [vms:1] 1× typu text s 1–2 řádky (1. řádek bližší, 2. řádek vzdálenější parkoviště)
+** Řadič VMS (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `roadsideMounted`): 1× dynamická značka pro zobrazení obsazenosti parkovišť [vms:1]
+** Činné plochy (`vms:DisplayArea`): [vms:1] 1× typu text s 1–2 řádky (1. řádek bližší, 2. řádek vzdálenější parkoviště)
 
 ==== Dynamická publikace „volná místa“
 
@@ -183,17 +185,19 @@ Mobilní VMS na vozíku umístěném na krajnici.
 ==== Statická publikace
 
 image:ex-08.png[Mobilní vozík,width=180]
-image:ex-09.png[Konfigurace vozíku,width=360]
+image:ex-09.png[Konfigurace vozíku (ilustrační),width=360]
 
 * vzorek: `static-5-trailer.xml`
 * koncept (bez polohy – poloha je v dynamické publikaci):
-** `VmsController` (identifikace): 1×
-** `Vms` (`trailerMounted`): 1× dynamická značka na vozíku [vms:1]
-** `DisplayArea`: [vms:1] 2× typu piktogram (s implicitní doplňkovou tabulkou)
+** Řadič VMS (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `trailerMounted`): 1× dynamická značka na vozíku [vms:1]
+** Činné plochy (`vms:DisplayArea`): [vms:1] 1× typu text s 1 řádkem, 1× typu piktogram a 1× typu text se 4 řádky
 
-==== Dynamická publikace „pozor kolona, zpomal“
+==== Dynamická publikace „stavební práce“
 
-Obsah: omezení „80 km/h“, „kolona v délce 2,2 km“; aktuální poloha vozíku je v `vmsLocationOverride`.
+Skutečný stav z dat NDIC (1. 10. 2026): vozík na D1 u Brna. Rozložení ploch je dynamicky přetíženo
+(`vmsDynamicConfiguration`: piktogram a pod ním text se dvěma řádky); piktogram A15 (práce na silnici),
+text „EXIT 196“, „stavební práce“. Aktuální poloha vozíku je ve `vmsLocationOverride`.
 
 .dynamic-5-trailer.xml
 [%collapsible]
@@ -216,3 +220,30 @@ Obsah: vozík deaktivovaný pomocí `vmsControllerFault`.
 include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tags=**]
 ----
 ====
+
+=== Hranolové značky liniového řízení
+
+Dvojice hranolových značek po obou stranách dálnice D3.
+
+==== Statická publikace
+
+* vzorek: `static-6-prism.xml`
+* koncept:
+** Řadič VMS (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `roadsideMounted`, `vmsType` = `rotatingPrismSign`): 2× značka – vlevo [vms:1] a vpravo [vms:2]
+** Činné plochy (`vms:DisplayArea`): [vms:1,2] 1× typu piktogram
+
+==== Dynamická publikace „bez zobrazení“
+
+Skutečný stav z dat NDIC (21. 9. 2026): obě značky bez zobrazení (`workingStatus` = `blank`), zpráva
+`vmsMessage` se neuvádí.
+
+.dynamic-6-prism.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-6-prism.xml[tags=**]
+----
+====
+

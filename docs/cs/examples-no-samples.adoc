@@ -8,26 +8,26 @@ základního konceptu.
 
 image::ex-10.png[Informační portál se ZPI a liniovým řízením,width=600]
 
-* `VmsController` (identifikace): 1×
-* `Vms` (`gantryMounted`):
+* Řadič VMS (`vms:VmsController`): 1×
+* VMS (`vms:Vms`; `gantryMounted`):
 ** 2× proměnná značka vlevo a vpravo na sloupku včetně blikačů pro celý jízdní pás [vms:1,5]
 ** 1× ZPI na portálu pro celý jízdní pás [vms:2]
 ** 2× proměnné signály pro řízení v jízdních pruzích [vms:3,4]
-* `DisplayArea`:
+* Činné plochy (`vms:DisplayArea`):
 ** [vms:1,3,4,5] 1× typu piktogram
-** [vms:2] 1× typu piktogram (s implicitní doplňkovou tabulkou) a 1× typu text
+** [vms:2] 1× typu piktogram (s implicitní dodatkovou tabulkou) a 1× typu text
 
 === Portál liniového řízení se statickými značkami
 
 image::ex-11.png[Portál liniového řízení se statickými značkami,width=600]
 
-* `VmsController` (identifikace): 1×
-* `Vms` (`gantryMounted`):
+* Řadič VMS (`vms:VmsController`): 1×
+* VMS (`vms:Vms`; `gantryMounted`):
 ** 2× statická značka vlevo a vpravo [vms:1,7]
 ** 3× dynamická značka na portálu pro řízení v jízdních pruzích [vms:2,4,6]
 ** 2× dynamická značka na portálu pro celý jízdní pás [vms:3,5]
-* `DisplayArea`:
-** [vms:1,3,5,7] 1× typu piktogram (s implicitní doplňkovou tabulkou)
+* Činné plochy (`vms:DisplayArea`):
+** [vms:1,3,5,7] 1× typu piktogram (s implicitní dodatkovou tabulkou)
 ** [vms:2,4,6] 2× typu piktogram (hlavní a vedlejší se signálem)
 
 Statické značky lze modelovat stejně jako proměnné v dynamické publikaci.
@@ -36,35 +36,35 @@ Statické značky lze modelovat stejně jako proměnné v dynamické publikaci.
 
 image::ex-12.png[Portál s plně konfigurovatelnou značkou,width=600]
 
-* `VmsController` (identifikace): 1×
-* `Vms` (`gantryMounted`): 2× dynamická značka na portálu pro celý jízdní pás [vms:1,2]
-* `DisplayArea`: [vms:1,2] 1× typu piktogram bez dalších informací
+* Řadič VMS (`vms:VmsController`): 1×
+* VMS (`vms:Vms`; `gantryMounted`): 2× dynamická značka na portálu pro celý jízdní pás [vms:1,2]
+* Činné plochy (`vms:DisplayArea`): [vms:1,2] 1× typu piktogram bez dalších informací
 
 === Portál se spojitými směrovými a provozními značkami
 
-Komplexní značky se popisují typem `PictogramDisplay` s obrázkem a doplňkovým předdefinovaným textem.
+Komplexní značky se popisují typem `vms:PictogramDisplay` s obrázkem a doplňkovým předdefinovaným textem.
 
 image::ex-13.png[Portál se spojitými směrovými značkami,width=600]
 
-* `VmsController` (identifikace): 1×
-* `Vms` (`gantryMounted`): 2× dynamická hranolová značka na portálu pro celý jízdní pás [vms:1,2]
-* `DisplayArea`: [vms:1,2] 1× typu piktogram bez dalších informací
+* Řadič VMS (`vms:VmsController`): 1×
+* VMS (`vms:Vms`; `gantryMounted`): 2× dynamická hranolová značka na portálu pro celý jízdní pás [vms:1,2]
+* Činné plochy (`vms:DisplayArea`): [vms:1,2] 1× typu piktogram bez dalších informací
 
 === Značky s provozními informacemi podél pozemní komunikace
 
-* Informace o teplotě se vyjadřuje jako textový panel se 2 řádky; typ značky určuje `vmsTypeCode`.
-* Komplexní značky se popisují typem `PictogramDisplay` s obrázkem a doplňkovým předdefinovaným textem.
+* Informace o teplotě se vyjadřuje jako činná plocha typu text se 2 řádky; typ značky určuje `vmsTypeCode`.
+* Komplexní značky se popisují typem `vms:PictogramDisplay` s obrázkem a doplňkovým předdefinovaným textem.
 
 image:ex-14.png[Značka s teplotou,width=300]
 image:ex-15.png[Hranolová značka s blikači,width=270]
 
-* `VmsController` (identifikace): 1×
-** `Vms` (`roadsideMounted`): 1× dynamická značka vpravo pro zobrazení teploty [vms:1]
-** `DisplayArea`: [vms:1] 1× typu text se 2 řádky pro zobrazení teploty
-* `VmsController` (identifikace): 1×
-** `Vms` (`roadsideMounted`):
+* Řadič VMS (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `roadsideMounted`): 1× dynamická značka vpravo pro zobrazení teploty [vms:1]
+** Činné plochy (`vms:DisplayArea`): [vms:1] 1× typu text se 2 řádky pro zobrazení teploty
+* Řadič VMS (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `roadsideMounted`):
 *** 1× dynamická nespojitá značka pro celý jízdní pás [vms:1]
 *** 1× dynamická hranolová značka s blikači pro celý jízdní pás [vms:2]
-** `DisplayArea`:
-*** [vms:1] 1× typu piktogram (s implicitní doplňkovou tabulkou)
+** Činné plochy (`vms:DisplayArea`):
+*** [vms:1] 1× typu piktogram (s implicitní dodatkovou tabulkou)
 *** [vms:2] 1× typu piktogram bez dalších informací (komplexní)

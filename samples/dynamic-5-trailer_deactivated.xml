@@ -26,8 +26,8 @@
   </vms:headerInformation>
   <!-- vmsControllerStatus per one dynamic sign -->
   <vms:vmsControllerStatus>
-    <vms:vmsControllerTableReference id="CzechVmsTable-mobileVms" targetClass="vms:VmsControllerTable" version="1"/>
-    <vms:vmsControllerReference id="an6qirhubg" targetClass="vms:VmsController" version="1"/>
+    <vms:vmsControllerTableReference id="CzechVmsTable-mobileVms" targetClass="vms:VmsControllerTable" version="260601"/>
+    <vms:vmsControllerReference id="63F8AFE2-8AC2-403A-BBE9-BB0A6A729AA2" targetClass="vms:VmsController" version="260601"/>
     <!-- tag::fault[] -->
     <vms:vmsControllerFault>
       <com:faultIdentifier>vmsControllerMovedToAnotherLocation</com:faultIdentifier>

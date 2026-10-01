@@ -21,8 +21,8 @@
     <com:informationStatus>real</com:informationStatus>
   </vms:headerInformation>
   <vms:vmsControllerStatus>
-    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="1"/>
-    <vms:vmsControllerReference id="hadr24lfd3" targetClass="vms:VmsController" version="1"/>
+    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="260601"/>
+    <vms:vmsControllerReference id="hadr24lfd3" targetClass="vms:VmsController" version="260601"/>
     <vms:statusUpdateTime>2021-12-28T18:45:00+01:00</vms:statusUpdateTime>
     
     <!-- obligatory sign with speed limit 100 km/h -->
@@ -41,7 +41,7 @@
               <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
                 <vms:isBlank>false</vms:isBlank>
                 <vms:legallyBinding>true</vms:legallyBinding>
-                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/hadr24lfd3/01/01</vms:pictogramDisplayUrl>
+                <vms:pictogramDisplayUrl>https://mobilitydata.rsd.cz/VMS/hadr24lfd3/1/1</vms:pictogramDisplayUrl>
                 <vms:pictogram xsi:type="vms:RegularPictogram">
                   <vms:customPictogramCode>B20a</vms:customPictogramCode>
                   <vms:pictogramInInverseColour>true</vms:pictogramInInverseColour>
@@ -80,7 +80,7 @@
               <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
                 <vms:isBlank>false</vms:isBlank>
                 <vms:legallyBinding>true</vms:legallyBinding>
-                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/hadr24lfd3/02/01</vms:pictogramDisplayUrl>
+                <vms:pictogramDisplayUrl>https://mobilitydata.rsd.cz/VMS/hadr24lfd3/2/1</vms:pictogramDisplayUrl>
                 <vms:pictogram xsi:type="vms:RegularPictogram">
                   <vms:customPictogramCode>S8d</vms:customPictogramCode>
                   <vms:pictogramInInverseColour>true</vms:pictogramInInverseColour>
@@ -114,7 +114,7 @@
               <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
                 <vms:isBlank>false</vms:isBlank>
                 <vms:legallyBinding>false</vms:legallyBinding>
-                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/hadr24lfd3/03/01</vms:pictogramDisplayUrl>
+                <vms:pictogramDisplayUrl>https://mobilitydata.rsd.cz/VMS/hadr24lfd3/3/1</vms:pictogramDisplayUrl>
                 <vms:pictogram xsi:type="vms:RegularPictogram">
                   <vms:customPictogramCode>A22</vms:customPictogramCode>
                   <vms:pictogramInInverseColour>true</vms:pictogramInInverseColour>
@@ -147,7 +147,7 @@
             <vms:displayAreaSettings displayAreaIndex="1">
               <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
                 <vms:isBlank>true</vms:isBlank>
-                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/hadr24lfd3/04/01</vms:pictogramDisplayUrl>
+                <vms:pictogramDisplayUrl>https://mobilitydata.rsd.cz/VMS/hadr24lfd3/4/1</vms:pictogramDisplayUrl>
                 <vms:pictogram xsi:type="vms:RegularPictogram">
                   <vms:customPictogramCode>blank</vms:customPictogramCode>
                   <vms:pictogramInformationType>blank</vms:pictogramInformationType>
@@ -180,7 +180,7 @@
               <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
                 <vms:isBlank>false</vms:isBlank>
                 <vms:legallyBinding>true</vms:legallyBinding>
-                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/hadr24lfd3/05/01</vms:pictogramDisplayUrl>
+                <vms:pictogramDisplayUrl>https://mobilitydata.rsd.cz/VMS/hadr24lfd3/5/1</vms:pictogramDisplayUrl>
                 <vms:pictogram xsi:type="vms:RegularPictogram">
                   <vms:customPictogramCode>B20a</vms:customPictogramCode>
                   <vms:pictogramInInverseColour>true</vms:pictogramInInverseColour>

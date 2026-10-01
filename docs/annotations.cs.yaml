@@ -12,7 +12,7 @@
 VmsPublication:
   feedType:
     note: Odkaz na zdroj dat v registru národního přístupového bodu (https://registr.dopravniinfo.cz/),
-      např. `x-source:cz-ndic_d2-vms-status-fixed-pull-v3`. Formát určují atributy `profileName` a `profileVersion`.
+      např. `x-source:cz-ndic_d2-vms-status-fixed-pull-v3`. Formát určují atributy `@profileName` a `@profileVersion`.
   publicationTime:
     note: Čas vytvoření obsahu publikace; nezměnil-li se obsah, zůstává původní.
   publicationCreator:
@@ -42,7 +42,7 @@ VmsControllerFault:
     values:
       vmsControllerDeactivated: řadič deaktivován, důvod neuveden
       vmsControllerMovedToAnotherLocation: řadič, vozík byl přesunut
-      vmsControllerLayoutChanged: předělávka zobrazovacích ploch či jízdních pruhů
+      vmsControllerLayoutChanged: předělávka činných ploch či jízdních pruhů
       vmsControllerMovedAndLayoutChanged: přesun i předělávka
   faultLastUpdateTime:
     note: Čas deaktivace.
@@ -54,12 +54,13 @@ VmsStatus:
   workingStatus:
     note: Provozní stav VMS; povoleny všechny hodnoty.
   vmsDynamicConfiguration:
-    note: Jen při dočasné změně rozložení aktivních zobrazovacích ploch bez změny statické publikace. Po dobu
+    note: Jen při dočasné změně rozložení aktivních činných ploch bez změny statické publikace. Po dobu
       změny musí být přítomna a nahrazuje celý popis konfigurace ve statické publikaci; struktura je shodná
       s `vmsConfiguration`.
   vmsMessage:
-    card: 1..1
-    note: Cyklování zpráv se nepoužívá – vždy jen `vmsMessage` s indexem 1.
+    card: 0..1
+    note: Cyklování zpráv se nepoužívá – nejvýše jedna `vmsMessage` s indexem 1. Nezobrazuje-li VMS nic nebo
+      je mimo provoz (`workingStatus` = `blank`, `notWorking`), zpráva se neuvádí.
   vmsLocationOverride:
     note: Při změně polohy značky (vozíku) bez změny statické publikace, typ `loc:PointLocation`. Po dobu
       změny musí být přítomna a nahrazuje celý popis polohy ve statické publikaci; struktura je shodná
@@ -67,12 +68,12 @@ VmsStatus:
 VmsMessage:
   messageInformationType:
     card: 0..1
-    note: Typ zobrazené zprávy; u prázdného displeje se neuvádí.
+    note: Typ zobrazené zprávy; u VMS bez zobrazení se neuvádí.
   timeLastSet:
     note: Čas nastavení VMS.
   displayAreaSettings:
     card: 1..n
-    note: Informace zobrazené na zobrazovací ploše, typ `vms:PictogramDisplay` nebo `vms:TextDisplay`.
+    note: Informace zobrazené na činné ploše, typ `vms:PictogramDisplay` nebo `vms:TextDisplay`.
 PictogramDisplay:
   isBlank:
     note: '`true`, nezobrazuje-li plocha nic (zpravidla spolu s `workingStatus` = `blank`, GDD kódem 11.991
@@ -80,25 +81,25 @@ PictogramDisplay:
   legallyBinding:
     note: '`true` pro zákazovou či příkazovou značku, jinak `false`. Při `isBlank` = `true` se vynechává.'
   pictogramDisplayUrl:
-    note: URL obrázku zobrazovací plochy (`baseUrl/…/vms/řadič/VMS/plocha`).
+    note: URL obrázku činné plochy (`baseUrl/…/vms/řadič/VMS/plocha`).
   pictogram:
     note: Zobrazený piktogram, typ `vms:RegularPictogram` nebo `vms:CompositePictogram`.
   supplementaryInformationDisplay:
-    note: Doplňková tabulka, typ `vms:SupplementaryPictogram` nebo `vms:SupplementaryText`. Popisuje význam
-      a kód doplňkové tabulky; číselné hodnoty jsou v nadřazeném piktogramu.
+    note: Dodatková tabulka, typ `vms:SupplementaryPictogram` nebo `vms:SupplementaryText`. Popisuje význam
+      a kód dodatkové tabulky; číselné hodnoty jsou v nadřazeném piktogramu.
 RegularPictogram:
   customPictogramCode:
     note: Povinný kód piktogramu v tabulce piktogramů (`pictogramCodeListIdentifier` ve statické
       publikaci), např. `A23`.
   pictogramInInverseColour:
-    note: '`true` = inverzní barvy (nespojitá značka), platí pro všechny maticové zobrazovače; `false` jen
+    note: '`true` = inverzní barvy (nespojitá značka), platí pro všechny maticové VMS; `false` jen
       u hranolových či plechových značek. Při `isBlank` = `true` se vynechává.'
   pictogramInformationType:
     note: Typ informace piktogramu.
   gddStructure:
     note: Kód piktogramu podle ISO 14823:2017; jen existuje-li v normě popis.
   displayedNumericalInformation:
-    note: Číselná hodnota a její význam, zobrazená na piktogramu či na doplňkové tabulce.
+    note: Číselná hodnota a její význam, zobrazená na piktogramu či na dodatkové tabulce.
   pictogramDescription:
     card: 0..1
     note: Popis piktogramu, jen jako doplněk toho, co nepopisuje GDD; lze uvést i spolu s kódem GDD.
@@ -109,32 +110,32 @@ CompositePictogram:
   pictogramDescription:
     note: Popis složeného piktogramu.
   regularPictogram:
-    note: Standardní piktogram použitý ve složeném zobrazení (struktura `RegularPictogram`).
+    note: Standardní piktogram použitý ve složeném zobrazení (struktura `vms:RegularPictogram`).
 GddStructure:
   gddPictogramIdentification:
     note: Trojčíselný kód piktogramu podle ISO 14823 (verze 14823:2022 má nové piktogramy a změny kódů).
 DisplayedNumericalInformation:
   numericalInformationType:
-    note: Význam číselné hodnoty zobrazené na piktogramu či doplňkové tabulce.
+    note: Význam číselné hodnoty zobrazené na piktogramu či dodatkové tabulce.
   numericValue:
     note: Hodnota k uvedenému významu.
   unitOfMeasure:
     note: Jednotka hodnoty.
 SupplementaryPictogram:
   pictogramCode:
-    note: Povinný kód doplňkové tabulky (piktogramu) v tabulce piktogramů.
+    note: Povinný kód dodatkové tabulky (piktogramu) v tabulce piktogramů.
   pictogramDescription:
-    note: Popis doplňkového piktogramu.
+    note: Popis dodatkové tabulky zobrazené jako piktogram.
 SupplementaryText:
   textLine:
-    note: Řádek doplňkového textového panelu; u VMS se zpravidla nepoužívá.
+    note: Řádek textové dodatkové tabulky; u VMS se zpravidla nepoužívá.
 TextDisplay:
   textCode:
-    note: Odkaz na řádek tabulky frází, který popisuje obsah celého panelu (zatím neimplementováno).
+    note: Odkaz na řádek tabulky frází, který popisuje obsah celé činné plochy (zatím neimplementováno).
   textImageUrl:
-    note: Aktuální grafické zobrazení aktivní plochy textového panelu.
+    note: Aktuální grafické zobrazení aktivní činné plochy typu text.
   textLine:
-    note: Řádky textového panelu shora dolů, horní řádek má `@lineIndex` = 1.
+    note: Řádky činné plochy typu text shora dolů, horní řádek má `@lineIndex` = 1.
 TextLine:
   textLine:
     note: Text řádku v UTF-8.

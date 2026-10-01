@@ -20,8 +20,8 @@
   </vms:headerInformation>
   <!-- vmsControllerStatus per one dynamic sign -->
   <vms:vmsControllerStatus>
-    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="1"/>
-    <vms:vmsControllerReference id="849619d2a1" targetClass="vms:VmsController" version="1"/>
+    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="260601"/>
+    <vms:vmsControllerReference id="C972FEAC-E862-44D4-B029-C037B27086BA" targetClass="vms:VmsController" version="260601"/>
     <vms:statusUpdateTime>2021-12-28T18:45:00+01:00</vms:statusUpdateTime>
     <!-- dynamic setting of PDZ -->
     <vms:vmsStatus vmsIndex="1">
@@ -36,7 +36,7 @@
               <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
                 <vms:isBlank>false</vms:isBlank>
                 <vms:legallyBinding>true</vms:legallyBinding>
-                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/849619d2a1/01/01</vms:pictogramDisplayUrl>
+                <vms:pictogramDisplayUrl>https://mobilitydata.rsd.cz/VMS/C972FEAC-E862-44D4-B029-C037B27086BA/1/1</vms:pictogramDisplayUrl>
                 <vms:pictogram xsi:type="vms:CompositePictogram">
                   <vms:customPictogramCode>B1</vms:customPictogramCode>
                   <vms:pictogramInformationType>prohibition</vms:pictogramInformationType>
@@ -61,7 +61,7 @@
               <vms:displayAreaSettings xsi:type="vms:TextDisplay">
                 <vms:isBlank>false</vms:isBlank>
                 <vms:legallyBinding>false</vms:legallyBinding>
-                <vms:textImageUrl>https://rsd.cz/cache/vms/849619d2a1/01/02</vms:textImageUrl>
+                <vms:textImageUrl>https://mobilitydata.rsd.cz/VMS/C972FEAC-E862-44D4-B029-C037B27086BA/1/2</vms:textImageUrl>
                 <vms:textLine lineIndex="1">
                   <vms:textLine lineLanguage="cs">
                     <vms:textLine>[56] km 65 -&gt; 90</vms:textLine>

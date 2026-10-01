@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<d2:payload xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="vms:VmsPublication" lang="cs" modelBaseVersion="3" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
+  <!-- tag::header[] -->
+  <com:feedType>x-source:cz-ndic_d2-vms-status-fixed-pull-v3</com:feedType>
+  <com:publicationTime>2026-09-21T03:26:20+02:00</com:publicationTime>
+  <com:publicationCreator>
+    <com:country>cz</com:country>
+    <com:nationalIdentifier>NDIC</com:nationalIdentifier>
+  </com:publicationCreator>
+  <!-- end::header[] -->
+  <vms:headerInformation>
+    <com:confidentiality>noRestriction</com:confidentiality>
+    <com:informationStatus>real</com:informationStatus>
+  </vms:headerInformation>
+  <vms:vmsControllerStatus>
+    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="260601"/>
+    <vms:vmsControllerReference id="D3-150-cb-p1" targetClass="vms:VmsController" version="260601"/>
+    <vms:statusUpdateTime>2026-09-21T03:19:50+02:00</vms:statusUpdateTime>
+    <vms:vmsStatus vmsIndex="1">
+      <vms:vmsStatus>
+        <vms:flashingLightsOn>false</vms:flashingLightsOn>
+        <vms:workingStatus>blank</vms:workingStatus>
+      </vms:vmsStatus>
+    </vms:vmsStatus>
+    <vms:vmsStatus vmsIndex="2">
+      <vms:vmsStatus>
+        <vms:flashingLightsOn>false</vms:flashingLightsOn>
+        <vms:workingStatus>blank</vms:workingStatus>
+      </vms:vmsStatus>
+    </vms:vmsStatus>
+  </vms:vmsControllerStatus>
+</d2:payload>

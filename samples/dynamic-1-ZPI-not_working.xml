@@ -20,8 +20,8 @@
   </vms:headerInformation>
   <!-- vmsControllerStatus per one dynamic sign -->
   <vms:vmsControllerStatus>
-    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="1"/>
-    <vms:vmsControllerReference id="849619d2a1" targetClass="vms:VmsController" version="1"/>
+    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="260601"/>
+    <vms:vmsControllerReference id="C972FEAC-E862-44D4-B029-C037B27086BA" targetClass="vms:VmsController" version="260601"/>
     <vms:statusUpdateTime>2021-12-28T18:45:00+01:00</vms:statusUpdateTime>
     <!-- dynamic setting of PDZ -->
     <vms:vmsStatus vmsIndex="1">

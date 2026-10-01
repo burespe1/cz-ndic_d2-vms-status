@@ -20,8 +20,8 @@
   </vms:headerInformation>
   <!-- vmsControllerStatus per one dynamic sign -->
   <vms:vmsControllerStatus>
-    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="1"/>
-    <vms:vmsControllerReference id="849619d2a1" targetClass="vms:VmsController" version="1"/>
+    <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="260601"/>
+    <vms:vmsControllerReference id="C972FEAC-E862-44D4-B029-C037B27086BA" targetClass="vms:VmsController" version="260601"/>
     <vms:statusUpdateTime>2021-12-28T18:45:00+01:00</vms:statusUpdateTime>
     <!-- dynamic setting of PDZ -->
 
@@ -36,7 +36,7 @@
             <vms:displayAreaSettings displayAreaIndex="1">
               <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
                 <vms:isBlank>true</vms:isBlank>
-                <vms:pictogramDisplayUrl>https://rsd.cz/cache/vms/849619d2a101/01</vms:pictogramDisplayUrl>
+                <vms:pictogramDisplayUrl>https://mobilitydata.rsd.cz/VMS/C972FEAC-E862-44D4-B029-C037B27086BA/1/1</vms:pictogramDisplayUrl>
                 <vms:pictogram xsi:type="vms:RegularPictogram">
                   <vms:customPictogramCode>blank</vms:customPictogramCode>
                   <vms:pictogramInformationType>blank</vms:pictogramInformationType>
@@ -57,7 +57,7 @@
                 <vms:legallyBinding>false</vms:legallyBinding>
                 <!-- drive safely in table of phrases -->
                 <vms:textCode>101</vms:textCode> 
-                <vms:textImageUrl>https://rsd.cz/cache/vms/849619d2a1/01/02</vms:textImageUrl>
+                <vms:textImageUrl>https://mobilitydata.rsd.cz/VMS/C972FEAC-E862-44D4-B029-C037B27086BA/1/2</vms:textImageUrl>
                 <!-- if text line- is missing then is blank !-->
                 <vms:textLine lineIndex="2">
                   <vms:textLine lineLanguage="cs">
