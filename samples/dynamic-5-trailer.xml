@@ -35,7 +35,6 @@
               <vms:positionXAbsolute>inTheMiddle</vms:positionXAbsolute>
               <vms:positionYRelativeToPrevious>alignedOnTheBottomSide</vms:positionYRelativeToPrevious>
               <vms:maxNumberOfRows>2</vms:maxNumberOfRows>
-              <vms:textCodeListIdentifier>cz-phrase-code-list-v1.0</vms:textCodeListIdentifier>
             </vms:displayArea>
           </vms:displayArea>
         </vms:vmsDynamicConfiguration>

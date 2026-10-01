@@ -1,19 +1,157 @@
-# Ruční texty k tabulkám elementů – jediný ručně psaný vstup tabulek.
-# Klíč = název třídy ve schématu (např. SituationRecord), pod ním element:
-#
-# SituationRecord:
-#   _: Úvodní věta tabulky (nepovinné).
-#   probabilityOfOccurrence:
-#     note: Popis z pohledu NDIC.
-#     card: "1..1"      # pravidlo NDIC nad rámec schématu (tmavě modře)
-#     required: true    # NDIC vždy vyplňuje
-#     values:           # překlad/upřesnění hodnot výčtu jen pro tento element
-#       certain: jistě nastalo
-#   locationReference:
-#     variants: reduced # u elementu s více typy: výčet typů je zúžený profilem (popisek „zúžený výčet – N“);
-#                       # seznam názvů tříd ([A, B]) uvede jen tyto typy
-#
-# _enum:                # překlady hodnot výčtů pro celý formát (přepisují sdílený slovník kitu)
-#   ProbabilityEnum.certain: jistá
-# _unused_types: [LinearLocation]   # třídy, které schéma připouští, ale formát nepoužívá (ve výčtech variant se neuvádějí)
-{}
+# Manual texts for the element tables (English) – the only hand-written input of the tables.
+# Structure as annotations.cs.yaml: ndic = NDIC rule shown after the model definition, card = NDIC cardinality,
+# values = value translations for this element. Kept in sync with annotations.cs.yaml.
+
+VmsPublication:
+  feedType:
+    ndic: Reference to the data source in the register of the national access point (https://registr.dopravniinfo.cz/),
+      e.g. `x-source:cz-ndic_d2-vms-status-fixed-pull-v3`. The format is identified by the `@profileName` and `@profileVersion`
+      attributes.
+  publicationTime:
+    ndic: Time the publication content was created; if the content has not changed, the original time is kept.
+  publicationCreator:
+    ndic: 'Publication provider: `country` = `cz`, `nationalIdentifier` = provider abbreviation (NDIC).'
+  headerInformation:
+    ndic: Always `confidentiality` = `noRestriction` and `informationStatus` = `real`.
+  vmsControllerStatus:
+    ndic: Status of the whole controller; always contains the status of all VMS of the controller.
+VmsControllerStatus:
+  vmsControllerTableReference:
+    ndic: Identifier and version of the table in the static publication (the version changes only in exceptional
+      cases).
+  vmsControllerReference:
+    ndic: Identifier and version of the controller in the static publication (the version changes when the configuration
+      or location changes).
+  statusUpdateTime:
+    ndic: Controller update time = the latest `timeLastSet` of its VMS. Not given only when the controller is deactivated;
+      the time is then in `vmsControllerFault`.
+  vmsStatus:
+    ndic: Omitted only when the controller is deactivated.
+  vmsControllerFault:
+    card: 0..1
+    ndic: Only for deactivating a controller version (relocation, invalidation). The version is activated again
+      by publishing its status without `vmsControllerFault`. Only one controller version is valid at any time.
+VmsControllerFault:
+  faultIdentifier:
+    card: 1..1
+    ndic: Deactivation code of the specific controller version.
+    values:
+      vmsControllerDeactivated: controller deactivated, reason not given
+      vmsControllerMovedToAnotherLocation: controller or trailer has been moved
+      vmsControllerLayoutChanged: display areas or lanes rebuilt
+      vmsControllerMovedAndLayoutChanged: moved and rebuilt
+  faultLastUpdateTime:
+    ndic: Time of deactivation.
+  vmsControllerFault:
+    ndic: Always `other` – the structure is used only for deactivation.
+VmsStatus:
+  workingStatus:
+    ndic: All values allowed.
+  vmsDynamicConfiguration:
+    ndic: Only for a temporary change of the layout of the active display areas without a change of the static publication.
+      It must be present for the duration of the change and replaces the whole configuration description of the
+      static publication; the structure is the same as `vmsConfiguration`.
+  vmsMessage:
+    card: 0..1
+    ndic: Message cycling is not used – at most one `vmsMessage` with index 1. If the VMS displays nothing or is
+      out of service (`workingStatus` = `blank`, `notWorking`), the message is not given.
+  vmsLocationOverride:
+    ndic: On a change of the location of the sign (trailer) without a change of the static publication, type `loc:PointLocation`.
+      It must be present for the duration of the change and replaces the whole location description of the static
+      publication; the structure is the same as `vmsLocation`.
+VmsMessage:
+  messageInformationType:
+    card: 0..1
+    ndic: Not given for a VMS displaying nothing.
+  displayAreaSettings:
+    card: 1..n
+    ndic: Information displayed on the display area, type `vms:PictogramDisplay` or `vms:TextDisplay`.
+PictogramDisplay:
+  isBlank:
+    ndic: '`true` if the area displays nothing (usually together with `workingStatus` = `blank`, GDD code 11.991
+      and `pictogramDescription` = `blankVoid`), otherwise `false`.'
+  legallyBinding:
+    ndic: '`true` for a prohibitory or mandatory sign, otherwise `false`. Omitted when `isBlank` = `true`.'
+  pictogramDisplayUrl:
+    ndic: URL of the image of the display area (`https://mobilitydata.rsd.cz/VMS/<controller identifier>/<VMS index>/<area
+      index>`).
+  pictogram:
+    ndic: Displayed pictogram, type `vms:RegularPictogram` or `vms:CompositePictogram`.
+  supplementaryInformationDisplay:
+    ndic: Supplementary panel, type `vms:SupplementaryPictogram` or `vms:SupplementaryText`. Describes the meaning
+      and code of the supplementary panel; numerical values are in the parent pictogram.
+RegularPictogram:
+  customPictogramCode:
+    ndic: Mandatory pictogram code in the pictogram table (`pictogramCodeListIdentifier` in the static publication),
+      e.g. `A23`.
+  pictogramInInverseColour:
+    ndic: '`true` = inverse colours (non-continuous sign), applies to all matrix VMS; `false` only for prism or
+      metal signs. Omitted when `isBlank` = `true`.'
+  gddStructure:
+    ndic: Pictogram code according to ISO 14823:2017; only if the standard contains a description.
+  displayedNumericalInformation:
+    ndic: Numerical value and its meaning, displayed on the pictogram or on the supplementary panel.
+  pictogramDescription:
+    card: 0..1
+    ndic: Pictogram description, only as a complement to what GDD does not describe; may also be given together
+      with the GDD code.
+  presenceOfRedTriangle:
+    ndic: '`true` for warning signs, `false` when only the inner part of a warning sign is displayed on the VMS;
+      given only when `pictogramInformationType` = `warning`.'
+CompositePictogram:
+  regularPictogram:
+    ndic: Regular pictogram used in the composite display (structure `vms:RegularPictogram`).
+GddStructure:
+  gddPictogramIdentification:
+    ndic: Three-number pictogram code according to ISO 14823 (version 14823:2022 has new pictograms and code changes).
+DisplayedNumericalInformation:
+  numericalInformationType:
+    ndic: Meaning of the numerical value displayed on the pictogram or supplementary panel.
+SupplementaryPictogram:
+  pictogramCode:
+    ndic: Mandatory code of the supplementary panel (pictogram) in the pictogram table.
+SupplementaryText:
+  textLine:
+    ndic: Line of a text supplementary panel; usually not used for VMS.
+TextDisplay:
+  textLine:
+    ndic: Lines of the text display area from top to bottom, the top line has `@lineIndex` = 1.
+TextLine:
+  textLine:
+    ndic: Line text in UTF-8.
+  lineLanguage:
+    card: '1'
+    ndic: Always given (the schema does not require the attribute).
+  lineColour:
+    ndic: White by default.
+  lineHtml:
+    ndic: HTML description of the line if it contains special symbols (e.g. arrows).
+  textInformationType:
+    ndic: Type of text information on the line if it can be determined unambiguously, otherwise omitted.
+NetworkLocation:
+  supplementaryPositionalDescription:
+    card: 1..1
+    ndic: Supplementary positional description of the current VMS location at lane level including the road name
+      and direction.
+SupplementaryPositionalDescription:
+  positionOnCarriageway:
+    card: 1..1
+    ndic: 'Position of the VMS on the structure: `onTheLeft` (on a post on the left in the direction of travel),
+      `inTheCentre` (on the cross-beam above the carriageway, also cantilever), `onTheRight` (on a post on the right
+      in the direction of travel).'
+  carriageway:
+    card: 1..1
+    ndic: Carriageway and lane for which the VMS is valid.
+  roadInformation:
+    card: 1..1
+    ndic: Direction (`roadDestination`), name (`roadName`) and number (`roadNumber`) of the road on which the VMS
+      is located.
+Carriageway:
+  carriageway:
+    ndic: Always `mainCarriageway`.
+  originalNumberOfLanes:
+    ndic: Given if known.
+  lane:
+    card: 1..1
+    ndic: '`laneNumber` (1 = first lane from the right, 0 = hard shoulder) if the VMS controls a lane, or `laneUsage`
+      = `allLanesCompleteCarriageway` if it applies to the whole carriageway.'

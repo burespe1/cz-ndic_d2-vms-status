@@ -250,11 +250,6 @@
           <xs:documentation>The horizontal position of the area in which the pictogram is displayed relative to the previous display area in the collection (i.e.above or below).</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="overriddenLaneAssociation" type="loc:Lane" minOccurs="0" maxOccurs="unbounded">
-        <xs:annotation>
-          <xs:documentation>The display area is associated with these lanes, which refine any location specified for the VMS</xs:documentation>
-        </xs:annotation>
-      </xs:element>
       <xs:element name="_displayAreaExtension" type="com:_ExtensionType" minOccurs="0" />
     </xs:sequence>
   </xs:complexType>
@@ -828,11 +823,6 @@
     <xs:complexContent>
       <xs:extension base="vms:DisplayAreaSettings">
         <xs:sequence>
-          <xs:element name="textCode" type="com:String" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation>The code of the specific text, from the defined code list.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
           <xs:element name="textImageUrl" type="com:Url" minOccurs="1" maxOccurs="1">
             <xs:annotation>
               <xs:documentation>Reference to a URL from where an image of the displayed text can be obtained.</xs:documentation>
@@ -851,19 +841,9 @@
     <xs:complexContent>
       <xs:extension base="vms:DisplayArea">
         <xs:sequence>
-          <xs:element name="maxNumberOfCharacters" type="com:NonNegativeInteger" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation>Maximum number of displayable characters on a single line in the textual display area of the VMS.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
           <xs:element name="maxNumberOfRows" type="com:NonNegativeInteger" minOccurs="1" maxOccurs="1">
             <xs:annotation>
               <xs:documentation>Maximum number of rows of displayable characters in the textual display area of the VMS.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="textCodeListIdentifier" type="com:String" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation>Indicates which textual message code list is referenced. This may be specific to the VMS type defined by vmsTypeCode.</xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name="_textDisplayAreaExtension" type="com:_ExtensionType" minOccurs="0" />

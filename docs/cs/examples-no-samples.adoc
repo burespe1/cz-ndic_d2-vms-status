@@ -23,14 +23,13 @@ image::ex-11.png[Portál liniového řízení se statickými značkami,width=600
 
 * Řadič VMS (`vms:VmsController`): 1×
 * VMS (`vms:Vms`; `gantryMounted`):
-** 2× statická značka vlevo a vpravo [vms:1,7]
-** 3× dynamická značka na portálu pro řízení v jízdních pruzích [vms:2,4,6]
-** 2× dynamická značka na portálu pro celý jízdní pás [vms:3,5]
+** 2× neproměnná („plechová“) informativní značka vlevo a vpravo podél komunikace [vms:1,7]
+** 3× PDZ nad osou jízdních pruhů (`laneNumber`) [vms:2,4,6]
+** 2× výstražná či zákazová PDZ pro celý jízdní pás [vms:3,5]
 * Činné plochy (`vms:DisplayArea`):
-** [vms:1,3,5,7] 1× typu piktogram (s implicitní dodatkovou tabulkou)
-** [vms:2,4,6] 2× typu piktogram (hlavní a vedlejší se signálem)
-
-Statické značky lze modelovat stejně jako proměnné v dynamické publikaci.
+** [vms:1,3,5,7] 1× typu piktogram
+** [vms:2,4,6] 2× typu piktogram (hlavní značka a vedlejší signál)
+* Neproměnné značky se popisují stejně jako proměnné; v dynamické publikaci mají stále stejný obsah.
 
 === Portál s plně konfigurovatelnou proměnnou značkou
 
@@ -42,13 +41,12 @@ image::ex-12.png[Portál s plně konfigurovatelnou značkou,width=600]
 
 === Portál se spojitými směrovými a provozními značkami
 
-Komplexní značky se popisují typem `vms:PictogramDisplay` s obrázkem a doplňkovým předdefinovaným textem.
-
 image::ex-13.png[Portál se spojitými směrovými značkami,width=600]
 
 * Řadič VMS (`vms:VmsController`): 1×
-* VMS (`vms:Vms`; `gantryMounted`): 2× dynamická hranolová značka na portálu pro celý jízdní pás [vms:1,2]
-* Činné plochy (`vms:DisplayArea`): [vms:1,2] 1× typu piktogram bez dalších informací
+* VMS (`vms:Vms`; `gantryMounted`): 2× VMS na portálu pro celý jízdní pás [vms:1,2]
+* Činné plochy (`vms:DisplayArea`): [vms:1,2] 1× typu piktogram; složité značky se popisují piktogramem
+  s obrázkem a předdefinovaným doplňkovým textem.
 
 === Značky s provozními informacemi podél pozemní komunikace
 

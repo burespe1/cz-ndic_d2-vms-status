@@ -11,10 +11,15 @@ include::{kitdir}/shared/en/introduction.adoc[]
 
 include::concepts.adoc[]
 
+include::additional-concepts.adoc[]
+
 include::elements.adoc[]
 
 [appendix]
 include::examples.adoc[]
+
+[appendix]
+include::examples-no-samples.adoc[]
 
 [appendix]
 include::changelog.adoc[]

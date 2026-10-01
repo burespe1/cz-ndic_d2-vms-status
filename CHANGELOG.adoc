@@ -2,10 +2,12 @@
 
 == 1.2
 
-Formát převeden na model DATEX II 3.7 (dříve cz-ndic_d2-vms-v1.1 (DATEX II 3.3)); třídy, prvky, kardinality a hodnoty výčtů se nemění.
+Formát převeden na model DATEX II 3.7 (dříve cz-ndic_d2-vms-v1.1 (DATEX II 3.3)); profil je zúžen o prvky, které NDIC nepublikuje, kardinality se nemění.
 
 * Nový název formátu `cz-ndic_d2-vms-status` (atribut `profileName`), verze `1.2` (`profileVersion`).
 * `feedType` identifikuje distribuci (`x-source:…`, zvlášť pevné a mobilní PDZ).
+* Vypuštěny: popis bodu VMS pomocí OpenLR (`openlrPointLocationReference`), kód fráze `textCode`
+  a v dynamické konfiguraci `textCodeListIdentifier`, `maxNumberOfCharacters` a `overriddenLaneAssociation`.
 * Síť Global Network označena `CZ-RSD-GlobalNetwork`; staničení se uvádí číslem komunikace (`roadNumber`).
 
 Podrobný popis viz dokumentace formátu (příloha Historie změn dokumentace).

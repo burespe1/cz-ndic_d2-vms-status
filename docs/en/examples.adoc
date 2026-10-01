@@ -1,4 +1,259 @@
-== Examples
+== Examples of sign configurations
 
-// Sample excerpts via tags – in the sample: <!-- tag::location[] --> … <!-- end::location[] -->
-Samples are part of the specification package `{schema-uri}.zip`.
+This appendix describes examples of variable message signs (VMS) described by the dynamic and the static
+publication. Each example contains:
+
+* the static publication describing the VMS configuration (format `cz-ndic_d2-vms-table`, sample
+  `static-…`): an image marking the described parts and their indexes and a description of the basic
+  concept,
+* one or more dynamic publications (this format, samples `dynamic-…`) describing what is currently
+  displayed on the VMS.
+
+The samples of the dynamic publication are part of the specification package `{schema-uri}.zip` (folder
+`samples`), the samples of the static publication are part of the `cz-ndic_d2-vms-table` format package.
+Displayed texts are given in Czech as in the data, with an English translation.
+
+=== Information cantilever or gantry with ZPI
+
+A cantilever with one traffic information device (PDZ and PIT). The states "information campaign" and "ZPI
+out of order" come from other ZPI controllers with the same configuration (one VMS with a pictogram and text).
+
+==== Static publication
+
+image::ex-02.png[Cantilever with ZPI,width=600]
+
+* sample: `static-1-ZPI.xml`
+* concept:
+** VMS controller (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `roadsideCantileverMounted`): 1× dynamic sign on the cantilever for the whole carriageway [vms:1]
+** Display areas (`vms:DisplayArea`): [vms:1] 1× pictogram (with an implicit supplementary panel) and 1× text
+
+==== Dynamic publication "roadworks"
+
+A real state from NDIC data (9 Nov 2025): pictogram A15 (roadworks) and the text "ulice Wilsonova"
+(Wilsonova street), "⇒ Muzeum" (⇒ Museum), "práce na silnici" (roadworks); flashers on. The version of
+the table reference is aligned with the table sample (`260601`).
+
+.dynamic-1-ZPI.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI.xml[tags=**]
+----
+====
+
+==== Dynamic publication "information campaign"
+
+A real state from NDIC data (snapshot 9 Nov 2025, message set on 21 Aug 2025): ZPI gantry `D00PP0000467` on
+the D0 – information campaign (`messageInformationType` = `campaignMessage`), blank pictogram and the text
+"Nedrž telefon" (do not hold your phone), "Use Handsfree"; the third line is empty.
+
+.dynamic-1-ZPI-campain.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI-campain.xml[tags=**]
+----
+====
+
+==== Dynamic publication "closed ahead, diversion"
+
+Illustrative state (composite pictograms do not occur in NDIC data yet): closed ahead, use exit 1; road I/56
+closed at km 65–90, use road I/58.
+
+image::ex-03.png[Composite pictogram with diversion,width=600]
+
+.dynamic-1-ZPI-composite.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI-composite.xml[tags=**]
+----
+====
+
+==== Dynamic publication "ZPI out of order"
+
+A real state from NDIC data (21 Sep 2026): ZPI cantilever `D08PP0000092` on the D8 is out of service
+(`workingStatus` = `notWorking`); the message `vmsMessage` is not given.
+
+.dynamic-1-ZPI-not_working.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI-not_working.xml[tags=**]
+----
+====
+
+=== Lane control gantry
+
+A lane control gantry with two PDZ on posts along the road and three PDZ for lane control above the road.
+
+==== Static publication
+
+image::ex-04.png[Lane control gantry,width=600]
+
+* sample: `static-2-LM.xml`
+* concept:
+** VMS controller (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `gantryMounted`):
+*** 2× variable sign on the left and right post for the whole carriageway [vms:1,5]
+*** 2× dynamic sign on the gantry for lane control [vms:2,4]
+*** 1× dynamic sign on the gantry for the whole carriageway [vms:3]
+** Display areas (`vms:DisplayArea`):
+*** [vms:1,5] 1× pictogram
+*** [vms:2,3,4] 1× pictogram (with an implicit supplementary panel)
+
+==== Dynamic publication "speed limit, warning, keep right"
+
+Illustrative state (NDIC does not publish lane control gantries yet): "100 km/h"; "keep right"; "attention";
+"blank"; "100 km/h".
+
+.dynamic-2-LM.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-2-LM.xml[tags=**]
+----
+====
+
+=== ZPI thermometer
+
+A variable sign along the road displaying air and road surface temperature.
+
+==== Static publication
+
+image::ex-05.png[ZPI thermometer,width=600]
+
+* sample: `static-3-meteo.xml`
+* concept:
+** VMS controller (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `roadsideMounted`): 1× dynamic sign on the right for displaying temperature [vms:1]
+** Display areas (`vms:DisplayArea`): [vms:1] 1× text with 2 lines (line 1 air temperature, line 2 road surface temperature)
+
+==== Dynamic publication "normal temperatures"
+
+Illustrative state (NDIC does not publish thermometers yet): air "27" °C, road surface "34" °C.
+
+.dynamic-3-meteo.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-3-meteo.xml[tags=**]
+----
+====
+
+=== Car park occupancy sign
+
+A variable sign along the road displaying the number of free spaces in a car park.
+
+==== Static publication
+
+image:ex-06.png[Car park occupancy sign,width=400]
+image:ex-07.png[Sign detail,width=140]
+
+* samples: `static-4-parking.xml`, `static-4-parking_full.xml`
+* concept:
+** VMS controller (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `roadsideMounted`): 1× dynamic sign displaying car park occupancy [vms:1]
+** Display areas (`vms:DisplayArea`): [vms:1] 1× text with 1–2 lines (line 1 the nearer, line 2 the farther car park)
+
+==== Dynamic publication "free spaces"
+
+Illustrative state (NDIC does not publish car park occupancy signs yet): "144" free spaces at the Pávov rest
+area at a distance of 800 m.
+
+.dynamic-4-parking.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-4-parking.xml[tags=**]
+----
+====
+
+.dynamic-4-parking_full.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-4-parking_full.xml[tags=**]
+----
+====
+
+=== Mobile trailer
+
+A mobile VMS on a trailer placed on the hard shoulder.
+
+==== Static publication
+
+image:ex-08.png[Mobile trailer,width=180]
+image:ex-09.png[Trailer configuration (illustrative),width=360]
+
+* sample: `static-5-trailer.xml`
+* concept (without location – the location is in the dynamic publication):
+** VMS controller (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `trailerMounted`): 1× dynamic sign on the trailer [vms:1]
+** Display areas (`vms:DisplayArea`): [vms:1] 1× text with 1 line, 1× pictogram and 1× text with 4 lines
+
+==== Dynamic publication "construction works"
+
+A real state from NDIC data (1 Oct 2026): a trailer on the D1 near Brno. The area layout is dynamically
+overridden (`vmsDynamicConfiguration`: a pictogram and below it text with two lines); pictogram A15
+(roadworks), text "EXIT 196", "stavební práce" (construction works). The current trailer location is in
+`vmsLocationOverride`.
+
+.dynamic-5-trailer.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-5-trailer.xml[tags=**]
+----
+====
+
+==== Dynamic publication "trailer moved to another place"
+
+Illustrative state derived from a real trailer (deactivation does not occur in NDIC data yet): the trailer from
+the sample `dynamic-5-trailer.xml` deactivated after relocation by `vmsControllerFault`
+(`faultIdentifier` = `vmsControllerMovedToAnotherLocation`).
+
+.dynamic-5-trailer_deactivated.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tags=**]
+----
+====
+
+=== Lane control prism signs
+
+A pair of prism signs on both sides of the D3 motorway.
+
+==== Static publication
+
+* sample: `static-6-prism.xml`
+* concept:
+** VMS controller (`vms:VmsController`): 1×
+** VMS (`vms:Vms`; `roadsideMounted`, `vmsType` = `rotatingPrismSign`): 2× sign – on the left [vms:1] and on the right [vms:2]
+** Display areas (`vms:DisplayArea`): [vms:1,2] 1× pictogram
+
+==== Dynamic publication "nothing displayed"
+
+A real state from NDIC data (21 Sep 2026): both signs display nothing (`workingStatus` = `blank`), the
+message `vmsMessage` is not given.
+
+.dynamic-6-prism.xml
+[%collapsible]
+====
+[source,xml]
+----
+include::{samplesdir}/dynamic-6-prism.xml[tags=**]
+----
+====

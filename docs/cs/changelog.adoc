@@ -6,8 +6,14 @@
 * Nová dokumentace formátu `cz-ndic_d2-vms-status` verze 1.2 (DATEX II 3.7); nahrazuje dokumentaci formátu
   cz-ndic_d2-vms-v1.1 (DATEX II 3.3).
 * Změny oproti verzi 1.1 (DATEX II 3.3):
-** Struktura se nemění – výběr profilu je přenesen do modelu 3.7 beze změny tříd, prvků, kardinalit
-   i hodnot výčtů a data zůstávají platná. Mění se identifikace formátu a zdroje v hlavičce (formát nese
-   nový název `cz-ndic_d2-vms-status`) a pravidlo pro `publicationTime`.
+** Výběr profilu je přenesen do modelu 3.7 beze změny kardinalit a zúžen o prvky, které NDIC nepublikuje:
+*** popis bodu VMS pomocí OpenLR (`openlrPointLocationReference`),
+*** kód fráze `textCode` – fráze se nekódují,
+*** v dynamické konfiguraci `textCodeListIdentifier`, `maxNumberOfCharacters` a `overriddenLaneAssociation`.
+** Mění se identifikace formátu a zdroje v hlavičce (formát nese nový název `cz-ndic_d2-vms-status`)
+   a pravidlo pro `publicationTime`.
+** Pravidla NDIC zužují kardinality nad rámec schématu (tabulky elementů): nejvýše jedna zpráva VMS
+   (bez cyklování), jeden typ zprávy, nejvýše jedna porucha řadiče, u polohy vozíku jeden jízdní pás,
+   jedna komunikace a jeden údaj o pruhu.
 ** Síť Global Network má `linearElementReferenceModel` = `CZ-RSD-GlobalNetwork` a staničení se uvádí číslem
    komunikace (`roadNumber`) místo modelu `mileage` – shodně se situačními formáty.

@@ -134,9 +134,8 @@ include::{samplesdir}/dynamic-1-ZPI.xml[tag=pictogram,indent=0]
 
 Činnou plochu typu text popisuje třída `vms:TextDisplay`.
 
-* Celkový obsah aktivní činné plochy typu text je popsán:
-** grafickým zobrazením dostupným na URL v elementu `textImageUrl`,
-** případně frází z tabulky předdefinovaných textů, odkázanou kódem `textCode` (zatím neimplementováno).
+* Celkový obsah aktivní činné plochy typu text je popsán grafickým zobrazením dostupným na URL v elementu
+  `textImageUrl`.
 * Jednotlivé řádky (`textLine`) vždy obsahují:
 ** jazyk,
 ** text řádku (v UTF-8),

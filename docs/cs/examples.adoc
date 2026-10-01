@@ -13,7 +13,8 @@ statické publikace balíčku formátu `cz-ndic_d2-vms-table`.
 
 === Informační (polo)portál se ZPI
 
-Poloportál s jedním zařízením pro provozní informace (PDZ a PIT).
+Poloportál s jedním zařízením pro provozní informace (PDZ a PIT). Stavy „informační kampaň“ a „nefunkční ZPI“
+pocházejí z jiných řadičů se ZPI téže konfigurace (jedna VMS s piktogramem a textem).
 
 ==== Statická publikace
 
@@ -40,9 +41,11 @@ include::{samplesdir}/dynamic-1-ZPI.xml[tags=**]
 ----
 ====
 
-==== Dynamická publikace „nic k hlášení“
+==== Dynamická publikace „informační kampaň“
 
-Obsah: prázdný piktogram; text „jeďte opatrně“ (informační kampaň).
+Skutečný stav z dat NDIC (snímek 9. 11. 2025, zpráva nastavena 21. 8. 2025): portál se ZPI `D00PP0000467`
+na D0 – informační kampaň (`messageInformationType` = `campaignMessage`), prázdný piktogram a text
+„Nedrž telefon“, „Use Handsfree“; třetí řádek je prázdný.
 
 .dynamic-1-ZPI-campain.xml
 [%collapsible]
@@ -55,7 +58,8 @@ include::{samplesdir}/dynamic-1-ZPI-campain.xml[tags=**]
 
 ==== Dynamická publikace „vpředu uzavřeno, objížďka“
 
-Obsah: vpředu uzavřeno, použijte 1. výjezd; silnice I/56 v km 65–90 uzavřena, použijte silnici I/58.
+Ukázkový stav (složený piktogram se v datech NDIC zatím nevyskytuje): vpředu uzavřeno, použijte 1. výjezd;
+silnice I/56 v km 65–90 uzavřena, použijte silnici I/58.
 
 image::ex-03.png[Složený piktogram s objížďkou,width=600]
 
@@ -70,7 +74,8 @@ include::{samplesdir}/dynamic-1-ZPI-composite.xml[tags=**]
 
 ==== Dynamická publikace „nefunkční ZPI“
 
-Obsah: oznámení o nefunkční části VMS.
+Skutečný stav z dat NDIC (21. 9. 2026): poloportál se ZPI `D08PP0000092` na D8 je mimo provoz
+(`workingStatus` = `notWorking`); zpráva `vmsMessage` se neuvádí.
 
 .dynamic-1-ZPI-not_working.xml
 [%collapsible]
@@ -103,7 +108,8 @@ image::ex-04.png[Portál liniového řízení,width=600]
 
 ==== Dynamická publikace „omezení rychlosti, výstraha, řaď se vpravo“
 
-Obsah: „100 km/h“; „řaď se vpravo“; „pozor“; „prázdné“; „100 km/h“.
+Ukázkový stav (portál liniového řízení zatím NDIC nepublikuje): „100 km/h“; „řaď se vpravo“; „pozor“;
+„prázdné“; „100 km/h“.
 
 .dynamic-2-LM.xml
 [%collapsible]
@@ -130,7 +136,7 @@ image::ex-05.png[ZPI teploměr,width=600]
 
 ==== Dynamická publikace „normální teploty“
 
-Obsah: okolí „27“ °C, vozovka „34“ °C.
+Ukázkový stav (teploměr zatím NDIC nepublikuje): okolí „27“ °C, vozovka „34“ °C.
 
 .dynamic-3-meteo.xml
 [%collapsible]
@@ -158,7 +164,8 @@ image:ex-07.png[Detail značky,width=140]
 
 ==== Dynamická publikace „volná místa“
 
-Obsah: volných „144“ míst na odpočívce Pávov ve vzdálenosti 800 m.
+Ukázkový stav (značku s obsazeností parkoviště zatím NDIC nepublikuje): volných „144“ míst na odpočívce
+Pávov ve vzdálenosti 800 m.
 
 .dynamic-4-parking.xml
 [%collapsible]
@@ -210,7 +217,9 @@ include::{samplesdir}/dynamic-5-trailer.xml[tags=**]
 
 ==== Dynamická publikace „vozík přesunut na jiné místo“
 
-Obsah: vozík deaktivovaný pomocí `vmsControllerFault`.
+Ukázkový stav odvozený ze skutečného vozíku (deaktivace se v datech NDIC zatím nevyskytla): vozík ze vzorku
+`dynamic-5-trailer.xml` po přesunu deaktivovaný pomocí `vmsControllerFault`
+(`faultIdentifier` = `vmsControllerMovedToAnotherLocation`).
 
 .dynamic-5-trailer_deactivated.xml
 [%collapsible]

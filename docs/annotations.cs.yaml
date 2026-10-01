@@ -2,7 +2,7 @@
 # Třída:
 #   _: úvodní věta tabulky
 #   element:
-#     note: popis
+#     ndic: pravidlo NDIC – zobrazí se za definicí (note: by definici nahradil)
 #     card: '1..1'   # pravidlo NDIC nad rámec schématu (tmavě modře)
 #     required: true # NDIC vždy vyplňuje
 #     values: {literal: překlad}
@@ -11,144 +11,149 @@
 
 VmsPublication:
   feedType:
-    note: Odkaz na zdroj dat v registru národního přístupového bodu (https://registr.dopravniinfo.cz/),
+    ndic: Odkaz na zdroj dat v registru národního přístupového bodu (https://registr.dopravniinfo.cz/),
       např. `x-source:cz-ndic_d2-vms-status-fixed-pull-v3`. Formát určují atributy `@profileName` a `@profileVersion`.
   publicationTime:
-    note: Čas vytvoření obsahu publikace; nezměnil-li se obsah, zůstává původní.
+    ndic: Čas vytvoření obsahu publikace; nezměnil-li se obsah, zůstává původní.
   publicationCreator:
-    note: 'Poskytovatel publikace: `country` = `cz`, `nationalIdentifier` = zkratka poskytovatele (NDIC).'
+    ndic: 'Poskytovatel publikace: `country` = `cz`, `nationalIdentifier` = zkratka poskytovatele (NDIC).'
   headerInformation:
-    note: Vždy `confidentiality` = `noRestriction` a `informationStatus` = `real`.
+    ndic: Vždy `confidentiality` = `noRestriction` a `informationStatus` = `real`.
   vmsControllerStatus:
-    note: Stav celého řadiče; obsahuje vždy stav všech VMS daného řadiče.
+    ndic: Stav celého řadiče; obsahuje vždy stav všech VMS daného řadiče.
 VmsControllerStatus:
   vmsControllerTableReference:
-    note: Identifikátor a verze tabulky ve statické publikaci (verze se mění jen ve výjimečných případech).
+    ndic: Identifikátor a verze tabulky ve statické publikaci (verze se mění jen ve výjimečných případech).
   vmsControllerReference:
-    note: Identifikátor a verze řadiče ve statické publikaci (verze se mění při změně konfigurace či polohy).
+    ndic: Identifikátor a verze řadiče ve statické publikaci (verze se mění při změně konfigurace či polohy).
   statusUpdateTime:
-    note: Čas aktualizace řadiče = nejvyšší `timeLastSet` jeho VMS. Neuvádí se jen při deaktivaci řadiče,
+    ndic: Čas aktualizace řadiče = nejvyšší `timeLastSet` jeho VMS. Neuvádí se jen při deaktivaci řadiče,
       kdy je čas v `vmsControllerFault`.
   vmsStatus:
-    note: Vynechává se jen při deaktivaci řadiče.
+    ndic: Vynechává se jen při deaktivaci řadiče.
   vmsControllerFault:
     card: 0..1
-    note: Jen pro deaktivaci verze řadiče (přesun, zneplatnění). Verze se znovu aktivuje zveřejněním jejího
+    ndic: Jen pro deaktivaci verze řadiče (přesun, zneplatnění). Verze se znovu aktivuje zveřejněním jejího
       stavu bez `vmsControllerFault`. Platná je vždy jen jedna verze řadiče.
 VmsControllerFault:
   faultIdentifier:
     card: 1..1
-    note: Kód deaktivace konkrétní verze řadiče.
+    ndic: Kód deaktivace konkrétní verze řadiče.
     values:
       vmsControllerDeactivated: řadič deaktivován, důvod neuveden
       vmsControllerMovedToAnotherLocation: řadič, vozík byl přesunut
       vmsControllerLayoutChanged: předělávka činných ploch či jízdních pruhů
       vmsControllerMovedAndLayoutChanged: přesun i předělávka
   faultLastUpdateTime:
-    note: Čas deaktivace.
+    ndic: Čas deaktivace.
   vmsControllerFault:
-    note: Vždy `other` – struktura slouží jen k deaktivaci.
+    ndic: Vždy `other` – struktura slouží jen k deaktivaci.
 VmsStatus:
-  flashingLightsOn:
-    note: '`true`, jsou-li blikače na VMS v provozu.'
   workingStatus:
-    note: Provozní stav VMS; povoleny všechny hodnoty.
+    ndic: Povoleny všechny hodnoty.
   vmsDynamicConfiguration:
-    note: Jen při dočasné změně rozložení aktivních činných ploch bez změny statické publikace. Po dobu
+    ndic: Jen při dočasné změně rozložení aktivních činných ploch bez změny statické publikace. Po dobu
       změny musí být přítomna a nahrazuje celý popis konfigurace ve statické publikaci; struktura je shodná
       s `vmsConfiguration`.
   vmsMessage:
     card: 0..1
-    note: Cyklování zpráv se nepoužívá – nejvýše jedna `vmsMessage` s indexem 1. Nezobrazuje-li VMS nic nebo
+    ndic: Cyklování zpráv se nepoužívá – nejvýše jedna `vmsMessage` s indexem 1. Nezobrazuje-li VMS nic nebo
       je mimo provoz (`workingStatus` = `blank`, `notWorking`), zpráva se neuvádí.
   vmsLocationOverride:
-    note: Při změně polohy značky (vozíku) bez změny statické publikace, typ `loc:PointLocation`. Po dobu
+    ndic: Při změně polohy značky (vozíku) bez změny statické publikace, typ `loc:PointLocation`. Po dobu
       změny musí být přítomna a nahrazuje celý popis polohy ve statické publikaci; struktura je shodná
       s `vmsLocation`.
 VmsMessage:
   messageInformationType:
     card: 0..1
-    note: Typ zobrazené zprávy; u VMS bez zobrazení se neuvádí.
-  timeLastSet:
-    note: Čas nastavení VMS.
+    ndic: U VMS bez zobrazení se neuvádí.
   displayAreaSettings:
     card: 1..n
-    note: Informace zobrazené na činné ploše, typ `vms:PictogramDisplay` nebo `vms:TextDisplay`.
+    ndic: Informace zobrazené na činné ploše, typ `vms:PictogramDisplay` nebo `vms:TextDisplay`.
 PictogramDisplay:
   isBlank:
-    note: '`true`, nezobrazuje-li plocha nic (zpravidla spolu s `workingStatus` = `blank`, GDD kódem 11.991
+    ndic: '`true`, nezobrazuje-li plocha nic (zpravidla spolu s `workingStatus` = `blank`, GDD kódem 11.991
       a `pictogramDescription` = `blankVoid`), jinak `false`.'
   legallyBinding:
-    note: '`true` pro zákazovou či příkazovou značku, jinak `false`. Při `isBlank` = `true` se vynechává.'
+    ndic: '`true` pro zákazovou či příkazovou značku, jinak `false`. Při `isBlank` = `true` se vynechává.'
   pictogramDisplayUrl:
-    note: URL obrázku činné plochy (`baseUrl/…/vms/řadič/VMS/plocha`).
+    ndic: URL obrázku činné plochy
+      (`https://mobilitydata.rsd.cz/VMS/<identifikátor řadiče>/<index VMS>/<index plochy>`).
   pictogram:
-    note: Zobrazený piktogram, typ `vms:RegularPictogram` nebo `vms:CompositePictogram`.
+    ndic: Zobrazený piktogram, typ `vms:RegularPictogram` nebo `vms:CompositePictogram`.
   supplementaryInformationDisplay:
-    note: Dodatková tabulka, typ `vms:SupplementaryPictogram` nebo `vms:SupplementaryText`. Popisuje význam
+    ndic: Dodatková tabulka, typ `vms:SupplementaryPictogram` nebo `vms:SupplementaryText`. Popisuje význam
       a kód dodatkové tabulky; číselné hodnoty jsou v nadřazeném piktogramu.
 RegularPictogram:
   customPictogramCode:
-    note: Povinný kód piktogramu v tabulce piktogramů (`pictogramCodeListIdentifier` ve statické
+    ndic: Povinný kód piktogramu v tabulce piktogramů (`pictogramCodeListIdentifier` ve statické
       publikaci), např. `A23`.
   pictogramInInverseColour:
-    note: '`true` = inverzní barvy (nespojitá značka), platí pro všechny maticové VMS; `false` jen
+    ndic: '`true` = inverzní barvy (nespojitá značka), platí pro všechny maticové VMS; `false` jen
       u hranolových či plechových značek. Při `isBlank` = `true` se vynechává.'
-  pictogramInformationType:
-    note: Typ informace piktogramu.
   gddStructure:
-    note: Kód piktogramu podle ISO 14823:2017; jen existuje-li v normě popis.
+    ndic: Kód piktogramu podle ISO 14823:2017; jen existuje-li v normě popis.
   displayedNumericalInformation:
-    note: Číselná hodnota a její význam, zobrazená na piktogramu či na dodatkové tabulce.
+    ndic: Číselná hodnota a její význam, zobrazená na piktogramu či na dodatkové tabulce.
   pictogramDescription:
     card: 0..1
-    note: Popis piktogramu, jen jako doplněk toho, co nepopisuje GDD; lze uvést i spolu s kódem GDD.
+    ndic: Popis piktogramu, jen jako doplněk toho, co nepopisuje GDD; lze uvést i spolu s kódem GDD.
   presenceOfRedTriangle:
-    note: '`true` u výstražných značek, `false` pro zobrazení vnitřní části výstražné značky na VMS;
+    ndic: '`true` u výstražných značek, `false` pro zobrazení vnitřní části výstražné značky na VMS;
       uvádí se jen při `pictogramInformationType` = `warning`.'
 CompositePictogram:
-  pictogramDescription:
-    note: Popis složeného piktogramu.
   regularPictogram:
-    note: Standardní piktogram použitý ve složeném zobrazení (struktura `vms:RegularPictogram`).
+    ndic: Standardní piktogram použitý ve složeném zobrazení (struktura `vms:RegularPictogram`).
 GddStructure:
   gddPictogramIdentification:
-    note: Trojčíselný kód piktogramu podle ISO 14823 (verze 14823:2022 má nové piktogramy a změny kódů).
+    ndic: Trojčíselný kód piktogramu podle ISO 14823 (verze 14823:2022 má nové piktogramy a změny kódů).
 DisplayedNumericalInformation:
   numericalInformationType:
-    note: Význam číselné hodnoty zobrazené na piktogramu či dodatkové tabulce.
-  numericValue:
-    note: Hodnota k uvedenému významu.
-  unitOfMeasure:
-    note: Jednotka hodnoty.
+    ndic: Význam číselné hodnoty zobrazené na piktogramu či dodatkové tabulce.
 SupplementaryPictogram:
   pictogramCode:
-    note: Povinný kód dodatkové tabulky (piktogramu) v tabulce piktogramů.
-  pictogramDescription:
-    note: Popis dodatkové tabulky zobrazené jako piktogram.
+    ndic: Povinný kód dodatkové tabulky (piktogramu) v tabulce piktogramů.
 SupplementaryText:
   textLine:
-    note: Řádek textové dodatkové tabulky; u VMS se zpravidla nepoužívá.
+    ndic: Řádek textové dodatkové tabulky; u VMS se zpravidla nepoužívá.
 TextDisplay:
-  textCode:
-    note: Odkaz na řádek tabulky frází, který popisuje obsah celé činné plochy (zatím neimplementováno).
-  textImageUrl:
-    note: Aktuální grafické zobrazení aktivní činné plochy typu text.
   textLine:
-    note: Řádky činné plochy typu text shora dolů, horní řádek má `@lineIndex` = 1.
+    ndic: Řádky činné plochy typu text shora dolů, horní řádek má `@lineIndex` = 1.
 TextLine:
   textLine:
-    note: Text řádku v UTF-8.
+    ndic: Text řádku v UTF-8.
   lineLanguage:
     card: '1'
-    note: Jazyk řádku, právě jeden.
+    ndic: Uvádí se vždy (schéma atribut nevyžaduje).
   lineColour:
-    note: Barva textu řádku (výchozí bílá).
+    ndic: Výchozí bílá.
   lineHtml:
-    note: Popis řádku v HTML, obsahuje-li speciální symboly (např. šipky).
-  isExactTextOnSign:
-    note: '`true`, odpovídá-li text přesně zobrazení na značce.'
+    ndic: Popis řádku v HTML, obsahuje-li speciální symboly (např. šipky).
   textInformationType:
-    note: Typ textové informace na řádku, lze-li jej jednoznačně určit, jinak se vynechá.
+    ndic: Typ textové informace na řádku, lze-li jej jednoznačně určit, jinak se vynechá.
 
 _enum: {}
+NetworkLocation:
+  supplementaryPositionalDescription:
+    card: 1..1
+    ndic: Doplňkový popis aktuální polohy VMS na úrovni jízdního pruhu včetně názvu a směru silnice.
+SupplementaryPositionalDescription:
+  positionOnCarriageway:
+    card: 1..1
+    ndic: 'Umístění VMS na konstrukci: `onTheLeft` (na sloupu vlevo po směru jízdy), `inTheCentre` (na příčníku
+      nad vozovkou, i poloportál), `onTheRight` (na sloupu vpravo po směru jízdy).'
+  carriageway:
+    card: 1..1
+    ndic: Jízdní pás a pruh, pro který VMS platí.
+  roadInformation:
+    card: 1..1
+    ndic: Směr (`roadDestination`), název (`roadName`) a číslo (`roadNumber`) komunikace, na které VMS leží.
+Carriageway:
+  carriageway:
+    ndic: Vždy `mainCarriageway`.
+  originalNumberOfLanes:
+    ndic: Uvádí se, je-li znám.
+  lane:
+    card: 1..1
+    ndic: '`laneNumber` (1 = první pruh zprava, 0 = zpevněná krajnice), řídí-li VMS jízdní pruh, nebo
+      `laneUsage` = `allLanesCompleteCarriageway`, platí-li pro celý jízdní pás.'

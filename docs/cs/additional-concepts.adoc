@@ -99,20 +99,15 @@ include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
 
 === Odkazy do dalších tabulek
 
-* Do předdefinovaných tabulek odkazují:
-** všechny činné plochy typu piktogram (`vms:PictogramDisplay`) – elementem `customPictogramCode`
-   do tabulky piktogramů,
-** některé činné plochy typu text (`vms:TextDisplay`) – elementem `textCode` do tabulky textových frází.
-* Tabulku piktogramů určuje statická publikace v elementu `pictogramCodeListIdentifier`.
-* Účel tabulek:
-** slouží *pouze k vysvětlení* (jak byl určitý symbol zakódován),
-** tabulka frází může obsahovat překlad opakujících se textů na PIT do jiného jazyka,
-** vhodnost jejich použití posoudí odběratel.
-* Tabulky související s tímto profilem:
-** tabulka piktogramů (identifikátor `cz-pictogram-code-list-v1.1`): `cz-pictogram-code-list.xlsx`
-   (součást balíčku specifikace `{schema-uri}.zip`, adresář `res`),
-** tabulka textových frází (identifikátor `cz-phrase-code-list-v1.0`): v sešitu je jen prázdný list,
-   fráze se nekódují.
+* Všechny činné plochy typu piktogram (`vms:PictogramDisplay`) odkazují elementem `customPictogramCode`
+  do tabulky piktogramů:
+** tabulku určuje statická publikace v elementu `pictogramCodeListIdentifier`,
+** tabulka piktogramů (identifikátor `cz-pictogram-code-list-v1.1`) je v sešitu `cz-pictogram-code-list.xlsx`
+   (součást balíčku specifikace `{schema-uri}.zip`, adresář `res`).
+* Tabulka slouží *pouze k vysvětlení* (jak byl určitý symbol zakódován); vhodnost jejího použití posoudí
+  odběratel.
+* Činné plochy typu text do tabulky frází neodkazují – fráze se nekódují; obsah popisují řádky textu
+  a grafické zobrazení.
 
 === Odkazy na grafické zobrazení
 

@@ -1,0 +1,164 @@
+== Other important aspects
+
+=== Publication scope
+
+* The publication contains either:
+** all relevant controllers, or
+** only the controllers that have changed.
+* A controller is always given with its whole structure, even if only one element has changed; the other
+  parts keep their original times.
+* `publicationTime` corresponds to the last change of the content; if the content has not changed since the
+  previous publication, the original time is kept.
+* The currency of the controller status (`statusUpdateTime`) is given by the latest setting time
+  (`timeLastSet`) of the individual VMS of the controller.
+
+=== VMS configuration
+
+* Stating values:
+** Boolean elements are given for both values; absence of an element does not mean "false", only that the
+   state is not known,
+** elements with enumerations are given only when they carry information.
+* The type of information displayed on the active display areas of a VMS is described in general by the
+  message type `messageInformationType`.
+
+=== VMS identification
+
+* The dynamic publication describes the states of the elements defined in the static publication.
+* The VMS controller status (element `vmsControllerStatus`) is uniquely determined by:
+** the identifier and version of the table (`vmsControllerTableReference`) in the static publication,
+** the identifier and version of the controller (`vmsControllerReference`) in the static publication.
+* The VMS status (element `vmsStatus`) is identified within the controller by the index `@vmsIndex` (1..n):
+** the state displayed on a VMS may change periodically; the individual states are defined by the VMS
+   message (element `vmsMessage`),
+** message cycling is *not used* in this profile: within a VMS status there is always only one VMS message
+   with index 1.
+* The display area settings (element `displayAreaSettings`) are identified within the VMS by the index
+  `@displayAreaIndex` (1..n).
+
+[#fig-id-structure]
+.Structure of identifiers (source: own)
+image::vms-id-structure.png[Structure of identifiers,width=600,align="center"]
+
+=== Dynamic VMS configuration
+
+* For each VMS, the display area configuration given in the static publication in the element
+  `vmsConfiguration` can be dynamically overridden in the VMS status (`vmsStatus`):
+** a short-term change of the layout of the active display areas, for example for informing at different
+   times, is described by the element `vmsDynamicConfiguration` (type `vms:VmsConfiguration`, the same as in
+   the static publication),
+** if the overriding element is used, the static content is replaced completely (not only the part
+   mentioned in the dynamic publication).
+* Dynamic configuration is used mainly by trailers with a fully programmable matrix – the layout of the
+  display areas changes according to the displayed information, e.g.:
+** in the static publication text / pictogram / text,
+** in the dynamic publication a pictogram and text with two lines.
+
+.Dynamic configuration of a trailer (sample `dynamic-5-trailer.xml`)
+[source,xml]
+----
+include::{samplesdir}/dynamic-5-trailer.xml[tag=dynamic-config,indent=0]
+----
+
+[[life-cycle]]
+=== Information life cycle in the dynamic publication
+
+==== Controller life cycle
+
+* In the dynamic publication only one version of each controller (`vms:VmsController`) is active at any time.
+* Transition to a new controller version:
+** the original controller version is deactivated first,
+** then the status of the new version is published.
+* Deactivation can also be used to take a sign out of service completely.
+
+==== Controller deactivation and reactivation
+
+* A controller version is deactivated in the *dynamic publication* by the element `vmsControllerFault`:
+** `faultIdentifier` with one of the predefined values according to <<tab-faultIdentifier>>,
+** `faultLastUpdateTime` with the time of deactivation,
+** `vmsControllerFault` with the value `other`.
+
+[#tab-faultIdentifier]
+.Values of the `faultIdentifier` element
+[cols="1,1",options="header"]
+|===
+|Value |Meaning
+|`vmsControllerDeactivated` |gantry deactivated, reason not given
+|`vmsControllerMovedToAnotherLocation` |gantry or trailer has been moved
+|`vmsControllerLayoutChanged` |display areas rebuilt
+|`vmsControllerMovedAndLayoutChanged` |see the two previous values
+|===
+
+.Controller deactivation – trailer moved (sample `dynamic-5-trailer_deactivated.xml`)
+[source,xml]
+----
+include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
+----
+
+* The static publication does not change on deactivation or reactivation.
+* An inactive controller version can be activated again by publishing its status without
+  `vmsControllerFault`. If, for example, a sign is moved between two places, it is possible to:
+** deactivate version 1 and later activate it again,
+** or switch between two versions of the static description.
+
+=== References to other tables
+
+* All pictogram display areas (`vms:PictogramDisplay`) refer by the element `customPictogramCode` to the
+  pictogram table:
+** the table is identified by the static publication in the element `pictogramCodeListIdentifier`,
+** the pictogram table (identifier `cz-pictogram-code-list-v1.1`) is in the workbook
+   `cz-pictogram-code-list.xlsx` (part of the specification package `{schema-uri}.zip`, folder `res`).
+* The table serves *only for explanation* (how a particular symbol was coded); whether to use it is up to
+  the subscriber.
+* Text display areas do not refer to a phrase table – phrases are not coded; the content is described by
+  the text lines and the graphical representation.
+
+=== References to graphical representation
+
+* The dynamic publication references images of the individual *active display areas*:
+** for a pictogram area (`vms:PictogramDisplay`) by the element `pictogramDisplayUrl`,
+** for a text area (`vms:TextDisplay`) by the element `textImageUrl`.
+* The links have the structure `https://mobilitydata.rsd.cz/VMS/<controller identifier>/<VMS index>/<area index>`,
+  e.g. the content of the 1st display area of the 1st VMS of the controller:
+  `https://mobilitydata.rsd.cz/VMS/C972FEAC-E862-44D4-B029-C037B27086BA/1/1`.
+* Links to the graphical representation of the whole controller (static) and of the whole VMS (dynamic) –
+  without the area index – are in the static publication.
+
+=== VMS location
+
+* Fixed signs:
+** the location is always described in the *static publication*,
+** on a permanent change of location a new controller version with an updated location description is
+   issued.
+* Trailers and portable signs:
+** the VMS status (`vmsStatus`) contains the element `vmsLocationOverride` with the current location
+   (geographic and relative to lanes and carriageway); its structure is the same as `vmsLocation` in the
+   static publication,
+** if the overriding element is used, the static location description is replaced completely.
+
+==== Location change
+
+* A location change may concern:
+** a temporary change of the lane arrangement, for example during a closure,
+** a permanent change of the location of a mobile VMS (on a trailer),
+** a moving mobile VMS (on a trailer).
+* These changes are handled entirely in the dynamic publication with `vmsLocationOverride`; no new
+  controller version is created.
+* When a mobile VMS stays in place longer (more than 6 months), a new static version with an updated
+  location description may be created to reduce the transferred data; the handling of the original
+  versions is described in <<life-cycle>>.
+* Relocation of a mobile VMS (trailer):
+** when it is removed from the original place, it is deactivated in the dynamic publication; the static
+   publication does not change,
+** when it is set up at a new place, it is reactivated in the dynamic publication.
+* A moving *active* mobile VMS is not deactivated; the change of the current location is reported
+  periodically (e.g. once a minute).
+
+.Current trailer location (sample `dynamic-5-trailer.xml`)
+[source,xml]
+----
+include::{samplesdir}/dynamic-5-trailer.xml[tag=location-override,indent=0]
+----
+
+The position on the controller, the validity for lanes, the geographic location of a VMS and the position of
+display areas within a VMS are specified in the documentation of the static publication
+(`cz-ndic_d2-vms-table`).

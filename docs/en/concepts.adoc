@@ -1,4 +1,161 @@
 == Concepts
 
-Description of the format concepts: content of the publication, static vs. dynamic part,
-location referencing, record versioning. References: <<EN16157-3>>.
+The format describes information displayed on variable message signs (VMS) along roads used for providing
+information and for traffic management. The profile has a static and a dynamic part:
+
+* the static part (format `cz-ndic_d2-vms-table`) describes the basic characteristics of a traffic sign or
+  gantry, including the display area configuration, the location and the validity for lanes,
+* the dynamic part (this format) describes the information currently displayed on the individual signs, for
+  mobile trailers including changes of the display area configuration and of the trailer location.
+
+The format is based on the DATEX II publication `vms:VmsPublication` <<EN16157-4>>. It uses the DATEX II 3.7
+model.
+
+include::{kitdir}/shared/en/vms/pojmy.adoc[]
+
+[[obalka]]
+=== Envelope and publication header
+
+Each message is a DATEX II 3 document with the root element `d2:payload`. The `xsi:type` attribute of the root element
+specifies the publication type (here `vms:VmsPublication`), the `modelBaseVersion="3"` attribute the model
+version and the `@lang` attribute the default language of texts.
+
+The format the message conforms to is identified solely by attributes of the root element:
+
+[horizontal]
+`@profileName`:: format identifier without version (`cz-ndic_d2-vms-status`),
+`@profileVersion`:: format version (`1.2`).
+
+The publication header contains:
+
+* `feedType` – identifier of the data source (distribution) in the register of the national access point
+  <<nap>>:
+** the source refers to the format in which it provides the data; the format of the message is identified
+   by the `@profileName` and `@profileVersion` attributes,
+** the `feedDescription` element is not used.
+* `publicationTime` – time the publication content was created; if the content has not changed since the
+  previous publication, the original time is kept; a new time is set only when the content changes.
+* `publicationCreator` – publication provider:
+** country code in lower case (`cz`),
+** provider abbreviation (`nationalIdentifier`).
+* `headerInformation` – handling of the information; NDIC always sets:
+** `confidentiality` = `noRestriction`,
+** `informationStatus` = `real`.
+
+All times in the message include the time zone.
+
+.Root element and publication header (sample `dynamic-1-ZPI.xml`)
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI.xml[lines=2]
+include::{samplesdir}/dynamic-1-ZPI.xml[tag=header,indent=2]
+  ...
+----
+
+[[struktura]]
+=== Structure of the dynamic publication
+
+The dynamic publication has the following structure:
+
+* VMS controller status (element `vmsControllerStatus`) – dynamic status of the whole controller (gantry,
+  sign, trailer),
+* VMS status (element `vmsStatus`) – status of an individual VMS within the controller,
+* VMS message (element `vmsMessage`) – container for all information displayed on the VMS,
+* display area settings (element `displayAreaSettings`) – status of a display area showing a pictogram
+  (`vms:PictogramDisplay`) or text (`vms:TextDisplay`).
+
+.VMS controller status (sample `dynamic-1-ZPI.xml`)
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI.xml[tag=controller,indent=0]
+----
+
+=== Publication structure concept
+
+* Dynamic information is provided as the VMS controller status (element `vmsControllerStatus`), which
+  references the VMS controller (`vms:VmsController`) in the static publication.
+* The overall status of the controller and the type of displayed information cannot be expressed at
+  controller level; they are expressed only:
+** at VMS level,
+** at the level of the active display areas.
+* A supplementary panel (text or pictogram):
+** is always created in the dynamic publication as part of a pictogram display area (`vms:PictogramDisplay`),
+** is not referenced by an index into the static publication (it does not exist there).
+
+==== Pictogram display area
+
+A pictogram display area is described by the class `vms:PictogramDisplay`.
+
+* Each pictogram may have exactly one supplementary panel (text or pictogram).
+* It always contains the pictogram code `customPictogramCode`:
+** the code refers to the predefined pictogram table identified in the static publication in
+   `pictogramCodeListIdentifier`,
+** if there is no standard description for the pictogram, this table is the only way to describe it.
+* The pictogram (`pictogram`) may be of type:
+** regular pictogram (`vms:RegularPictogram`) – a simple symbol,
+** composite pictogram (`vms:CompositePictogram`) – a symbol composed of a regular pictogram and a
+   directional layout.
+* Description of the pictogram according to standards:
+** all pictograms for which a description exists in the GDD standard (ISO 14823:2017) are described by a
+   GDD code (`gddStructure`),
+** if the code list of pictogram descriptions `pictogramDescription` fits, it is used too (see
+   <<fig-gdd-mapping>>).
+
+[#fig-gdd-mapping]
+.Part of the traffic sign coding description (source: ISO 14823)
+image::vms-gdd-mapping.png[Traffic sign coding according to ISO 14823,width=600,align="center"]
+
+* A pictogram always carries information on:
+** whether it is blank (`isBlank`),
+** whether it is legally binding (`legallyBinding`),
+** whether it uses inverse display (`pictogramInInverseColour`; applies to all non-continuous signs, see
+   <<fig-inverse-pic>>),
+** its type (`pictogramInformationType`),
+** whether a warning triangle is used (`presenceOfRedTriangle`).
+
+[#fig-inverse-pic]
+.Continuous and non-continuous display (source: ŘSD R19)
+image::vms-inverse.png[Continuous and non-continuous display,width=600,align="center"]
+
+.Pictogram with a supplementary panel (sample `dynamic-1-ZPI.xml`)
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI.xml[tag=pictogram,indent=0]
+----
+
+==== Supplementary panel
+
+* A supplementary panel is modelled as a pictogram by the class `vms:SupplementaryPictogram`, e.g. for the
+  types:
+** E3a – distance to the location,
+** E4 – length of the section,
+** E5 – maximum permitted weight,
+** E7 and others.
+* It always contains the code `pictogramCode`:
+** the code refers to the predefined table,
+** if there is no standard description for the supplementary panel, this table is the only way to describe
+   it.
+* Numerical data of the supplementary panel are projected into the numerical information structure of the
+  parent pictogram (`displayedNumericalInformation`); only the type remains in the panel description.
+
+==== Text display area
+
+A text display area is described by the class `vms:TextDisplay`.
+
+* The overall content of an active text display area is described by a graphical representation available
+  at the URL in the element `textImageUrl`.
+* The individual lines (`textLine`) always contain:
+** the language,
+** the line text (in UTF-8),
+** the line colour (white by default),
+** whether the description matches the display on the VMS exactly (`isExactTextOnSign`); it differs for
+   special characters and symbols, see the pictogram table `res/cz-pictogram-code-list.xlsx` in the
+   specification package.
+* A line may also contain an HTML description for a more exact representation of the content if it
+  contains special symbols.
+
+.Text display area (sample `dynamic-1-ZPI.xml`)
+[source,xml]
+----
+include::{samplesdir}/dynamic-1-ZPI.xml[tag=text,indent=0]
+----

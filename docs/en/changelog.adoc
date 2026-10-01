@@ -1,5 +1,21 @@
 == Documentation change history
 
+// Documentation revision (MAJOR.MINOR.REVISION). Format changes see CHANGELOG.adoc in the specification.
 === 1.2.0
 
-* first release of the documentation
+* New documentation of the `cz-ndic_d2-vms-status` format version 1.2 (DATEX II 3.7); replaces the
+  documentation of the cz-ndic_d2-vms-v1.1 format (DATEX II 3.3).
+* Changes compared to version 1.1 (DATEX II 3.3):
+** The profile selection is carried over to the 3.7 model without changes of cardinalities and narrowed by
+   elements that NDIC does not publish:
+*** description of the VMS point by OpenLR (`openlrPointLocationReference`),
+*** the phrase code `textCode` – phrases are not coded,
+*** in the dynamic configuration `textCodeListIdentifier`, `maxNumberOfCharacters` and
+    `overriddenLaneAssociation`.
+** The identification of the format and of the source in the header (the format has the new name
+   `cz-ndic_d2-vms-status`) and the rule for `publicationTime` change.
+** NDIC rules narrow cardinalities beyond the schema (element tables): at most one VMS message (no
+   cycling), one message type, at most one controller fault, and for the trailer location one carriageway,
+   one road and one lane statement.
+** The Global Network has `linearElementReferenceModel` = `CZ-RSD-GlobalNetwork` and the chainage is given
+   by road number (`roadNumber`) instead of the model `mileage` – the same as the situation formats.

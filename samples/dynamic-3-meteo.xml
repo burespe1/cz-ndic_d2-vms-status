@@ -11,7 +11,7 @@
  -->
 <d2:payload xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" modelBaseVersion="3" xsi:type="vms:VmsPublication" xsi:schemaLocation="http://datex2.eu/schema/3/d2Payload ../schema/DATEXII_3_D2Payload.xsd" lang="cs" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
   <com:feedType>x-source:cz-ndic_d2-vms-status-fixed-pull-v3</com:feedType>
-  <com:publicationTime>2021-12-28T18:45:00+01:00</com:publicationTime>
+  <com:publicationTime>2026-10-01T18:45:00+02:00</com:publicationTime>
   <com:publicationCreator>
     <com:country>cz</com:country>
     <com:nationalIdentifier>NDIC</com:nationalIdentifier>
@@ -24,7 +24,7 @@
   <vms:vmsControllerStatus>
     <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="260601"/>
     <vms:vmsControllerReference id="0lf3pel9rq" targetClass="vms:VmsController" version="260601"/>
-    <vms:statusUpdateTime>2021-12-28T18:45:00+01:00</vms:statusUpdateTime>
+    <vms:statusUpdateTime>2026-10-01T16:05:00+02:00</vms:statusUpdateTime>
     <!-- dynamic setting of information table with temperatures -->
     <vms:vmsStatus vmsIndex="1">
       <vms:vmsStatus>
@@ -33,7 +33,7 @@
         <vms:vmsMessage messageIndex="1">
           <vms:vmsMessage>
             <vms:messageInformationType>temperature</vms:messageInformationType>
-            <vms:timeLastSet>2021-12-23T16:05:00+01:00</vms:timeLastSet>
+            <vms:timeLastSet>2026-10-01T16:05:00+02:00</vms:timeLastSet>
             <vms:displayAreaSettings displayAreaIndex="1">
               <vms:displayAreaSettings xsi:type="vms:TextDisplay">
                 <vms:isBlank>false</vms:isBlank>
