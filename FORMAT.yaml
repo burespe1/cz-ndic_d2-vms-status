@@ -1,5 +1,5 @@
 # Metadata formátu – součást vydání specifikace (tag v1.2).
-uri: cz-ndic_d2-vms-status
+id: x-format:cz-ndic_d2-vms-status-v1.2
 version: '1.2'
 name:
   cs: DATEX II VMS Publication – Stav proměnných dopravních značek
@@ -20,12 +20,6 @@ schema:
   entry: DATEXII_3_D2Payload.xsd
 selection: sel/cz-ndic_d2-vms-status.sel
 samples: samples
-ndic:
-  action: review
-  previous: cz-ndic_d2-vms-v1.1 (DATEX II 3.3)
-  profiles: []
-  profileName: cz-ndic_d2-vms-status
-  profileVersion: '1.2'
 maintainer:
   name: Petr Bureš
   company: TamTam Research s.r.o.
