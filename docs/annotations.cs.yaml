@@ -106,7 +106,7 @@ CompositePictogram:
     ndic: Standardní piktogram použitý ve složeném zobrazení (struktura `vms:RegularPictogram`).
 GddStructure:
   gddPictogramIdentification:
-    ndic: Trojčíselný kód piktogramu podle ISO 14823 (verze 14823:2022 má nové piktogramy a změny kódů).
+    ndic: Trojčíselný kód piktogramu podle ISO 14823 (nástupce ISO 14823-1:2024 má nové piktogramy a změny kódů).
 DisplayedNumericalInformation:
   numericalInformationType:
     ndic: Význam číselné hodnoty zobrazené na piktogramu či dodatkové tabulce.
