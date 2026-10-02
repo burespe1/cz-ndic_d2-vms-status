@@ -114,7 +114,7 @@ include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
 * Dynamická publikace odkazuje na obrázky jednotlivých *aktivních činných ploch*:
 ** u plochy typu piktogram (`vms:PictogramDisplay`) elementem `pictogramDisplayUrl`,
 ** u plochy typu text (`vms:TextDisplay`) elementem `textImageUrl`.
-* Odkazy mají strukturu `https://mobilitydata.rsd.cz/VMS/<identifikátor řadiče>/<index VMS>/<index plochy>`,
+* Odkazy mají strukturu `+https://mobilitydata.rsd.cz/VMS/<identifikátor řadiče>/<index VMS>/<index plochy>+`,
   např. obsah 1. činné plochy 1. VMS na řadiči:
   `https://mobilitydata.rsd.cz/VMS/C972FEAC-E862-44D4-B029-C037B27086BA/1/1`.
 * Odkazy na grafické zobrazení celého řadiče (statické) a celé VMS (dynamické) – bez indexu plochy – jsou

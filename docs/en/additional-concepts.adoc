@@ -117,7 +117,7 @@ include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
 * The dynamic publication references images of the individual *active display areas*:
 ** for a pictogram area (`vms:PictogramDisplay`) by the element `pictogramDisplayUrl`,
 ** for a text area (`vms:TextDisplay`) by the element `textImageUrl`.
-* The links have the structure `https://mobilitydata.rsd.cz/VMS/<controller identifier>/<VMS index>/<area index>`,
+* The links have the structure `+https://mobilitydata.rsd.cz/VMS/<controller identifier>/<VMS index>/<area index>+`,
   e.g. the content of the 1st display area of the 1st VMS of the controller:
   `https://mobilitydata.rsd.cz/VMS/C972FEAC-E862-44D4-B029-C037B27086BA/1/1`.
 * Links to the graphical representation of the whole controller (static) and of the whole VMS (dynamic) –
