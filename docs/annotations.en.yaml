@@ -8,7 +8,7 @@ VmsPublication:
       e.g. `x-source:cz-ndic_d2-vms-status-fixed-pull-v3`. The format is identified by the `@profileName` and `@profileVersion`
       attributes.
   publicationTime:
-    ndic: Time the publication content was created; if the content has not changed, the original time is kept.
+    ndic: Time the publication was generated; it changes with every generated publication, even without a change of content.
   publicationCreator:
     ndic: 'Publication provider: `country` = `cz`, `nationalIdentifier` = provider abbreviation (NDIC).'
   headerInformation:

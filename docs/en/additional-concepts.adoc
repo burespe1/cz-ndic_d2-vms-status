@@ -7,8 +7,8 @@
 ** only the controllers that have changed.
 * A controller is always given with its whole structure, even if only one element has changed; the other
   parts keep their original times.
-* `publicationTime` corresponds to the last change of the content; if the content has not changed since the
-  previous publication, the original time is kept.
+* `publicationTime` is the time the publication was generated; it changes with every generated publication,
+  even if the content has not changed.
 * The currency of the controller status (`statusUpdateTime`) is given by the latest setting time
   (`timeLastSet`) of the individual VMS of the controller.
 

@@ -14,7 +14,7 @@ VmsPublication:
     ndic: Odkaz na zdroj dat v registru národního přístupového bodu (https://registr.dopravniinfo.cz/),
       např. `x-source:cz-ndic_d2-vms-status-fixed-pull-v3`. Formát určují atributy `@profileName` a `@profileVersion`.
   publicationTime:
-    ndic: Čas vytvoření obsahu publikace; nezměnil-li se obsah, zůstává původní.
+    ndic: Čas vygenerování publikace; mění se s každým vygenerováním, i beze změny obsahu.
   publicationCreator:
     ndic: 'Poskytovatel publikace: `country` = `cz`, `nationalIdentifier` = zkratka poskytovatele (NDIC).'
   headerInformation:

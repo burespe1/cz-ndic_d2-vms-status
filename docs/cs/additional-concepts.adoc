@@ -6,8 +6,8 @@
 ** všechny relevantní řadiče, nebo
 ** jen řadiče, které se změnily.
 * Řadič se uvádí vždy celou strukturou, i když se změnil jediný element; ostatní části nesou původní časy.
-* `publicationTime` odpovídá poslední změně obsahu; nezměnil-li se obsah od předchozí publikace, zůstává
-  čas původní.
+* `publicationTime` je čas vygenerování publikace; mění se s každým vygenerováním, i když se obsah
+  nezměnil.
 * Aktuálnost stavu řadiče (`statusUpdateTime`) je dána nejvyšší hodnotou času nastavení (`timeLastSet`)
   jednotlivých VMS daného řadiče.
 
