@@ -36,18 +36,12 @@ VmsControllerStatus:
     ndic: Jen pro deaktivaci verze řadiče (přesun, zneplatnění). Verze se znovu aktivuje zveřejněním jejího
       stavu bez `vmsControllerFault`. Platná je vždy jen jedna verze řadiče.
 VmsControllerFault:
-  faultIdentifier:
-    card: 1..1
-    ndic: Kód deaktivace konkrétní verze řadiče.
-    values:
-      vmsControllerDeactivated: řadič deaktivován, důvod neuveden
-      vmsControllerMovedToAnotherLocation: řadič, vozík byl přesunut
-      vmsControllerLayoutChanged: předělávka činných ploch či jízdních pruhů
-      vmsControllerMovedAndLayoutChanged: přesun i předělávka
   faultLastUpdateTime:
     ndic: Čas deaktivace.
   vmsControllerFault:
-    ndic: Vždy `other` – struktura slouží jen k deaktivaci.
+    ndic: 'Vždy `_extended`; důvod deaktivace v `@_extendedValue`: `vmsControllerDeactivated` (důvod neuveden),
+      `vmsControllerMovedToAnotherLocation` (přesun), `vmsControllerLayoutChanged` (předělávka činných ploch či
+      jízdních pruhů), `vmsControllerMovedAndLayoutChanged` (přesun i předělávka).'
 VmsStatus:
   workingStatus:
     ndic: Povoleny všechny hodnoty.

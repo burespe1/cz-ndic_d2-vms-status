@@ -32,18 +32,12 @@ VmsControllerStatus:
     ndic: Only for deactivating a controller version (relocation, invalidation). The version is activated again
       by publishing its status without `vmsControllerFault`. Only one controller version is valid at any time.
 VmsControllerFault:
-  faultIdentifier:
-    card: 1..1
-    ndic: Deactivation code of the specific controller version.
-    values:
-      vmsControllerDeactivated: controller deactivated, reason not given
-      vmsControllerMovedToAnotherLocation: controller or trailer has been moved
-      vmsControllerLayoutChanged: display areas or lanes rebuilt
-      vmsControllerMovedAndLayoutChanged: moved and rebuilt
   faultLastUpdateTime:
     ndic: Time of deactivation.
   vmsControllerFault:
-    ndic: Always `other` – the structure is used only for deactivation.
+    ndic: 'Always `_extended`; the reason for deactivation in `@_extendedValue`: `vmsControllerDeactivated`
+      (reason not given), `vmsControllerMovedToAnotherLocation` (moved), `vmsControllerLayoutChanged` (display
+      areas or lanes rebuilt), `vmsControllerMovedAndLayoutChanged` (moved and rebuilt).'
 VmsStatus:
   workingStatus:
     ndic: All values allowed.

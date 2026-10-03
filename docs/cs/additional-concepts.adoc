@@ -73,12 +73,11 @@ include::{samplesdir}/dynamic-5-trailer.xml[tag=dynamic-config,indent=0]
 ==== Deaktivace a reaktivace řadiče
 
 * Verze řadiče se deaktivuje v *dynamické publikaci* elementem `vmsControllerFault`:
-** `faultIdentifier` s jednou z předdefinovaných hodnot podle <<tab-faultIdentifier>>,
 ** `faultLastUpdateTime` s časem deaktivace,
-** `vmsControllerFault` s hodnotou `other`.
+** `vmsControllerFault` s hodnotou `_extended` a atributem `@_extendedValue` podle <<tab-faultIdentifier>>.
 
 [#tab-faultIdentifier]
-.Hodnoty elementu `faultIdentifier`
+.Hodnoty atributu `@_extendedValue`
 [cols="1,1",options="header"]
 |===
 |Hodnota |Význam

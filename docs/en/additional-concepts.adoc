@@ -76,12 +76,12 @@ include::{samplesdir}/dynamic-5-trailer.xml[tag=dynamic-config,indent=0]
 ==== Controller deactivation and reactivation
 
 * A controller version is deactivated in the *dynamic publication* by the element `vmsControllerFault`:
-** `faultIdentifier` with one of the predefined values according to <<tab-faultIdentifier>>,
 ** `faultLastUpdateTime` with the time of deactivation,
-** `vmsControllerFault` with the value `other`.
+** `vmsControllerFault` with the value `_extended` and the attribute `@_extendedValue` according to
+   <<tab-faultIdentifier>>.
 
 [#tab-faultIdentifier]
-.Values of the `faultIdentifier` element
+.Values of the `@_extendedValue` attribute
 [cols="1,1",options="header"]
 |===
 |Value |Meaning
