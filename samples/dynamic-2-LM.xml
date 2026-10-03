@@ -1,5 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<d2:payload xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" modelBaseVersion="3" xsi:type="vms:VmsPublication" lang="cs" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
+<!-- Dynamic Lane management example, VMS on the gantry and support structure -->
+<!-- 
+         x=====x   x=====x   x=====x      
+    x====x PDZ x===x PDZ x===x PDZ x====x
+    x    x=====x   x=====x   x=====x    x
+ x=====x                           x=====x
+ x PDZ x                             x PDZ x
+ x=====x                             x=====x
+    x                                   x
+ -->
+<d2:payload xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" modelBaseVersion="3" xsi:type="vms:VmsPublication" xsi:schemaLocation="http://datex2.eu/schema/3/d2Payload ../schema/DATEXII_3_D2Payload.xsd" lang="cs" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
   <com:feedType>x-source:cz-ndic_d2-vms-status-fixed-pull-v3</com:feedType>
   <com:publicationTime>2026-10-01T18:45:00+02:00</com:publicationTime>
   <com:publicationCreator>
@@ -15,10 +25,14 @@
     <vms:vmsControllerReference id="hadr24lfd3" targetClass="vms:VmsController" version="260601"/>
     <vms:statusUpdateTime>2026-10-01T16:05:00+02:00</vms:statusUpdateTime>
     
+    <!-- obligatory sign with speed limit 100 km/h -->
     <vms:vmsStatus vmsIndex="1">
       <vms:vmsStatus>
         <vms:flashingLightsOn>false</vms:flashingLightsOn>
         <vms:workingStatus>working</vms:workingStatus>
+        <!-- if needed for override of display settings
+        <vms:vmsDynamicConfiguration></vms:vmsDynamicConfiguration>
+        -->
         <vms:vmsMessage messageIndex="1">
           <vms:vmsMessage>
             <vms:messageInformationType>trafficManagement</vms:messageInformationType>
@@ -53,6 +67,7 @@
       </vms:vmsStatus>
     </vms:vmsStatus>
     
+    <!-- merge lane sign above 2. lane -->
     <vms:vmsStatus vmsIndex="2">
       <vms:vmsStatus>
         <vms:flashingLightsOn>false</vms:flashingLightsOn>
@@ -86,6 +101,7 @@
       </vms:vmsStatus>
     </vms:vmsStatus>
     
+    <!-- warning sign in between lanes -->
     <vms:vmsStatus vmsIndex="3">
       <vms:vmsStatus>
         <vms:flashingLightsOn>false</vms:flashingLightsOn>
@@ -119,12 +135,14 @@
       </vms:vmsStatus>
     </vms:vmsStatus>
     
+    <!-- blank pictogram -->
     <vms:vmsStatus vmsIndex="4">
       <vms:vmsStatus>
         <vms:flashingLightsOn>false</vms:flashingLightsOn>
         <vms:workingStatus>working</vms:workingStatus>
         <vms:vmsMessage messageIndex="1">
           <vms:vmsMessage>
+            <!-- no messageInformationType for blank -->
             <vms:timeLastSet>2026-10-01T16:05:00+02:00</vms:timeLastSet>
             <vms:displayAreaSettings displayAreaIndex="1">
               <vms:displayAreaSettings xsi:type="vms:PictogramDisplay">
@@ -149,6 +167,7 @@
       </vms:vmsStatus>
     </vms:vmsStatus>
     
+    <!-- obligatory sign with speed limit 100 km/h -->
     <vms:vmsStatus vmsIndex="5">
       <vms:vmsStatus>
         <vms:flashingLightsOn>false</vms:flashingLightsOn>

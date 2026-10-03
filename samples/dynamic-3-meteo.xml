@@ -1,5 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<d2:payload xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" modelBaseVersion="3" xsi:type="vms:VmsPublication" lang="cs" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
+<!-- Road and ambient temperature information panel, realized by text area -->
+<!-- LED PDZ A 8, A 24, E 3a, E 4 na dálnici D8 v km 14,900 a 18,915 -->
+<!-- 
+ x====================x     
+ x  PIT, ambient temp x      
+ x  PIT, road temp    x 
+ x=====x========x=====x
+       x        x
+       x      x
+ -->
+<d2:payload xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" modelBaseVersion="3" xsi:type="vms:VmsPublication" xsi:schemaLocation="http://datex2.eu/schema/3/d2Payload ../schema/DATEXII_3_D2Payload.xsd" lang="cs" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
   <com:feedType>x-source:cz-ndic_d2-vms-status-fixed-pull-v3</com:feedType>
   <com:publicationTime>2026-10-01T18:45:00+02:00</com:publicationTime>
   <com:publicationCreator>
@@ -10,10 +20,12 @@
     <com:confidentiality>noRestriction</com:confidentiality>
     <com:informationStatus>real</com:informationStatus>
   </vms:headerInformation>
+  <!-- vmsControllerStatus per one dynamic sign -->
   <vms:vmsControllerStatus>
     <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="260601"/>
     <vms:vmsControllerReference id="0lf3pel9rq" targetClass="vms:VmsController" version="260601"/>
     <vms:statusUpdateTime>2026-10-01T16:05:00+02:00</vms:statusUpdateTime>
+    <!-- dynamic setting of information table with temperatures -->
     <vms:vmsStatus vmsIndex="1">
       <vms:vmsStatus>
         <vms:flashingLightsOn>false</vms:flashingLightsOn>
@@ -27,6 +39,7 @@
                 <vms:isBlank>false</vms:isBlank>
                 <vms:legallyBinding>false</vms:legallyBinding>
                 <vms:textImageUrl>https://mobilitydata.rsd.cz/VMS/0lf3pel9rq/1/1</vms:textImageUrl>
+                <!-- 1st line always for ambient temperature in C -->
                 <vms:textLine lineIndex="1">
                   <vms:textLine lineLanguage="cs">
                     <vms:textLine>27</vms:textLine>
@@ -34,6 +47,7 @@
                     <vms:isExactTextOnSign>true</vms:isExactTextOnSign>
                   </vms:textLine>
                 </vms:textLine>
+                <!-- 2nd line always for road temperature in C -->
                 <vms:textLine lineIndex="2">
                   <vms:textLine lineLanguage="cs">
                     <vms:textLine>34</vms:textLine>
