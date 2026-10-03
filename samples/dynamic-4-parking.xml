@@ -1,15 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Navigation to parking with static info about parking name, distance and parking type and number of free places -->
-<!-- Parking Pávov in 800 m for trucks with 144 free places -->
-<!-- 
- x=======================x     
- x  static, parking name x      
- x  symbol, occupancy    x 
- x==========x============x
-            x
-            x
- -->
-<d2:payload xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" modelBaseVersion="3" xsi:type="vms:VmsPublication" xsi:schemaLocation="http://datex2.eu/schema/3/d2Payload ../schema/DATEXII_3_D2Payload.xsd" lang="cs" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
+<d2:payload xmlns:vms="http://datex2.eu/schema/3/vms" xmlns:d2="http://datex2.eu/schema/3/d2Payload" xmlns:loc="http://datex2.eu/schema/3/locationReferencing" xmlns:com="http://datex2.eu/schema/3/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" modelBaseVersion="3" xsi:type="vms:VmsPublication" lang="cs" profileName="cz-ndic_d2-vms-status" profileVersion="1.2">
   <com:feedType>x-source:cz-ndic_d2-vms-status-fixed-pull-v3</com:feedType>
   <com:publicationTime>2026-10-01T18:45:00+02:00</com:publicationTime>
   <com:publicationCreator>
@@ -20,12 +10,10 @@
     <com:confidentiality>noRestriction</com:confidentiality>
     <com:informationStatus>real</com:informationStatus>
   </vms:headerInformation>
-  <!-- vmsControllerStatus per one dynamic sign -->
   <vms:vmsControllerStatus>
     <vms:vmsControllerTableReference id="CzechVmsTable-fixedVms" targetClass="vms:VmsControllerTable" version="260601"/>
     <vms:vmsControllerReference id="e2p7j5pc25" targetClass="vms:VmsController" version="260601"/>
     <vms:statusUpdateTime>2026-10-01T16:05:00+02:00</vms:statusUpdateTime>
-    <!-- dynamic setting of information table with parking occupancy info -->
     <vms:vmsStatus vmsIndex="1">
       <vms:vmsStatus>
         <vms:flashingLightsOn>false</vms:flashingLightsOn>
@@ -39,7 +27,6 @@
                 <vms:isBlank>false</vms:isBlank>
                 <vms:legallyBinding>false</vms:legallyBinding>
                 <vms:textImageUrl>https://mobilitydata.rsd.cz/VMS/e2p7j5pc25/1/1</vms:textImageUrl>
-                <!-- 1st line for more distant parking (in case of sign with more parking) -->
                 <vms:textLine lineIndex="1">
                   <vms:textLine lineLanguage="cs">
                     <vms:textLine>144</vms:textLine>
@@ -47,7 +34,6 @@
                     <vms:isExactTextOnSign>true</vms:isExactTextOnSign>
                   </vms:textLine>
                 </vms:textLine>
-                <!-- 2nd line for closer parking (in case of sign with more parking) -->
               </vms:displayAreaSettings>
             </vms:displayAreaSettings>
           </vms:vmsMessage>
