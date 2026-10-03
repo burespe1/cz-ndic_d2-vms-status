@@ -2,7 +2,7 @@
 id: x-format:cz-ndic_d2-vms-status-v1.2
 version: '1.2'
 name:
-  cs: DATEX II VMS Publication – Stav proměnných dopravních značek
+  cs: DATEX II VMS Publication – Stav proměnného dopravního značení
   en: DATEX II VMS Publication – Variable message sign status
 description:
   cs: Aktuální obsah a stav proměnných dopravních značek (pevné i mobilní).

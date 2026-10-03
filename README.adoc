@@ -1,7 +1,7 @@
 = cz-ndic_d2-vms-status
 :toc: macro
 
-DATEX II VMS Publication – Stav proměnných dopravních značek. Aktuální obsah a stav proměnných dopravních značek (pevné i mobilní).
+DATEX II VMS Publication – Stav proměnného dopravního značení. Aktuální obsah a stav proměnných dopravních značek (pevné i mobilní).
 
 Repozitář formátu Národního dopravního informačního centra (NDIC) – specifikace datového profilu
 DATEX II 3.7 a jeho dokumentace. Aktuální verze formátu: *1.2*.
