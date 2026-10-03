@@ -257,3 +257,5 @@ message `vmsMessage` is not given.
 include::{samplesdir}/dynamic-6-prism.xml[tags=**]
 ----
 ====
+
+Further controller configurations without a sample are described in the documentation of the format `cz-ndic_d2-vms-table`, appendix Examples of sign configurations.

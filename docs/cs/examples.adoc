@@ -256,3 +256,4 @@ include::{samplesdir}/dynamic-6-prism.xml[tags=**]
 ----
 ====
 
+Další konfigurace řadičů bez vzorku popisuje dokumentace formátu `cz-ndic_d2-vms-table`, příloha Příklady konfigurace značek.
