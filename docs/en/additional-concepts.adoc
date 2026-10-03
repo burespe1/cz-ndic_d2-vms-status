@@ -68,6 +68,9 @@ include::{samplesdir}/dynamic-5-trailer.xml[tag=dynamic-config,indent=0]
 * Transition to a new controller version:
 ** the original controller version is deactivated first,
 ** then the status of the new version is published.
+* A new version created only by a new Global Network release (without a change of the controller) is not
+  deactivated: from the validity of the new table the dynamic publication refers directly to the new version.
+  Deactivation applies only to a change of the controller (relocation, layout change) and to its withdrawal.
 * Deactivation can also be used to take a sign out of service completely.
 
 ==== Controller deactivation and reactivation
@@ -96,9 +99,8 @@ include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
 
 * The static publication does not change on deactivation or reactivation.
 * An inactive controller version can be activated again by publishing its status without
-  `vmsControllerFault`. If, for example, a sign is moved between two places, it is possible to:
-** deactivate version 1 and later activate it again,
-** or switch between two versions of the static description.
+  `vmsControllerFault`. If, for example, a sign is moved between two places, the controller version can be
+  deactivated and later activated again.
 
 === References to other tables
 

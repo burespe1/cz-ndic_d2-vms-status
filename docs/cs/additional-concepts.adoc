@@ -65,6 +65,9 @@ include::{samplesdir}/dynamic-5-trailer.xml[tag=dynamic-config,indent=0]
 * Přechod na novou verzi řadiče:
 ** původní verze řadiče se nejprve deaktivuje,
 ** poté se zveřejní stav nové verze.
+* Nová verze, která vznikla jen s novým vydáním sítě Global Network (beze změny řadiče), se nedeaktivuje:
+  dynamická publikace od platnosti nové tabulky odkazuje rovnou na novou verzi. Deaktivace platí jen pro
+  změnu řadiče (přesun, změna rozložení) a pro jeho odstavení.
 * Deaktivace může sloužit i k úplnému odstavení značky.
 
 ==== Deaktivace a reaktivace řadiče
@@ -93,9 +96,7 @@ include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
 
 * Statická publikace se při deaktivaci ani reaktivaci nemění.
 * Neaktivní verzi řadiče lze opět aktivovat zveřejněním jejího stavu bez `vmsControllerFault`. Je-li
-  například značka přesouvána mezi dvěma místy, lze:
-** verzi 1 deaktivovat a následně opět aktivovat,
-** či přepínat mezi dvěma verzemi statického popisu.
+  například značka přesouvána mezi dvěma místy, lze verzi řadiče deaktivovat a následně opět aktivovat.
 
 === Odkazy do dalších tabulek
 
