@@ -130,7 +130,6 @@ TextLine:
     ndic: Type of text information on the line if it can be determined unambiguously, otherwise omitted.
 NetworkLocation:
   supplementaryPositionalDescription:
-    card: 1..1
     ndic: Supplementary positional description of the current VMS location at lane level including the road name
       and direction.
 SupplementaryPositionalDescription:
