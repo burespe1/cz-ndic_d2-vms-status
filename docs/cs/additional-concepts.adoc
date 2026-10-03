@@ -87,10 +87,10 @@ include::{samplesdir}/dynamic-5-trailer.xml[tag=dynamic-config,indent=0]
 |`vmsControllerMovedAndLayoutChanged` |viz dvě předchozí
 |===
 
-.Deaktivace řadiče – vozík přesunut (vzorek `dynamic-5-trailer_deactivated.xml`)
+.Deaktivace řadiče – vozík přesunut (ilustrační příklad `dynamic-5-trailer_deactivated.xml`)
 [source,xml]
 ----
-include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
+include::../ilustrace/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
 ----
 
 * Statická publikace se při deaktivaci ani reaktivaci nemění.

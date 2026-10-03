@@ -91,10 +91,10 @@ include::{samplesdir}/dynamic-5-trailer.xml[tag=dynamic-config,indent=0]
 |`vmsControllerMovedAndLayoutChanged` |see the two previous values
 |===
 
-.Controller deactivation – trailer moved (sample `dynamic-5-trailer_deactivated.xml`)
+.Controller deactivation – trailer moved (illustrative example `dynamic-5-trailer_deactivated.xml`)
 [source,xml]
 ----
-include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
+include::../ilustrace/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
 ----
 
 * The static publication does not change on deactivation or reactivation.
