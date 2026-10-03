@@ -65,12 +65,12 @@ closed at km 65–90, use road I/58.
 
 image::ex-03.png[Composite pictogram with diversion,width=600]
 
-.dynamic-1-ZPI-composite.xml (illustrative example, not a data sample)
+.dynamic-1-ZPI-composite.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-1-ZPI-composite.xml[tags=**]
+include::{samplesdir}/dynamic-1-ZPI-composite.xml[tags=**]
 ----
 ====
 
@@ -112,12 +112,12 @@ image::ex-04.png[Lane control gantry,width=600]
 Illustrative state (NDIC does not publish lane control gantries yet): "100 km/h"; "keep right"; "attention";
 "blank"; "100 km/h".
 
-.dynamic-2-LM.xml (illustrative example, not a data sample)
+.dynamic-2-LM.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-2-LM.xml[tags=**]
+include::{samplesdir}/dynamic-2-LM.xml[tags=**]
 ----
 ====
 
@@ -139,12 +139,12 @@ image::ex-05.png[ZPI thermometer,width=600]
 
 Illustrative state (NDIC does not publish thermometers yet): air "27" °C, road surface "34" °C.
 
-.dynamic-3-meteo.xml (illustrative example, not a data sample)
+.dynamic-3-meteo.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-3-meteo.xml[tags=**]
+include::{samplesdir}/dynamic-3-meteo.xml[tags=**]
 ----
 ====
 
@@ -168,21 +168,21 @@ image:ex-07.png[Sign detail,width=140]
 Illustrative state (NDIC does not publish car park occupancy signs yet): "144" free spaces at the Pávov rest
 area at a distance of 800 m.
 
-.dynamic-4-parking.xml (illustrative example, not a data sample)
+.dynamic-4-parking.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-4-parking.xml[tags=**]
+include::{samplesdir}/dynamic-4-parking.xml[tags=**]
 ----
 ====
 
-.dynamic-4-parking_full.xml (illustrative example, not a data sample)
+.dynamic-4-parking_full.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-4-parking_full.xml[tags=**]
+include::{samplesdir}/dynamic-4-parking_full.xml[tags=**]
 ----
 ====
 
@@ -223,12 +223,12 @@ Illustrative state derived from a real trailer (deactivation does not occur in N
 the sample `dynamic-5-trailer.xml` deactivated after relocation by `vmsControllerFault`
 (`faultIdentifier` = `vmsControllerMovedToAnotherLocation`).
 
-.dynamic-5-trailer_deactivated.xml (illustrative example, not a data sample)
+.dynamic-5-trailer_deactivated.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-5-trailer_deactivated.xml[tags=**]
+include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tags=**]
 ----
 ====
 
@@ -257,5 +257,3 @@ message `vmsMessage` is not given.
 include::{samplesdir}/dynamic-6-prism.xml[tags=**]
 ----
 ====
-
-Further controller configurations without a sample are described in the documentation of the format `cz-ndic_d2-vms-table`, appendix Examples of sign configurations.

@@ -19,6 +19,9 @@ include::elements.adoc[]
 include::examples.adoc[]
 
 [appendix]
+include::examples-no-samples.adoc[]
+
+[appendix]
 include::changelog.adoc[]
 
 [appendix]

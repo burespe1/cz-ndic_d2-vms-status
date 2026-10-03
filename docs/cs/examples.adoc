@@ -63,12 +63,12 @@ silnice I/56 v km 65–90 uzavřena, použijte silnici I/58.
 
 image::ex-03.png[Složený piktogram s objížďkou,width=600]
 
-.dynamic-1-ZPI-composite.xml (ilustrační příklad, nejde o vzorek dat)
+.dynamic-1-ZPI-composite.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-1-ZPI-composite.xml[tags=**]
+include::{samplesdir}/dynamic-1-ZPI-composite.xml[tags=**]
 ----
 ====
 
@@ -111,12 +111,12 @@ image::ex-04.png[Portál liniového řízení,width=600]
 Ukázkový stav (portál liniového řízení zatím NDIC nepublikuje): „100 km/h“; „řaď se vpravo“; „pozor“;
 „prázdné“; „100 km/h“.
 
-.dynamic-2-LM.xml (ilustrační příklad, nejde o vzorek dat)
+.dynamic-2-LM.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-2-LM.xml[tags=**]
+include::{samplesdir}/dynamic-2-LM.xml[tags=**]
 ----
 ====
 
@@ -138,12 +138,12 @@ image::ex-05.png[ZPI teploměr,width=600]
 
 Ukázkový stav (teploměr zatím NDIC nepublikuje): okolí „27“ °C, vozovka „34“ °C.
 
-.dynamic-3-meteo.xml (ilustrační příklad, nejde o vzorek dat)
+.dynamic-3-meteo.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-3-meteo.xml[tags=**]
+include::{samplesdir}/dynamic-3-meteo.xml[tags=**]
 ----
 ====
 
@@ -167,21 +167,21 @@ image:ex-07.png[Detail značky,width=140]
 Ukázkový stav (značku s obsazeností parkoviště zatím NDIC nepublikuje): volných „144“ míst na odpočívce
 Pávov ve vzdálenosti 800 m.
 
-.dynamic-4-parking.xml (ilustrační příklad, nejde o vzorek dat)
+.dynamic-4-parking.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-4-parking.xml[tags=**]
+include::{samplesdir}/dynamic-4-parking.xml[tags=**]
 ----
 ====
 
-.dynamic-4-parking_full.xml (ilustrační příklad, nejde o vzorek dat)
+.dynamic-4-parking_full.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-4-parking_full.xml[tags=**]
+include::{samplesdir}/dynamic-4-parking_full.xml[tags=**]
 ----
 ====
 
@@ -221,12 +221,12 @@ Ukázkový stav odvozený ze skutečného vozíku (deaktivace se v datech NDIC z
 `dynamic-5-trailer.xml` po přesunu deaktivovaný pomocí `vmsControllerFault`
 (`faultIdentifier` = `vmsControllerMovedToAnotherLocation`).
 
-.dynamic-5-trailer_deactivated.xml (ilustrační příklad, nejde o vzorek dat)
+.dynamic-5-trailer_deactivated.xml
 [%collapsible]
 ====
 [source,xml]
 ----
-include::../ilustrace/dynamic-5-trailer_deactivated.xml[tags=**]
+include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tags=**]
 ----
 ====
 
@@ -256,4 +256,3 @@ include::{samplesdir}/dynamic-6-prism.xml[tags=**]
 ----
 ====
 
-Další konfigurace řadičů bez vzorku popisuje dokumentace formátu `cz-ndic_d2-vms-table`, příloha Příklady konfigurace značek.
