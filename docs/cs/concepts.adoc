@@ -15,7 +15,7 @@ include::{kitdir}/shared/cs/vms/pojmy.adoc[]
 [[obalka]]
 === Obálka a hlavička publikace
 
-Každá zpráva je dokument DATEX II 3 s kořenovým elementem `d2:payload`. Atribut `xsi:type` kořenového elementu určuje typ
+Každá zpráva je dokument DATEX II 3 s kořenovým elementem `d2:payload`. Atribut `@xsi:type` kořenového elementu určuje typ
 publikace (zde `vms:VmsPublication`), atribut `modelBaseVersion="3"` verzi modelu a atribut `@lang` výchozí jazyk
 textů.
 
@@ -31,8 +31,9 @@ Hlavička publikace obsahuje:
 ** zdroj odkazuje na formát, ve kterém data poskytuje; formát zprávy určují atributy `@profileName` a
    `@profileVersion`,
 ** element `feedDescription` se nepoužívá.
-* `publicationTime` – čas vytvoření obsahu publikace; pokud se obsah od předchozí publikace nezměnil, zůstává
-  čas původní; nový čas vzniká jen se změnou obsahu.
+* `publicationTime` – čas vygenerování publikace; publikace se vydává periodicky a každé vygenerování (v každé
+  periodě) má nový čas, i když se hodnoty nezměnily. Je-li soubor vystaven mimo periodu aktualizace (sestaven
+  z předchozích hodnot beze změny obsahu), `publicationTime` se nemění; mění se jen čas vystavení souboru.
 * `publicationCreator` – poskytovatel publikace:
 ** kód země malými písmeny (`cz`),
 ** zkratka poskytovatele (`nationalIdentifier`).

@@ -7,8 +7,8 @@
 ** only the controllers that have changed.
 * A controller is always given with its whole structure, even if only one element has changed; the other
   parts keep their original times.
-* `publicationTime` corresponds to the last change of the content; if the content has not changed since the
-  previous publication, the original time is kept.
+* `publicationTime` is the time the publication was generated; it changes with every generated publication,
+  even if the content has not changed.
 * The currency of the controller status (`statusUpdateTime`) is given by the latest setting time
   (`timeLastSet`) of the individual VMS of the controller.
 
@@ -68,17 +68,20 @@ include::{samplesdir}/dynamic-5-trailer.xml[tag=dynamic-config,indent=0]
 * Transition to a new controller version:
 ** the original controller version is deactivated first,
 ** then the status of the new version is published.
+* A new version created only by a new Global Network release (without a change of the controller) is not
+  deactivated: from the validity of the new table the dynamic publication refers directly to the new version.
+  Deactivation applies only to a change of the controller (relocation, layout change) and to its withdrawal.
 * Deactivation can also be used to take a sign out of service completely.
 
 ==== Controller deactivation and reactivation
 
 * A controller version is deactivated in the *dynamic publication* by the element `vmsControllerFault`:
-** `faultIdentifier` with one of the predefined values according to <<tab-faultIdentifier>>,
 ** `faultLastUpdateTime` with the time of deactivation,
-** `vmsControllerFault` with the value `other`.
+** `vmsControllerFault` with the value `_extended` and the attribute `@_extendedValue` according to
+   <<tab-faultIdentifier>>.
 
 [#tab-faultIdentifier]
-.Values of the `faultIdentifier` element
+.Values of the `@_extendedValue` attribute
 [cols="1,1",options="header"]
 |===
 |Value |Meaning
@@ -96,9 +99,8 @@ include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
 
 * The static publication does not change on deactivation or reactivation.
 * An inactive controller version can be activated again by publishing its status without
-  `vmsControllerFault`. If, for example, a sign is moved between two places, it is possible to:
-** deactivate version 1 and later activate it again,
-** or switch between two versions of the static description.
+  `vmsControllerFault`. If, for example, a sign is moved between two places, the controller version can be
+  deactivated and later activated again.
 
 === References to other tables
 

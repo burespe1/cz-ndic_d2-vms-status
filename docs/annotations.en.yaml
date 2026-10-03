@@ -8,7 +8,7 @@ VmsPublication:
       e.g. `x-source:cz-ndic_d2-vms-status-fixed-pull-v3`. The format is identified by the `@profileName` and `@profileVersion`
       attributes.
   publicationTime:
-    ndic: Time the publication content was created; if the content has not changed, the original time is kept.
+    ndic: Time the publication was generated; it changes with every generated publication, even without a change of content.
   publicationCreator:
     ndic: 'Publication provider: `country` = `cz`, `nationalIdentifier` = provider abbreviation (NDIC).'
   headerInformation:
@@ -32,18 +32,12 @@ VmsControllerStatus:
     ndic: Only for deactivating a controller version (relocation, invalidation). The version is activated again
       by publishing its status without `vmsControllerFault`. Only one controller version is valid at any time.
 VmsControllerFault:
-  faultIdentifier:
-    card: 1..1
-    ndic: Deactivation code of the specific controller version.
-    values:
-      vmsControllerDeactivated: controller deactivated, reason not given
-      vmsControllerMovedToAnotherLocation: controller or trailer has been moved
-      vmsControllerLayoutChanged: display areas or lanes rebuilt
-      vmsControllerMovedAndLayoutChanged: moved and rebuilt
   faultLastUpdateTime:
     ndic: Time of deactivation.
   vmsControllerFault:
-    ndic: Always `other` – the structure is used only for deactivation.
+    ndic: 'Always `_extended`; the reason for deactivation in `@_extendedValue`: `vmsControllerDeactivated`
+      (reason not given), `vmsControllerMovedToAnotherLocation` (moved), `vmsControllerLayoutChanged` (display
+      areas or lanes rebuilt), `vmsControllerMovedAndLayoutChanged` (moved and rebuilt).'
 VmsStatus:
   workingStatus:
     ndic: All values allowed.
@@ -130,7 +124,6 @@ TextLine:
     ndic: Type of text information on the line if it can be determined unambiguously, otherwise omitted.
 NetworkLocation:
   supplementaryPositionalDescription:
-    card: 1..1
     ndic: Supplementary positional description of the current VMS location at lane level including the road name
       and direction.
 SupplementaryPositionalDescription:

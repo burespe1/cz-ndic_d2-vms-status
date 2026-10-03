@@ -17,9 +17,8 @@
     <vms:vmsControllerReference id="63F8AFE2-8AC2-403A-BBE9-BB0A6A729AA2" targetClass="vms:VmsController" version="260601"/>
     <!-- tag::fault[] -->
     <vms:vmsControllerFault>
-      <com:faultIdentifier>vmsControllerMovedToAnotherLocation</com:faultIdentifier>
       <com:faultLastUpdateTime>2026-10-01T22:15:00+02:00</com:faultLastUpdateTime>
-      <vms:vmsControllerFault>other</vms:vmsControllerFault>
+      <vms:vmsControllerFault _extendedValue="vmsControllerMovedToAnotherLocation">_extended</vms:vmsControllerFault>
     </vms:vmsControllerFault>
     <!-- end::fault[] -->
   </vms:vmsControllerStatus>

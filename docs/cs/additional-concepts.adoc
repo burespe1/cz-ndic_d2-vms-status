@@ -6,8 +6,8 @@
 ** všechny relevantní řadiče, nebo
 ** jen řadiče, které se změnily.
 * Řadič se uvádí vždy celou strukturou, i když se změnil jediný element; ostatní části nesou původní časy.
-* `publicationTime` odpovídá poslední změně obsahu; nezměnil-li se obsah od předchozí publikace, zůstává
-  čas původní.
+* `publicationTime` je čas vygenerování publikace; mění se s každým vygenerováním, i když se obsah
+  nezměnil.
 * Aktuálnost stavu řadiče (`statusUpdateTime`) je dána nejvyšší hodnotou času nastavení (`timeLastSet`)
   jednotlivých VMS daného řadiče.
 
@@ -65,17 +65,19 @@ include::{samplesdir}/dynamic-5-trailer.xml[tag=dynamic-config,indent=0]
 * Přechod na novou verzi řadiče:
 ** původní verze řadiče se nejprve deaktivuje,
 ** poté se zveřejní stav nové verze.
+* Nová verze, která vznikla jen s novým vydáním sítě Global Network (beze změny řadiče), se nedeaktivuje:
+  dynamická publikace od platnosti nové tabulky odkazuje rovnou na novou verzi. Deaktivace platí jen pro
+  změnu řadiče (přesun, změna rozložení) a pro jeho odstavení.
 * Deaktivace může sloužit i k úplnému odstavení značky.
 
 ==== Deaktivace a reaktivace řadiče
 
 * Verze řadiče se deaktivuje v *dynamické publikaci* elementem `vmsControllerFault`:
-** `faultIdentifier` s jednou z předdefinovaných hodnot podle <<tab-faultIdentifier>>,
 ** `faultLastUpdateTime` s časem deaktivace,
-** `vmsControllerFault` s hodnotou `other`.
+** `vmsControllerFault` s hodnotou `_extended` a atributem `@_extendedValue` podle <<tab-faultIdentifier>>.
 
 [#tab-faultIdentifier]
-.Hodnoty elementu `faultIdentifier`
+.Hodnoty atributu `@_extendedValue`
 [cols="1,1",options="header"]
 |===
 |Hodnota |Význam
@@ -93,9 +95,7 @@ include::{samplesdir}/dynamic-5-trailer_deactivated.xml[tag=fault,indent=0]
 
 * Statická publikace se při deaktivaci ani reaktivaci nemění.
 * Neaktivní verzi řadiče lze opět aktivovat zveřejněním jejího stavu bez `vmsControllerFault`. Je-li
-  například značka přesouvána mezi dvěma místy, lze:
-** verzi 1 deaktivovat a následně opět aktivovat,
-** či přepínat mezi dvěma verzemi statického popisu.
+  například značka přesouvána mezi dvěma místy, lze verzi řadiče deaktivovat a následně opět aktivovat.
 
 === Odkazy do dalších tabulek
 

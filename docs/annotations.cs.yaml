@@ -14,7 +14,7 @@ VmsPublication:
     ndic: Odkaz na zdroj dat v registru národního přístupového bodu (https://registr.dopravniinfo.cz/),
       např. `x-source:cz-ndic_d2-vms-status-fixed-pull-v3`. Formát určují atributy `@profileName` a `@profileVersion`.
   publicationTime:
-    ndic: Čas vytvoření obsahu publikace; nezměnil-li se obsah, zůstává původní.
+    ndic: Čas vygenerování publikace; mění se s každým vygenerováním, i beze změny obsahu.
   publicationCreator:
     ndic: 'Poskytovatel publikace: `country` = `cz`, `nationalIdentifier` = zkratka poskytovatele (NDIC).'
   headerInformation:
@@ -36,18 +36,12 @@ VmsControllerStatus:
     ndic: Jen pro deaktivaci verze řadiče (přesun, zneplatnění). Verze se znovu aktivuje zveřejněním jejího
       stavu bez `vmsControllerFault`. Platná je vždy jen jedna verze řadiče.
 VmsControllerFault:
-  faultIdentifier:
-    card: 1..1
-    ndic: Kód deaktivace konkrétní verze řadiče.
-    values:
-      vmsControllerDeactivated: řadič deaktivován, důvod neuveden
-      vmsControllerMovedToAnotherLocation: řadič, vozík byl přesunut
-      vmsControllerLayoutChanged: předělávka činných ploch či jízdních pruhů
-      vmsControllerMovedAndLayoutChanged: přesun i předělávka
   faultLastUpdateTime:
     ndic: Čas deaktivace.
   vmsControllerFault:
-    ndic: Vždy `other` – struktura slouží jen k deaktivaci.
+    ndic: 'Vždy `_extended`; důvod deaktivace v `@_extendedValue`: `vmsControllerDeactivated` (důvod neuveden),
+      `vmsControllerMovedToAnotherLocation` (přesun), `vmsControllerLayoutChanged` (předělávka činných ploch či
+      jízdních pruhů), `vmsControllerMovedAndLayoutChanged` (přesun i předělávka).'
 VmsStatus:
   workingStatus:
     ndic: Povoleny všechny hodnoty.
@@ -135,7 +129,6 @@ TextLine:
 _enum: {}
 NetworkLocation:
   supplementaryPositionalDescription:
-    card: 1..1
     ndic: Doplňkový popis aktuální polohy VMS na úrovni jízdního pruhu včetně názvu a směru silnice.
 SupplementaryPositionalDescription:
   positionOnCarriageway:
